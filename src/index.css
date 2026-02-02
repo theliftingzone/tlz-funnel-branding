@@ -10,22 +10,22 @@
   /* Light Blue */
 
   /* Accent Colors */
-  --color-brand-gold: #facc15;
-  /* Electric Gold */
-  --color-brand-gold-deep: #eab308;
-  /* Deep Gold */
-  --color-brand-orange: #b45309;
-  /* Burnt Orange (Shadows) */
-  --color-brand-urgent: #ea580c;
-  /* Urgency Orange */
+  --color-brand-gold: #2563eb;
+  /* Blue 600 (Replaced Gold) */
+  --color-brand-gold-deep: #1d4ed8;
+  /* Blue 700 (Replaced Deep Gold) */
+  --color-brand-orange: #1e40af;
+  /* Blue 800 (Replaced Burnt Orange) */
+  --color-brand-urgent: #2563eb;
+  /* Blue 600 (Replaced Urgency Orange) */
 
   /* Neutrals */
-  --color-text-main: #334155;
-  /* Slate 700 */
-  --color-text-sub: #64748b;
-  /* Slate 500 */
-  --color-border-card: #e2e8f0;
-  /* Slate 200 */
+  --color-text-main: #0f172a;
+  /* Slate 900 */
+  --color-text-sub: #475569;
+  /* Slate 600 */
+  --color-border-card: #cbd5e1;
+  /* Slate 300 */
   --color-bg-offwhite: #f8fafc;
   /* Off-White */
 }
@@ -49,6 +49,6 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--color-brand-navy);
-  /* Dark Page Background */
+  background-color: var(--color-bg-offwhite);
+  /* Light Page Background */
 }
