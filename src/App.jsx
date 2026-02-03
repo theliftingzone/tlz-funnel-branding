@@ -776,37 +776,78 @@ const App = () => {
                 </div>
               </div>
 
-              {/* "What Makes This Coaching Different" - Kevin Section */}
-              <div className="max-w-6xl mx-auto mb-24 bg-slate-100 rounded-[40px] p-8 md:p-12 mt-12">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                  {/* Left Column: Copy */}
-                  <div className="text-center md:text-left space-y-8">
-                    <h3 className="text-4xl md:text-5xl font-heading font-black text-slate-900 leading-[0.95] tracking-tight">
-                      What Makes This <br /> Coaching Different
-                    </h3>
+              {/* "What Makes This Coaching Different" - Kevin Section (Redesigned & Video Integrated) */}
+              <div className="max-w-6xl mx-auto mb-32 relative group">
+                {/* Decorative Gradients */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-[45px] opacity-20 group-hover:opacity-40 blur-xl transition-opacity duration-500"></div>
 
-                    <p className="text-slate-600 font-bold text-lg leading-relaxed border-l-4 border-blue-500 pl-6">
-                      Whether you're rebuilding, chasing performance, or refusing to slow down the standard stays the same.
-                    </p>
+                <div className="relative bg-white rounded-[40px] p-8 md:p-14 border border-slate-100 shadow-2xl overflow-hidden">
+                  <div className="grid md:grid-cols-2 gap-16 items-center">
+                    {/* Left Column: Copy */}
+                    <div className="text-center md:text-left space-y-8 relative z-10">
+                      <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-[11px] font-black tracking-widest uppercase mb-2">
+                        <Star className="w-3 h-3 fill-blue-700" />
+                        Client Spotlight
+                      </div>
 
-                    <div className="space-y-6 text-slate-500 font-bold text-base leading-relaxed pl-6">
-                      <p>The same system used with the very best.</p>
-                      <p>Precision, accountability, and results that last.</p>
-                      <p className="text-slate-800 text-lg">
-                        Take Kevin, 66 years old, a Senior Creative Director.
+                      <h3 className="text-4xl md:text-5xl font-heading font-black text-slate-900 leading-[0.95] tracking-tight whitespace-pre-line">
+                        What Makes This <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-500">Coaching Different.</span>
+                      </h3>
+
+                      <p className="text-slate-600 font-bold text-lg leading-relaxed border-l-4 border-blue-500 pl-6">
+                        Whether you're rebuilding, chasing performance, or refusing to slow down the standard stays the same.
                       </p>
-                      <p>Still training like an athlete. Focused on strength, mobility, and longevity.</p>
-                      <p>This is built for those who value expertise and results that stick.</p>
-                    </div>
-                  </div>
 
-                  {/* Right Column: Image */}
-                  <div className="h-[500px] w-full relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                    <img
-                      src="kevin4.jpg"
-                      alt="Kevin Training"
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
+                      <div className="space-y-6 text-slate-500 font-medium text-base leading-relaxed pl-6">
+                        <p>The same system used with the very best.</p>
+                        <p>Precision, accountability, and results that last.</p>
+                        <p className="text-slate-900 text-lg font-bold">
+                          Take Kevin, 66 years old, a Senior Creative Director.
+                        </p>
+                        <p>Still training like an athlete. Focused on strength, mobility, and longevity.</p>
+                        <div className="flex items-center gap-3 text-blue-700 font-bold uppercase text-xs tracking-wider pt-2">
+                          <CheckCircle className="w-4 h-4" />
+                          <span>Built for expertise who value results</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Column: Video (Vimeo) */}
+                    <div className="relative w-full aspect-[4/5] md:aspect-square rounded-3xl overflow-hidden shadow-2xl bg-slate-900 border-[6px] border-white group/video cursor-pointer"
+                      onClick={(e) => {
+                        const iframe = document.createElement('iframe');
+                        iframe.src = "https://player.vimeo.com/video/775627130?h=9d0e41e34e&autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479";
+                        iframe.width = "100%";
+                        iframe.height = "100%";
+                        iframe.frameBorder = "0";
+                        iframe.allow = "autoplay; fullscreen; picture-in-picture";
+                        iframe.title = "Kevin's Results";
+                        iframe.className = "absolute inset-0 w-full h-full";
+                        e.currentTarget.innerHTML = '';
+                        e.currentTarget.appendChild(iframe);
+                      }}>
+
+                      <img
+                        src="kevin4.jpg"
+                        alt="Kevin Training"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/video:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+
+                      {/* Play Button */}
+                      <div className="absolute inset-0 flex items-center justify-center z-20">
+                        <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 group-hover/video:scale-110 transition-transform duration-300">
+                          <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                            <Play className="w-6 h-6 fill-white text-white ml-1" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="absolute bottom-6 left-6 right-6 z-20">
+                        <p className="text-white font-bold text-sm uppercase tracking-wider mb-1">Watch His Story</p>
+                        <p className="text-white/80 text-xs line-clamp-2">See how Kevin transformed his strength at 66.</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
