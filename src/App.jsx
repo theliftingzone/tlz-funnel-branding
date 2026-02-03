@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { ChevronRight, Play, CheckCircle, Calendar, ArrowRight, Star, Dumbbell, Zap, Target, Mail, Users, Award, TrendingUp, ShieldCheck, Eye, Instagram, Youtube, Twitter, ArrowLeft, X, Lock, Menu, Loader2, ExternalLink } from 'lucide-react';
+import { ChevronRight, Play, CheckCircle, Calendar, ArrowRight, Dumbbell, Zap, Target, Mail, Award, TrendingUp, ShieldCheck, Eye, ArrowLeft, X, Lock, Menu, Loader2, ExternalLink, Star } from 'lucide-react';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -110,11 +110,7 @@ const VimeoPlayer = ({ videoId, thumbnail }) => {
             className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-1000"
             alt="Video Thumbnail"
           />
-          <div className="absolute bottom-6 left-0 right-0 text-center z-20">
-            <span className="bg-white/90 backdrop-blur-md text-slate-900 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full border border-slate-200 shadow-lg">
-              Watch the 60-Second Analysis
-            </span>
-          </div>
+
         </>
       ) : (
         <iframe
@@ -170,14 +166,24 @@ const WebinarPopup = ({ isOpen, onClose }) => {
   );
 };
 
-const LeadCaptureForm = ({ data, setData, onSubmit }) => (
-  <div className="bg-[#f8fafc] min-h-screen relative font-body flex items-center justify-center p-6 text-slate-900 overflow-hidden selection:bg-[#2563eb] selection:text-white">
+const LeadCaptureForm = ({ data, setData, onSubmit, onBack }) => (
+  <div className="bg-[#f8fafc] min-h-screen relative font-body flex flex-col items-center justify-center p-6 text-slate-900 overflow-hidden selection:bg-[#2563eb] selection:text-white">
     <AnimatedBackground />
+    {/* Navigation */}
+    <div className="flex justify-center pt-8 pb-4 relative z-30">
+      <button
+        onClick={onBack}
+        className="cursor-pointer group flex items-center gap-3 px-8 py-3 rounded-full bg-white border border-slate-200 hover:bg-slate-50 hover:border-blue-200 transition-all uppercase text-[10px] font-bold tracking-widest text-slate-600 backdrop-blur-md shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+      >
+        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+        HOME
+      </button>
+    </div>
     <div className="relative z-10 w-full max-w-md">
       <FadeInSection>
         <div className="bg-white backdrop-blur-xl border border-slate-200 p-8 md:p-10 rounded-[32px] shadow-2xl">
           <div className="text-center mb-10">
-            <span className="bg-blue-600/10 text-blue-600 px-4 py-1.5 rounded-full text-[10px] font-heading font-bold border border-blue-600/20 mb-6 inline-block uppercase tracking-[0.2em] animate-pulse">
+            <span className="bg-slate-900 border border-slate-800 text-white px-4 py-1.5 rounded-full text-[10px] font-heading font-bold mb-6 inline-block uppercase tracking-[0.2em] shadow-lg shadow-slate-900/20">
               ALMOST THERE
             </span>
             <h2 className="text-3xl md:text-4xl font-heading font-black mb-4 tracking-tight text-slate-900">
@@ -256,7 +262,7 @@ const LeadCaptureForm = ({ data, setData, onSubmit }) => (
         </div>
       </FadeInSection>
     </div>
-  </div>
+  </div >
 );
 
 const AnalyzingScreen = () => (
@@ -287,8 +293,7 @@ const AnalyzingScreen = () => (
   </div>
 );
 
-// Bridge Page Component - Handles redirection to specific funnel
-const BridgePage = ({ resource, onUpsellClick }) => {
+const BridgePage = ({ resource, onUpsellClick, onBack }) => {
   const [timeLeft, setTimeLeft] = useState(15);
 
   // Auto-redirect logic
@@ -310,12 +315,22 @@ const BridgePage = ({ resource, onUpsellClick }) => {
   return (
     <div className="bg-[#f8fafc] min-h-screen relative font-body overflow-x-hidden selection:bg-[#2563eb] selection:text-white">
       <AnimatedBackground />
+      {/* Navigation */}
+      <div className="flex justify-center pt-8 pb-0 relative z-30">
+        <button
+          onClick={onBack}
+          className="cursor-pointer group flex items-center gap-3 px-8 py-3 rounded-full bg-white border border-slate-200 hover:bg-slate-50 hover:border-blue-200 transition-all uppercase text-[10px] font-bold tracking-widest text-slate-600 backdrop-blur-md shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          HOME
+        </button>
+      </div>
       <div className="relative z-10 max-w-4xl mx-auto px-6 py-20">
 
         {/* Diagnosis Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-100 border border-green-200 text-green-700 text-[10px] font-bold uppercase tracking-[0.2em] mb-8 shadow-sm">
-            <CheckCircle className="w-3.5 h-3.5" /> Diagnosis Complete
+          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-slate-900 border border-slate-800 text-white text-[10px] font-bold uppercase tracking-[0.2em] mb-8 shadow-xl shadow-slate-900/20">
+            <CheckCircle className="w-3.5 h-3.5 text-blue-500" /> Diagnosis Complete
           </div>
           <h1 className="text-4xl md:text-6xl font-heading font-black mb-6 leading-tight text-slate-900 uppercase">
             YOUR DIAGNOSIS: <br /> <span className="text-[#2563eb]">{resource.title}</span>
@@ -338,12 +353,12 @@ const BridgePage = ({ resource, onUpsellClick }) => {
 
         {/* While You Wait / Upsell Section */}
         <div className="bg-white text-slate-950 p-8 md:p-12 rounded-[32px] shadow-2xl border-4 border-slate-100 relative overflow-hidden">
-          <div className="absolute top-0 right-0 bg-[#2563eb] text-white text-[10px] font-black px-4 py-2 rounded-bl-xl uppercase tracking-widest z-10">
+          <div className="absolute top-0 right-0 bg-slate-900 text-white text-[10px] font-black px-4 py-2 rounded-bl-xl uppercase tracking-widest z-10 border-l border-b border-slate-800">
             One-Time Offer
           </div>
 
           <div className="relative z-10">
-            <span className="bg-[#2563eb]/10 text-[#2563eb] px-4 py-1.5 font-heading font-bold text-[10px] rounded-full uppercase mb-4 inline-block tracking-[0.2em]">WHILE YOU WAIT</span>
+            <span className="bg-slate-900 border border-slate-800 text-white shadow-lg shadow-slate-900/20 px-4 py-1.5 font-heading font-bold text-[10px] rounded-full uppercase mb-4 inline-block tracking-[0.2em]">WHILE YOU WAIT</span>
             <h4 className="text-2xl md:text-3xl font-heading font-black mb-4 tracking-tight text-slate-900 uppercase leading-none">
               FIX IT PERMANENTLY.
             </h4>
@@ -356,7 +371,7 @@ const BridgePage = ({ resource, onUpsellClick }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
@@ -368,15 +383,6 @@ const App = () => {
   const [resultPage, setResultPage] = useState(null);
   const [showDevTools, setShowDevTools] = useState(false);
   const [showWebinar, setShowWebinar] = useState(false);
-
-  // Refs for scrolling to sections
-  const teamRef = useRef(null);
-  const resultsRef = useRef(null);
-  const freeCourseRef = useRef(null);
-
-  const scrollToSection = (ref) => {
-    ref.current?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   useEffect(() => {
     if (step === 'landing') {
@@ -448,7 +454,7 @@ const App = () => {
       text: "How are you currently handling your programming and technical correction?",
       options: [
         { label: "Winging it: I make it up as I go or cherry-pick workouts from Instagram.", value: "winging" },
-        { label: "Static template: I follow a spreadsheet or PDF, but I have nobody to critique my movement.", value: "template" },
+        { label: "Static template: I follow a spreadsheet or PDF or class programming.", value: "template" },
         { label: "Coached: I have a coach, but I’m looking for more specialized expertise (Olympian level).", value: "coached" }
       ]
     },
@@ -525,27 +531,15 @@ const App = () => {
       <AnimatedBackground />
       <WebinarPopup isOpen={showWebinar} onClose={() => setShowWebinar(false)} />
 
-      <nav className="relative z-50 p-6 flex flex-col md:flex-row justify-between items-center bg-transparent max-w-7xl mx-auto gap-6 md:gap-0">
+      <nav className="relative z-50 p-6 flex justify-center items-center bg-transparent max-w-7xl mx-auto">
         <LogoPlaceholder />
-
-        {/* Subtle Menu - Absolute Center for Desktop */}
-        <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8 bg-white border border-slate-200 px-8 py-3 rounded-full shadow-sm z-20">
-          <button onClick={() => scrollToSection(teamRef)} className="text-slate-600 hover:text-blue-600 text-xs font-bold uppercase tracking-widest transition-colors">Meet the Team</button>
-          <button onClick={() => scrollToSection(resultsRef)} className="text-slate-600 hover:text-blue-600 text-xs font-bold uppercase tracking-widest transition-colors">Results</button>
-          <a href="#" className="text-slate-600 hover:text-blue-600 text-xs font-bold uppercase tracking-widest transition-colors">Free Resources</a>
-        </div>
-
-        <div className="flex gap-4 items-center">
-          <a href="https://www.instagram.com/sonnywebstergb" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-blue-600 transition-colors p-2 bg-white border border-slate-200 rounded-full hover:bg-blue-50"><Instagram className="w-4 h-4" /></a>
-          <a href="https://www.youtube.com/@sonnywebsterGB" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-blue-600 transition-colors p-2 bg-white border border-slate-200 rounded-full hover:bg-blue-50"><Youtube className="w-4 h-4" /></a>
-        </div>
       </nav>
 
       {/* Hero Header */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 pt-12 pb-8 text-center">
         <FadeInSection>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-[10px] font-bold uppercase tracking-[0.2em] mb-10 shadow-sm">
-            <Award className="w-3.5 h-3.5" /> Olympian Mentorship
+          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-slate-900 border border-slate-800 text-white text-xs font-bold uppercase tracking-[0.2em] mb-10 shadow-xl shadow-slate-900/20 hover:scale-105 transition-transform duration-300">
+            <Award className="w-4 h-4 text-blue-500" /> By The Lifting Zone Sonny Webster
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black mb-10 tracking-tight leading-[0.95] text-slate-900">
@@ -554,7 +548,7 @@ const App = () => {
           </h1>
 
           <p className="text-slate-600 font-medium text-base md:text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
-            Fix your technique, add <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">10kg to your total</span>, and build a body that lasts a lifetime. Direct mentorship from the world's best.
+            Give us <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">60 seconds</span> to identify exactly where you need to be focusing your energy to reach your true potential and provide you with the next steps to action it. Could be a <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">free course</span> could be a <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">direct mentorship with Sonny Webster</span>. Let's find out.
           </p>
 
           {/* VSL Video - Vimeo Player - Custom component used here */}
@@ -643,92 +637,11 @@ const App = () => {
         </div>
       </section >
 
-      {/* Meet the Team Section */}
-      < section ref={teamRef} className="relative z-10 py-32 px-6 bg-slate-100" >
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-heading font-black mb-16 text-slate-900">MEET THE <span className="text-[#2563eb]">TEAM</span></h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { name: "Sonny Webster", role: "Rio Olympian / Founder", image: "/Sonny-Webster.webp" },
-              { name: "Senior Coach", role: "Elite Performance Specialist", image: null },
-              { name: "Head Nutritionist", role: "Performance Nutrition", image: null }
-            ].map((member, i) => (
-              <div key={i} className="bg-white border border-slate-200 p-8 rounded-[32px] hover:border-blue-300 transition-colors group shadow-lg">
-                <div className="w-32 h-32 rounded-full mx-auto mb-6 overflow-hidden border-4 border-slate-100 group-hover:border-blue-600 transition-colors relative bg-slate-100">
-                  {member.image ? (
-                    <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-slate-400">
-                      <Users className="w-12 h-12" />
-                    </div>
-                  )}
-                </div>
-                <h4 className="font-heading font-bold text-xl mb-2 text-slate-900">{member.name}</h4>
-                <p className="text-blue-600 text-xs font-bold uppercase tracking-widest">{member.role}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section >
-
-      {/* Results Section */}
-      < section ref={resultsRef} className="relative z-10 py-32 px-6" >
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-heading font-black mb-16 text-slate-900">REAL <span className="text-blue-600">RESULTS</span></h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { name: "Justin Garcia", role: "US ATHLETE", text: "TLZ is the perfect storm. You have access to not only an amazing group of coaches... but also an amazing community... These coaches gave me the confidence to compete in the sport knowing that I have the foundation to succeed. Truly a 1 of 1 group." },
-              { name: "Jessica Nesbitt", role: "AU ATHLETE", text: "The set up, coaching team and community are the best I've experienced. Excellent technical analysis... The global community is supportive and the TLZ team goes above and beyond regardless of experience, age or ability." },
-              { name: "Andrew Hallworth", role: "GB ATHLETE", text: "The coaches are fantastic, they break everything down so you can understand where you're going wrong and so you can fix it. The knowledge and expertise is second to none." },
-              { name: "Pavol Rovnan", role: "US ATHLETE", text: "Worth every single penny. In just a short time, I gained a wealth of knowledge... Sonny expertly guided me through the steps to build unshakable confidence in dropping under the bar." },
-              { name: "A.", role: "GB ATHLETE", text: "Learned a huge amount and had so much fun... Not to mentioned PBs in both the snatch and clean & jerk. Sonny was amazing." },
-              { name: "Jonathan Gil", role: "CH ATHLETE", text: "In just a few hours, I made huge progress and it kind of changed my mindset... especially with the snatch, which I had been struggling with for two years." }
-            ].map((t, i) => (
-              <div key={i} className="bg-white p-8 rounded-2xl border border-slate-200 shadow-lg relative text-left">
-                <div className="flex gap-1 mb-4">
-                  {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-4 h-4 fill-blue-500 text-blue-500" />)}
-                </div>
-                <p className="text-slate-600 text-sm mb-6 leading-relaxed min-h-[80px]">"{t.text}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs shrink-0">
-                    {t.name.charAt(0)}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 text-sm">{t.name}</h4>
-                    <p className="text-blue-600 text-[10px] font-bold uppercase tracking-wider">{t.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section >
-
 
 
       {/* Footer */}
-      < footer className="relative z-10 py-20 px-6 border-t border-slate-200 bg-slate-50" >
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-16">
-          <div className="flex flex-col">
-            <LogoPlaceholder className="mb-8" />
-            <div className="flex gap-4">
-              <a href="https://www.instagram.com/sonnywebstergb" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-blue-600 transition-all hover:bg-blue-50"><Instagram className="w-5 h-5" /></a>
-              <a href="https://www.youtube.com/@sonnywebsterGB" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-blue-600 transition-all hover:bg-blue-50"><Youtube className="w-5 h-5" /></a>
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-x-24 gap-y-12">
-            <div className="space-y-4">
-              <h4 className="font-heading font-bold text-slate-500 uppercase text-[10px] tracking-[0.2em]">Legal</h4>
-              <ul className="space-y-3 text-sm font-medium text-slate-500">
-                <li className="hover:text-blue-600 cursor-pointer transition-colors">Privacy Policy</li>
-                <li className="hover:text-blue-600 cursor-pointer transition-colors">Terms & Conditions</li>
-                <li className="hover:text-blue-600 cursor-pointer transition-colors">Refund Policy</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="mt-16 text-center border-t border-slate-200 pt-10">
+      < footer className="relative z-10 py-10 px-6 border-t border-slate-200 bg-slate-50" >
+        <div className="text-center">
           <p className="text-slate-400 text-[10px] uppercase font-bold tracking-[0.4em]">© 2026 THE LIFTING ZONE</p>
         </div>
       </footer >
@@ -749,7 +662,7 @@ const App = () => {
           <div className="pointer-events-auto">
             <button
               onClick={handleBack}
-              className="group flex items-center gap-3 px-8 py-3 rounded-full bg-white border border-slate-200 hover:bg-slate-50 hover:border-blue-200 transition-all uppercase text-[10px] font-bold tracking-widest text-slate-600 backdrop-blur-md shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+              className="cursor-pointer group flex items-center gap-3 px-8 py-3 rounded-full bg-white border border-slate-200 hover:bg-slate-50 hover:border-blue-200 transition-all uppercase text-[10px] font-bold tracking-widest text-slate-600 backdrop-blur-md shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               {currentQuestion > 0 ? "GO BACK" : "HOME"}
@@ -812,35 +725,330 @@ const App = () => {
     );
   };
 
-  const ResultView = () => {
+  const ResultView = ({ onBack }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+
     return (
       <div className="bg-[#f8fafc] text-slate-900 min-h-screen relative font-body">
         <AnimatedBackground />
-        <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 text-center">
+        {/* Navigation */}
+        <div className="flex justify-center pt-8 pb-4 relative z-30">
+          <button
+            onClick={onBack}
+            className="cursor-pointer group flex items-center gap-3 px-8 py-3 rounded-full bg-white border border-slate-200 hover:bg-slate-50 hover:border-blue-200 transition-all uppercase text-[10px] font-bold tracking-widest text-slate-600 backdrop-blur-md shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            HOME
+          </button>
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-12 text-center">
           {resultPage === 'vip' && (
             <FadeInSection>
-              <span className="bg-blue-100 text-blue-700 px-6 py-2 rounded-full text-[10px] font-heading font-bold border border-blue-200 mb-8 inline-block uppercase tracking-[0.3em]">ELITE QUALIFICATION MET</span>
+              <span className="bg-slate-900 border border-slate-800 text-white shadow-xl shadow-slate-900/20 px-6 py-2 rounded-full text-[10px] font-heading font-bold mb-8 inline-block uppercase tracking-[0.3em]">ELITE QUALIFICATION MET</span>
               <h1 className="text-4xl md:text-6xl font-heading font-black mb-8 leading-[0.95] tracking-tight text-slate-900 uppercase">
                 TRAIN LIKE AN OLYMPIAN. <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">WITH AN OLYMPIAN.</span>
               </h1>
 
-              {/* VIDEO PLACEHOLDER - Top for VIP */}
-              <div className="w-full max-w-3xl mx-auto mb-12">
-                <VideoPlaceholder src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=1200" alt="Sonny Mentorship Video" className="aspect-video" />
+              {/* VIDEO PLAYER - Top for VIP */}
+              <VimeoPlayer videoId="1128121321" thumbnail="https://i.vimeocdn.com/video/2071093259-e1f82c45f19badfe0e72d5ffbbf34379ea2860f9eb30c2343dedab3ebe3dcf19-d_1280" />
+
+              {/* Trusted By Section */}
+              {/* Authority / Trusted By Section - Redesigned */}
+              <div className="max-w-6xl mx-auto mb-24 text-center relative">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div className="text-left order-2 md:order-1 relative z-10">
+                    <div className="w-12 h-1 bg-blue-600 mb-8 ml-1"></div>
+                    <h3 className="text-3xl md:text-5xl font-heading font-black mb-6 uppercase text-slate-900 leading-[0.9]">Trusted By <br /> The Best.</h3>
+                    <p className="text-slate-800 text-lg font-bold leading-relaxed mb-6 font-heading border-l-4 border-slate-200 pl-6 py-1">
+                      "We’ve coached with CrossFit Games champions, the World’s Strongest Man alongside founders, CEOs, and high performers who expect results."
+                    </p>
+                    <p className="text-slate-500 text-sm font-medium leading-relaxed pl-7">
+                      The same system we use with world champions is the one we use with every client—adapted to your goals, schedule, and life.
+                    </p>
+                  </div>
+
+                  <div className="order-1 md:order-2 grid grid-cols-2 gap-4">
+                    <img src="/worlds-strongest-man.jpg" className="rounded-2xl shadow-xl rotate-3 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover" alt="World's Strongest Man" />
+                    <img src="/torian-pro-champions.png" className="rounded-2xl shadow-xl -rotate-2 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover translate-y-8" alt="Torian Pro Champions" />
+                    <img src="/Sara.jpg" className="rounded-2xl shadow-xl -rotate-1 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover" alt="Sara Sigmundsdottir" />
+                    <img src="/Ricky.jpg" className="rounded-2xl shadow-xl rotate-2 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover translate-y-8" alt="Ricky Garard" />
+                  </div>
+                </div>
               </div>
 
-              <div className="max-w-4xl mx-auto bg-white text-slate-950 p-10 md:p-16 rounded-[40px] text-center shadow-2xl border border-slate-200">
-                <h3 className="text-3xl font-heading font-black mb-6 uppercase leading-tight tracking-tight text-slate-900">VIP MENTORSHIP.</h3>
-                <p className="text-slate-500 mb-10 text-lg font-medium leading-relaxed italic max-w-2xl mx-auto">"You told us you want high-level accountability. We are ready to take over your programming and video analysis. Direct slots with our Olympian staff."</p>
-                <button className="w-full md:w-auto px-12 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-bold py-5 rounded-xl flex items-center justify-center gap-3 transition-all text-xs uppercase tracking-widest shadow-xl shadow-blue-600/20 hover:-translate-y-1 mx-auto">
-                  BOOK STRATEGY CALL <Calendar className="w-4 h-4" />
-                </button>
+              {/* "What Makes This Coaching Different" - Kevin Section */}
+              <div className="max-w-6xl mx-auto mb-24 bg-slate-100 rounded-[40px] p-8 md:p-12 mt-12">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  {/* Left Column: Copy */}
+                  <div className="text-center md:text-left space-y-8">
+                    <h3 className="text-4xl md:text-5xl font-heading font-black text-slate-900 leading-[0.95] tracking-tight">
+                      What Makes This <br /> Coaching Different
+                    </h3>
+
+                    <p className="text-slate-600 font-bold text-lg leading-relaxed border-l-4 border-blue-500 pl-6">
+                      Whether you're rebuilding, chasing performance, or refusing to slow down the standard stays the same.
+                    </p>
+
+                    <div className="space-y-6 text-slate-500 font-bold text-base leading-relaxed pl-6">
+                      <p>The same system used with the very best.</p>
+                      <p>Precision, accountability, and results that last.</p>
+                      <p className="text-slate-800 text-lg">
+                        Take Kevin, 66 years old, a Senior Creative Director.
+                      </p>
+                      <p>Still training like an athlete. Focused on strength, mobility, and longevity.</p>
+                      <p>This is built for those who value expertise and results that stick.</p>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Image */}
+                  <div className="h-[500px] w-full relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                    <img
+                      src="kevin4.jpg"
+                      alt="Kevin Training"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature 3: Pedigree */}
+              <div className="mb-24 relative rounded-[40px] overflow-hidden h-[500px] flex items-end text-left group">
+                <img src="Built-By.jpg" alt="Olympian" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-90"></div>
+                <div className="relative z-10 p-10 md:p-16 max-w-3xl">
+                  <div className="inline-block bg-blue-600 text-white text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-6">Built By Olympians</div>
+                  <h3 className="text-4xl md:text-6xl font-heading font-black text-white mb-6 uppercase leading-none">With Proven <br />Pedigree.</h3>
+                  <p className="text-slate-300 text-lg font-medium leading-relaxed mb-8">
+                    "Most high-level athletes turn into low-level coaches. That's not the case here. We have stood on the platform at the Olympic Games. We know exactly what it takes to build strength that lasts a lifetime."
+                  </p>
+                  <button onClick={() => document.getElementById('process-timeline').scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer bg-white text-slate-900 font-heading font-black px-8 py-4 rounded-xl uppercase tracking-widest text-xs hover:bg-blue-50 transition-colors">
+                    See The Methodology
+                  </button>
+                </div>
+              </div>
+
+              {/* The Process Timeline */}
+              <div id="process-timeline" className="mb-24 text-left p-4 scroll-mt-24">
+                <div className="text-center mb-16">
+                  <h3 className="text-3xl md:text-5xl font-heading font-black mb-6 uppercase text-slate-900 leading-tight">From Assessment <br /> To <span className="text-blue-600">Action.</span></h3>
+                  <p className="text-slate-600 max-w-2xl mx-auto text-lg font-medium">What happens when you join? We don't just throw a program at you. We build your lifting profile from the ground up.</p>
+                </div>
+
+                {/* Video Replacement for Steps */}
+                <div
+                  className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl group cursor-pointer border-4 border-slate-900 aspect-video bg-black"
+                  onClick={() => setIsPlaying(true)}
+                >
+                  {!isPlaying ? (
+                    <>
+                      <img src="https://img.youtube.com/vi/cRXR3UieHUc/maxresdefault.jpg" alt="How I Fix Lifts Video" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+                      {/* Play Button Overlay */}
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white p-6 rounded-full shadow-2xl group-hover:scale-110 transition-transform z-10">
+                        <Play className="w-10 h-10 fill-white ml-1" />
+                      </div>
+
+                      {/* Title Overlay */}
+                      <div className="absolute bottom-8 left-8 right-8 z-10">
+                        <h4 className="text-white font-heading font-black text-3xl md:text-5xl uppercase leading-none drop-shadow-lg glitch-text">
+                          HOW I FIX <span className="text-red-500">LIFTS</span>
+                        </h4>
+                        <p className="text-slate-300 font-bold tracking-widest text-sm mt-2 uppercase">Watch The Breakdown</p>
+                      </div>
+                    </>
+                  ) : (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src="https://www.youtube.com/embed/cRXR3UieHUc?autoplay=1"
+                      title="How I Fix Lifts Check"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                    ></iframe>
+                  )}
+                </div>
+              </div>
+
+              {/* Real Results / Testimonials */}
+              <div className="mb-24">
+                <h3 className="text-3xl md:text-5xl font-heading font-black mb-4 uppercase text-center text-slate-900 leading-tight">Real Lifters. <span className="text-blue-600">Real Results.</span></h3>
+                <p className="text-slate-500 text-center text-xs font-bold tracking-widest uppercase mb-12">Don't just take our word for it</p>
+
+                <div className="grid md:grid-cols-3 gap-6">
+                  {[
+                    { name: "James T.", result: "+15kg Total", quote: "I was stuck at the same plateau for 3 years. Sonny fixed my jerk in 3 weeks.", img: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=400" },
+                    { name: "Sarah M.", result: "Pain Free", quote: "I thought my knees were done. The technical changes took the load off my joints completely.", img: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=400" },
+                    { name: "David K.", result: "First Competition", quote: "Walked onto the platform with total confidence. Went 6 for 6. Unbelievable coaching.", img: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&q=80&w=400" }
+                  ].map((testimonial, i) => (
+                    <div key={i} className="bg-white rounded-[24px] overflow-hidden border border-slate-100 shadow-xl group hover:-translate-y-1 transition-transform duration-300">
+                      <div className="h-48 overflow-hidden relative">
+                        <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors"></div>
+                        <img src={testimonial.img} alt={testimonial.name} className="w-full h-full object-cover" />
+                        <div className="absolute bottom-4 left-4">
+                          <span className="bg-green-500 text-white text-[10px] font-black px-2 py-1 rounded uppercase tracking-wide shadow-sm">{testimonial.result}</span>
+                        </div>
+                      </div>
+                      <div className="p-8">
+                        <div className="flex gap-1 text-orange-400 mb-3">
+                          <Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" />
+                        </div>
+                        <p className="text-slate-600 text-sm font-medium mb-4 leading-relaxed">"{testimonial.quote}"</p>
+                        <p className="text-slate-900 font-heading font-bold text-xs uppercase tracking-widest">- {testimonial.name}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Final CTA Area */}
+              {/* Pricing Section */}
+              <div className="mb-24">
+                <h3 className="text-3xl md:text-5xl font-heading font-black mb-16 uppercase text-center text-slate-900 leading-tight">Choose Your <span className="text-blue-600">Protocol</span></h3>
+
+                <div className="grid lg:grid-cols-3 gap-6 items-start max-w-7xl mx-auto">
+                  {/* Option 1: SOLO */}
+                  <div className="bg-white rounded-[32px] p-8 border border-slate-200 shadow-xl relative group hover:-translate-y-2 transition-transform duration-300">
+                    <div className="mb-6">
+                      <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400">The Maintenance Option</span>
+                      <h4 className="text-3xl font-heading font-black text-slate-900 mt-2 uppercase">Solo <br />Protocol</h4>
+                    </div>
+
+                    <div className="mb-8">
+                      <span className="text-5xl font-heading font-black text-slate-900">£199</span><span className="text-slate-500 font-medium">/mo</span>
+                      <div className="mt-4 p-4 bg-slate-50 rounded-xl">
+                        <div className="text-[10px] uppercase font-bold text-slate-400 mb-1">Annual Commitment</div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-xl font-bold text-slate-900">£2,034</span>
+                          <span className="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded">SAVE £354</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <ul className="space-y-4 mb-8 text-left">
+                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> Custom Program (Mobility OR Lift)</li>
+                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> 3x Video Reviews Per Week</li>
+                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> Monthly Community Call</li>
+                    </ul>
+
+                    <button className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Select Solo</button>
+                    <p className="text-center text-[10px] text-red-400 font-bold mt-4 uppercase tracking-wider">Warning: 48hr feedback delay.</p>
+                  </div>
+
+                  {/* Option 2: ELITE (Highlighted) */}
+                  <div className="bg-white rounded-[32px] p-8 border-2 border-blue-500 shadow-2xl relative transform lg:-translate-y-6 z-10">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-6 py-2 rounded-full font-heading font-bold text-[10px] uppercase tracking-widest shadow-lg">Most Popular</div>
+
+                    <div className="mb-6">
+                      <span className="text-[10px] uppercase font-bold tracking-widest text-blue-500">For Serious Athletes</span>
+                      <h4 className="text-4xl font-heading font-black text-slate-900 mt-2 uppercase">Elite <br />Protocol</h4>
+                    </div>
+
+                    <div className="mb-8">
+                      <span className="text-6xl font-heading font-black text-slate-900">£349</span><span className="text-slate-500 font-medium">/mo</span>
+                      <div className="mt-4 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-[10px] uppercase font-bold text-blue-600">Best Value (Yearly)</span>
+                          <span className="bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded">SAVE £630</span>
+                        </div>
+                        <span className="text-2xl font-bold text-slate-900">£3,558</span><span className="text-sm font-medium text-slate-500"> /year</span>
+                      </div>
+                    </div>
+
+                    <ul className="space-y-4 mb-8 text-left">
+                      <li className="flex gap-3 text-sm font-bold text-slate-700">
+                        <Zap className="w-5 h-5 text-blue-500 shrink-0" />
+                        <div>
+                          Daily "Rapid-Response" Audits
+                          <p className="text-[10px] text-slate-400 font-normal">Mon-Fri frame-by-frame analysis.</p>
+                        </div>
+                      </li>
+                      <li className="flex gap-3 text-sm font-bold text-slate-700">
+                        <Target className="w-5 h-5 text-blue-500 shrink-0" />
+                        <div>
+                          The "Tribrid" Architecture
+                          <p className="text-[10px] text-slate-400 font-normal">Mobility + Weightlifting + Accessories.</p>
+                        </div>
+                      </li>
+                      <li className="flex gap-3 text-sm font-bold text-slate-700">
+                        <Calendar className="w-5 h-5 text-blue-500 shrink-0" />
+                        <div>
+                          Live Strategy Onboarding
+                          <p className="text-[10px] text-slate-400 font-normal">1-on-1 Zoom call to map your year.</p>
+                        </div>
+                      </li>
+                    </ul>
+
+                    <button className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply For Elite</button>
+
+                    <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-slate-500 bg-slate-50 py-3 rounded-lg border border-slate-100">
+                      <ShieldCheck className="w-3.5 h-3.5 text-blue-500" /> 90-DAY PR GUARANTEE INCLUDED
+                    </div>
+                  </div>
+
+                  {/* Option 3: INNER CIRCLE */}
+                  <div className="bg-white rounded-[32px] p-8 border border-slate-200 shadow-xl relative group hover:-translate-y-2 transition-transform duration-300">
+                    <div className="mb-6">
+                      <span className="text-[10px] uppercase font-bold tracking-widest text-orange-500">The Mentorship</span>
+                      <h4 className="text-3xl font-heading font-black text-slate-900 mt-2 uppercase">Inner <br />Circle</h4>
+                    </div>
+
+                    <div className="mb-8">
+                      <span className="text-5xl font-heading font-black text-slate-900">£500</span><span className="text-slate-500 font-medium">/mo</span>
+                      <div className="mt-4 p-4 bg-slate-50 rounded-xl">
+                        <div className="text-[10px] uppercase font-bold text-slate-400 mb-1">Annual Commitment</div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-xl font-bold text-slate-900">£5,100</span>
+                          <span className="bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded">SAVE £900</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <ul className="space-y-4 mb-8 text-left">
+                      <li className="flex gap-3 text-sm font-bold text-slate-900"><Star className="w-5 h-5 text-orange-400 shrink-0 fill-orange-400" /> Everything in Elite, plus:</li>
+                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Weekly 1-1 Private Coach Call</li>
+                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Weekly Tech Session with Sonny</li>
+                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Unlimited Video Reviews</li>
+                    </ul>
+
+                    <button className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Join Inner Circle</button>
+                  </div>
+                </div>
+
+                {/* Add-Ons */}
+                <div className="max-w-4xl mx-auto mt-16">
+                  <h4 className="text-xl font-heading font-black text-slate-400 uppercase tracking-widest mb-6 text-center">Available Add-Ons</h4>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg">
+                      <div className="text-left">
+                        <div className="font-heading font-black text-slate-900 uppercase">VIP Onboarding</div>
+                        <div className="text-[10px] text-slate-500 font-medium">30-min strategy session w/ Sonny Webster.</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-slate-900">£500</div>
+                        <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
+                      </div>
+                    </div>
+                    <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg">
+                      <div className="text-left">
+                        <div className="font-heading font-black text-slate-900 uppercase">Performance Nutrition</div>
+                        <div className="text-[10px] text-slate-500 font-medium">Dietitian support & monthly check-ins.</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-slate-900">£100</div>
+                        <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </FadeInSection>
           )}
           {resultPage === 'sales' && (
             <FadeInSection>
-              <span className="bg-blue-600 text-white px-6 py-2 rounded-full text-[10px] font-heading font-bold mb-8 inline-block uppercase tracking-[0.3em] shadow-lg shadow-blue-600/20">THE SYSTEM UNLOCKED</span>
+              <span className="bg-slate-900 border border-slate-800 text-white shadow-xl shadow-slate-900/20 px-6 py-2 rounded-full text-[10px] font-heading font-bold mb-8 inline-block uppercase tracking-[0.3em]">THE SYSTEM UNLOCKED</span>
               <h1 className="text-4xl md:text-6xl font-heading font-black mb-8 leading-[0.95] tracking-tight text-slate-900 uppercase">
                 THE OLYMPIAN'S <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">TECHNICAL HANDBOOK.</span>
               </h1>
@@ -916,10 +1124,10 @@ const App = () => {
 
       {step === 'landing' && <LandingPage />}
       {step === 'quiz' && <QuizStep />}
-      {step === 'lead-form' && <LeadCaptureForm data={leadData} setData={setLeadData} onSubmit={handleLeadSubmit} />}
+      {step === 'lead-form' && <LeadCaptureForm data={leadData} setData={setLeadData} onSubmit={handleLeadSubmit} onBack={() => setStep('landing')} />}
       {step === 'analyzing' && <AnalyzingScreen />}
-      {step === 'bridge' && <BridgePage resource={getFreeResource()} onUpsellClick={() => { setStep('result'); setResultPage('sales'); }} />}
-      {step === 'result' && <ResultView />}
+      {step === 'bridge' && <BridgePage resource={getFreeResource()} onUpsellClick={() => { setStep('result'); setResultPage('sales'); }} onBack={() => setStep('landing')} />}
+      {step === 'result' && <ResultView onBack={() => setStep('landing')} />}
 
       <DevToolbar />
 
