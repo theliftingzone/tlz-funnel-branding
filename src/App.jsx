@@ -776,95 +776,197 @@ const App = () => {
                 </div>
               </div>
 
-              {/* "What Makes This Coaching Different" - Kevin Section (Redesigned & Video Integrated) */}
-              <div className="max-w-6xl mx-auto mb-32 relative group">
-                {/* Decorative Gradients */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-[45px] opacity-20 group-hover:opacity-40 blur-xl transition-opacity duration-500"></div>
+              {/* "What Makes This Coaching Different" - Kevin Section (Organic & Designed) */}
+              <div className="mb-32 mt-24 relative">
+                {/* Background Blobs for specific section ambience */}
+                <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 -z-10 mix-blend-multiply"></div>
+                <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-50/60 rounded-full blur-3xl translate-x-1/2 -z-10 mix-blend-multiply"></div>
 
-                <div className="relative bg-white rounded-[40px] p-8 md:p-14 border border-slate-100 shadow-2xl overflow-hidden">
-                  <div className="grid md:grid-cols-2 gap-16 items-center">
-                    {/* Left Column: Copy */}
-                    <div className="text-center md:text-left space-y-8 relative z-10">
-                      <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-[11px] font-black tracking-widest uppercase mb-2">
-                        <Star className="w-3 h-3 fill-blue-700" />
-                        Client Spotlight
-                      </div>
+                <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center relative z-10">
+                  {/* Left Column: Copy */}
+                  <div className="text-center md:text-left space-y-8 md:pl-8">
+                    <div className="inline-flex items-center gap-2 bg-white border border-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-[11px] font-black tracking-widest uppercase mb-2 shadow-sm">
+                      <Star className="w-3 h-3 fill-blue-700" />
+                      Client Spotlight
+                    </div>
 
-                      <h3 className="text-4xl md:text-5xl font-heading font-black text-slate-900 leading-[0.95] tracking-tight whitespace-pre-line">
-                        What Makes This <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-500">Coaching Different.</span>
-                      </h3>
+                    <h3 className="text-5xl md:text-6xl font-heading font-black text-slate-900 leading-[0.9] tracking-tight whitespace-pre-line">
+                      What Makes This <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-cyan-500">Coaching Different.</span>
+                    </h3>
 
-                      <p className="text-slate-600 font-bold text-lg leading-relaxed border-l-4 border-blue-500 pl-6">
-                        Whether you're rebuilding, chasing performance, or refusing to slow down the standard stays the same.
+                    <p className="text-slate-600 font-bold text-xl leading-relaxed border-l-4 border-blue-600 pl-8">
+                      Whether you're rebuilding, chasing performance, or refusing to slow down—the standard stays the same.
+                    </p>
+
+                    <div className="space-y-6 text-slate-500 font-medium text-lg leading-relaxed pl-8">
+                      <p>The same system used with the very best.</p>
+                      <p>Precision, accountability, and results that last.</p>
+                      <p className="text-slate-900 text-xl font-bold">
+                        Take Kevin, 66 years old, a Senior Creative Director.
                       </p>
+                      <p>Still training like an athlete. Focused on strength, mobility, and longevity.</p>
+                    </div>
+                  </div>
 
-                      <div className="space-y-6 text-slate-500 font-medium text-base leading-relaxed pl-6">
-                        <p>The same system used with the very best.</p>
-                        <p>Precision, accountability, and results that last.</p>
-                        <p className="text-slate-900 text-lg font-bold">
-                          Take Kevin, 66 years old, a Senior Creative Director.
-                        </p>
-                        <p>Still training like an athlete. Focused on strength, mobility, and longevity.</p>
-                        <div className="flex items-center gap-3 text-blue-700 font-bold uppercase text-xs tracking-wider pt-2">
-                          <CheckCircle className="w-4 h-4" />
-                          <span>Built for expertise who value results</span>
+                  {/* Right Column: Video (Vimeo) - Clean & Sharp */}
+                  <div className="relative w-full aspect-[4/5] md:aspect-square rounded-[32px] overflow-hidden shadow-2xl bg-black group/video cursor-pointer z-20"
+                    onClick={(e) => {
+                      const iframe = document.createElement('iframe');
+                      iframe.src = "https://player.vimeo.com/video/775627130?h=9d0e41e34e&autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479";
+                      iframe.width = "100%";
+                      iframe.height = "100%";
+                      iframe.frameBorder = "0";
+                      iframe.allow = "autoplay; fullscreen; picture-in-picture";
+                      iframe.title = "Kevin's Results";
+                      iframe.className = "absolute inset-0 w-full h-full";
+                      e.currentTarget.innerHTML = '';
+                      e.currentTarget.appendChild(iframe);
+                    }}>
+
+                    <img
+                      src="kevin4.jpg"
+                      alt="Kevin Training"
+                      className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover/video:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+                    {/* Play Button */}
+                    <div className="absolute inset-0 flex items-center justify-center z-20">
+                      <div className="w-24 h-24 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover/video:scale-110 transition-transform duration-300 shadow-xl">
+                        <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                          <Play className="w-6 h-6 fill-white text-white ml-1" />
                         </div>
                       </div>
                     </div>
 
-                    {/* Right Column: Video (Vimeo) */}
-                    <div className="relative w-full aspect-[4/5] md:aspect-square rounded-3xl overflow-hidden shadow-2xl bg-slate-900 border-[6px] border-white group/video cursor-pointer"
-                      onClick={(e) => {
-                        const iframe = document.createElement('iframe');
-                        iframe.src = "https://player.vimeo.com/video/775627130?h=9d0e41e34e&autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479";
-                        iframe.width = "100%";
-                        iframe.height = "100%";
-                        iframe.frameBorder = "0";
-                        iframe.allow = "autoplay; fullscreen; picture-in-picture";
-                        iframe.title = "Kevin's Results";
-                        iframe.className = "absolute inset-0 w-full h-full";
-                        e.currentTarget.innerHTML = '';
-                        e.currentTarget.appendChild(iframe);
-                      }}>
-
-                      <img
-                        src="kevin4.jpg"
-                        alt="Kevin Training"
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/video:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
-
-                      {/* Play Button */}
-                      <div className="absolute inset-0 flex items-center justify-center z-20">
-                        <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 group-hover/video:scale-110 transition-transform duration-300">
-                          <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
-                            <Play className="w-6 h-6 fill-white text-white ml-1" />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="absolute bottom-6 left-6 right-6 z-20">
-                        <p className="text-white font-bold text-sm uppercase tracking-wider mb-1">Watch His Story</p>
-                        <p className="text-white/80 text-xs line-clamp-2">See how Kevin transformed his strength at 66.</p>
-                      </div>
+                    <div className="absolute bottom-8 left-8 right-8 z-20">
+                      <p className="text-white font-black text-lg uppercase tracking-wider mb-2 drop-shadow-md">Watch His Story</p>
+                      <p className="text-white/90 text-sm line-clamp-2 font-medium drop-shadow-sm">See how Kevin transformed his strength at 66.</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Feature 3: Pedigree */}
-              <div className="mb-24 relative rounded-[40px] overflow-hidden h-[500px] flex items-end text-left group">
-                <img src="Built-By.jpg" alt="Olympian" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-90"></div>
-                <div className="relative z-10 p-10 md:p-16 max-w-3xl">
-                  <div className="inline-block bg-blue-600 text-white text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-6">Built By Olympians</div>
-                  <h3 className="text-4xl md:text-6xl font-heading font-black text-white mb-6 uppercase leading-none">With Proven <br />Pedigree.</h3>
-                  <p className="text-slate-300 text-lg font-medium leading-relaxed mb-8">
-                    "Most high-level athletes turn into low-level coaches. That's not the case here. We have stood on the platform at the Olympic Games. We know exactly what it takes to build strength that lasts a lifetime."
-                  </p>
-                  <button onClick={() => document.getElementById('process-timeline').scrollIntoView({ behavior: 'smooth' })} className="cursor-pointer bg-white text-slate-900 font-heading font-black px-8 py-4 rounded-xl uppercase tracking-widest text-xs hover:bg-blue-50 transition-colors">
-                    See The Methodology
+              {/* "Built By Olympians" Section - Dark Full Width */}
+              <div className="w-screen relative left-[calc(-50vw+50%)] bg-[#0f172a] py-24 mb-24 overflow-hidden border-t border-b border-slate-800">
+                {/* Subtle Mesh Grid Background */}
+                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+
+                <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+                  {/* Left Column: Copy */}
+                  <div className="flex flex-col justify-center text-left space-y-10 relative z-10 order-2 lg:order-1">
+                    <div className="space-y-6">
+                      <h3 className="text-4xl md:text-6xl font-heading font-black text-white leading-[0.95]">
+                        When You Move <br /> Better, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Everything Improves.</span>
+                      </h3>
+
+                      <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full"></div>
+
+                      <h4 className="text-xl md:text-2xl font-bold text-slate-300 leading-snug max-w-lg">
+                        Most athletes train to lift more weight. <br />
+                        <span className="text-white">We train you to move better.</span>
+                      </h4>
+                    </div>
+
+                    <div className="space-y-6">
+                      <p className="text-slate-400 font-medium leading-relaxed text-lg pl-6 border-l-2 border-slate-700">
+                        Because when the machine works efficiently, the numbers go up automatically. No stiffness. No plateaus. No pain holding you back.
+                      </p>
+
+                      <p className="text-slate-200 font-bold leading-relaxed text-lg">
+                        This isn't just about adding kilos. It's about building strength that lasts—powerful, mobile, and built for life.
+                      </p>
+                    </div>
+
+                    <button className="cursor-pointer bg-white text-slate-950 font-heading font-black px-10 py-5 rounded-full uppercase tracking-widest text-sm hover:bg-blue-50 hover:scale-105 transition-all w-full md:w-auto self-start shadow-[0_0_30px_rgba(255,255,255,0.15)]">
+                      Let's Do This Coach
+                    </button>
+                  </div>
+
+                  {/* Right Column: Image - Poster Style */}
+                  <div className="relative order-1 lg:order-2">
+                    {/* Light glow behind the image */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-500/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+                    <img
+                      src="Built-By.jpg"
+                      alt="Built By Olympians"
+                      className="relative w-full h-auto rounded-3xl shadow-2xl border border-slate-700/50 transform rotate-1 hover:rotate-0 transition-transform duration-700"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* "Two Options" Comparison Section - Clean & Connected */}
+              <div className="max-w-6xl mx-auto mb-32 px-4 relative">
+                <div className="text-center mb-20 space-y-6">
+                  <span className="text-blue-600 font-black tracking-widest uppercase text-xs">The Choice Is Yours</span>
+                  <h3 className="text-4xl md:text-6xl font-heading font-black text-slate-900 leading-none">
+                    Want To Improve Your Lifting? <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-700">You Have Two Options.</span>
+                  </h3>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 relative items-stretch">
+                  {/* Divider Desktop */}
+                  <div className="hidden md:block absolute top-8 bottom-8 left-1/2 w-px bg-gradient-to-b from-transparent via-slate-200 to-transparent -translate-x-1/2"></div>
+
+                  {/* Option 1 */}
+                  <div className="bg-white p-10 rounded-[40px] shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 group">
+                    <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                      <X className="w-8 h-8 text-red-500" />
+                    </div>
+                    <h4 className="text-3xl font-heading font-black text-slate-900 mb-8">Go It Alone</h4>
+                    <ul className="space-y-5">
+                      {[
+                        "Spend years stuck at the same numbers",
+                        "Film your lifts & hope you spot what's wrong",
+                        "Listen to vague cues that never seem to help",
+                        "Waste time with drills that don't help lifting",
+                        "Follow plans that aren't built for you"
+                      ].map((item, i) => (
+                        <li key={i} className="flex gap-4 items-start text-slate-500 font-medium text-base">
+                          <div className="bg-red-100 rounded-full p-1 mt-0.5 shrink-0"><X className="w-3 h-3 text-red-600 stroke-[3]" /></div>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Option 2 */}
+                  <div className="bg-slate-50 p-10 rounded-[40px] shadow-lg border border-blue-100 relative overflow-hidden group hover:shadow-2xl transition-all duration-300">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-bl-[100px] pointer-events-none"></div>
+
+                    <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-transform">
+                      <CheckCircle className="w-8 h-8 text-white" />
+                    </div>
+
+                    <h4 className="text-3xl font-heading font-black text-blue-900 mb-8">Lead To Success</h4>
+                    <ul className="space-y-5 relative z-10">
+                      {[
+                        "Break plateaus fixing exactly what's holding you back",
+                        "Get expert eyes on your lifts with daily feedback",
+                        "Learn to spot and fix your own technique issues",
+                        "Build mobility and strength that carry over to your lifts",
+                        "A plan that adjusts weekly to your real progress"
+                      ].map((item, i) => (
+                        <li key={i} className="flex gap-4 items-start text-slate-800 font-bold text-base">
+                          <div className="bg-green-500 rounded-full p-1 mt-0.5 shrink-0 shadow-sm"><CheckCircle className="w-3 h-3 text-white stroke-[3]" /></div>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mt-20 text-center">
+                  <button className="cursor-pointer bg-slate-900 text-white font-heading font-black px-16 py-6 rounded-2xl uppercase tracking-widest text-lg hover:bg-slate-800 hover:scale-105 transition-all shadow-2xl hover:shadow-blue-900/20 active:scale-95 group relative overflow-hidden">
+                    <span className="relative z-10">I'm Ready To Do This</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                   </button>
+                  <p className="text-slate-400 text-xs font-bold mt-6 uppercase tracking-widest">
+                    <span className="text-red-500">*</span> Limited Team Spots Available
+                  </p>
                 </div>
               </div>
 
