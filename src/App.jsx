@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { ChevronRight, Play, CheckCircle, Calendar, ArrowRight, Dumbbell, Zap, Target, Mail, Award, TrendingUp, ShieldCheck, Eye, ArrowLeft, X, Lock, Menu, Loader2, ExternalLink, Star } from 'lucide-react';
+import ProcessTimeline from './components/ProcessTimeline';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -642,7 +643,7 @@ const App = () => {
       {/* Footer */}
       < footer className="relative z-10 py-10 px-6 border-t border-slate-200 bg-slate-50" >
         <div className="text-center">
-          <p className="text-slate-400 text-[10px] uppercase font-bold tracking-[0.4em]">© 2026 THE LIFTING ZONE</p>
+          <p className="text-slate-400 text-[10px] uppercase font-bold tracking-[0.4em]">© 2026 THE LIFTING ZONE v2.0</p>
         </div>
       </footer >
     </div >
@@ -727,12 +728,13 @@ const App = () => {
 
   const ResultView = ({ onBack }) => {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isAnnual, setIsAnnual] = useState(false); // Toggle state for pricing
 
     return (
       <div className="bg-[#f8fafc] text-slate-900 min-h-screen relative font-body">
         <AnimatedBackground />
         {/* Navigation */}
-        <div className="flex justify-center pt-8 pb-4 relative z-30">
+        <div className="flex justify-center pt-12 pb-6 relative z-30">
           <button
             onClick={onBack}
             className="cursor-pointer group flex items-center gap-3 px-8 py-3 rounded-full bg-white border border-slate-200 hover:bg-slate-50 hover:border-blue-200 transition-all uppercase text-[10px] font-bold tracking-widest text-slate-600 backdrop-blur-md shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
@@ -741,503 +743,577 @@ const App = () => {
             HOME
           </button>
         </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-6 py-12 text-center">
+        <div className="relative z-10 w-full text-center">
           {resultPage === 'vip' && (
-            <FadeInSection>
-              <span className="bg-slate-900 border border-slate-800 text-white shadow-xl shadow-slate-900/20 px-6 py-2 rounded-full text-[10px] font-heading font-bold mb-8 inline-block uppercase tracking-[0.3em]">ELITE QUALIFICATION MET</span>
-              <h1 className="text-4xl md:text-6xl font-heading font-black mb-8 leading-[0.95] tracking-tight text-slate-900 uppercase">
-                TRAIN LIKE AN OLYMPIAN. <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">WITH AN OLYMPIAN.</span>
-              </h1>
+            <>
+              {/* FadeInSection removed for top content to fix mobile loading/visibility issues */}
+              <div>
+                <div className="max-w-6xl mx-auto px-6 pt-12">
+                  <span className="bg-slate-900 border border-slate-800 text-white shadow-xl shadow-slate-900/20 px-6 py-2 rounded-full text-[10px] font-heading font-bold mb-8 inline-block uppercase tracking-[0.3em]">ELITE QUALIFICATION MET</span>
+                  <h1 className="text-4xl md:text-6xl font-heading font-black mb-8 leading-tight tracking-tight text-slate-900 uppercase">
+                    TRAIN LIKE AN OLYMPIAN. <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">WITH AN OLYMPIAN.</span>
+                  </h1>
 
-              {/* VIDEO PLAYER - Top for VIP */}
-              <VimeoPlayer videoId="1128121321" thumbnail="https://i.vimeocdn.com/video/2071093259-e1f82c45f19badfe0e72d5ffbbf34379ea2860f9eb30c2343dedab3ebe3dcf19-d_1280" />
+                  {/* VIDEO PLAYER - Top for VIP */}
+                  <VimeoPlayer videoId="1128121321" thumbnail="https://i.vimeocdn.com/video/2071093259-e1f82c45f19badfe0e72d5ffbbf34379ea2860f9eb30c2343dedab3ebe3dcf19-d_1280" />
 
-              {/* Trusted By Section */}
-              {/* Authority / Trusted By Section - Redesigned */}
-              <div className="max-w-6xl mx-auto mb-24 text-center relative">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                  <div className="text-left order-2 md:order-1 relative z-10">
-                    <div className="w-12 h-1 bg-blue-600 mb-8 ml-1"></div>
-                    <h3 className="text-3xl md:text-5xl font-heading font-black mb-6 uppercase text-slate-900 leading-[0.9]">Trusted By <br /> The Best.</h3>
-                    <p className="text-slate-800 text-lg font-bold leading-relaxed mb-6 font-heading border-l-4 border-slate-200 pl-6 py-1">
-                      "We’ve coached with CrossFit Games champions, the World’s Strongest Man alongside founders, CEOs, and high performers who expect results."
-                    </p>
-                    <p className="text-slate-500 text-sm font-medium leading-relaxed pl-7">
-                      The same system we use with world champions is the one we use with every client—adapted to your goals, schedule, and life.
-                    </p>
-                  </div>
+                  {/* Trusted By Section */}
+                  {/* Authority / Trusted By Section - Redesigned */}
+                  <div className="max-w-6xl mx-auto mb-24 text-center relative">
+                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                      <div className="text-left order-2 md:order-1 relative z-10">
+                        <div className="w-12 h-1 bg-blue-600 mb-8 ml-1"></div>
+                        <h3 className="text-3xl md:text-5xl font-heading font-black mb-6  text-slate-900 leading-[0.9]">Trusted By The Best.</h3>
+                        <p className="text-slate-800 text-lg font-bold leading-relaxed mb-6 font-heading border-l-4 border-slate-200 pl-6 py-1">
+                          "We’ve coached with CrossFit Games champions, the World’s Strongest Man alongside founders, CEOs, and high performers who expect results."
+                        </p>
+                        <p className="text-slate-500 text-sm font-medium leading-relaxed pl-7">
+                          The same system we use with world champions is the one we use with every client—adapted to your goals, schedule, and life.
+                        </p>
+                      </div>
 
-                  <div className="order-1 md:order-2 grid grid-cols-2 gap-4">
-                    <img src="/worlds-strongest-man.jpg" className="rounded-2xl shadow-xl rotate-3 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover" alt="World's Strongest Man" />
-                    <img src="/torian-pro-champions.png" className="rounded-2xl shadow-xl -rotate-2 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover translate-y-8" alt="Torian Pro Champions" />
-                    <img src="/Sara.jpg" className="rounded-2xl shadow-xl -rotate-1 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover" alt="Sara Sigmundsdottir" />
-                    <img src="/Ricky.jpg" className="rounded-2xl shadow-xl rotate-2 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover translate-y-8" alt="Ricky Garard" />
-                  </div>
-                </div>
-              </div>
-
-              {/* "What Makes This Coaching Different" - Kevin Section (Organic & Designed) */}
-              <div className="mb-32 mt-24 relative">
-                {/* Background Blobs for specific section ambience */}
-                <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 -z-10 mix-blend-multiply"></div>
-                <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-50/60 rounded-full blur-3xl translate-x-1/2 -z-10 mix-blend-multiply"></div>
-
-                <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center relative z-10">
-                  {/* Left Column: Copy */}
-                  <div className="text-center md:text-left space-y-8 md:pl-8">
-                    <div className="inline-flex items-center gap-2 bg-white border border-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-[11px] font-black tracking-widest uppercase mb-2 shadow-sm">
-                      <Star className="w-3 h-3 fill-blue-700" />
-                      Client Spotlight
-                    </div>
-
-                    <h3 className="text-5xl md:text-6xl font-heading font-black text-slate-900 leading-[0.9] tracking-tight whitespace-pre-line">
-                      What Makes This <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-cyan-500">Coaching Different.</span>
-                    </h3>
-
-                    <p className="text-slate-600 font-bold text-xl leading-relaxed border-l-4 border-blue-600 pl-8">
-                      Whether you're rebuilding, chasing performance, or refusing to slow down—the standard stays the same.
-                    </p>
-
-                    <div className="space-y-6 text-slate-500 font-medium text-lg leading-relaxed pl-8">
-                      <p>The same system used with the very best.</p>
-                      <p>Precision, accountability, and results that last.</p>
-                      <p className="text-slate-900 text-xl font-bold">
-                        Take Kevin, 66 years old, a Senior Creative Director.
-                      </p>
-                      <p>Still training like an athlete. Focused on strength, mobility, and longevity.</p>
-                    </div>
-                  </div>
-
-                  {/* Right Column: Video (Vimeo) - Clean & Sharp */}
-                  <div className="relative w-full aspect-[4/5] md:aspect-square rounded-[32px] overflow-hidden shadow-2xl bg-black group/video cursor-pointer z-20"
-                    onClick={(e) => {
-                      const iframe = document.createElement('iframe');
-                      iframe.src = "https://player.vimeo.com/video/775627130?h=9d0e41e34e&autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479";
-                      iframe.width = "100%";
-                      iframe.height = "100%";
-                      iframe.frameBorder = "0";
-                      iframe.allow = "autoplay; fullscreen; picture-in-picture";
-                      iframe.title = "Kevin's Results";
-                      iframe.className = "absolute inset-0 w-full h-full";
-                      e.currentTarget.innerHTML = '';
-                      e.currentTarget.appendChild(iframe);
-                    }}>
-
-                    <img
-                      src="kevin4.jpg"
-                      alt="Kevin Training"
-                      className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover/video:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-
-                    {/* Play Button */}
-                    <div className="absolute inset-0 flex items-center justify-center z-20">
-                      <div className="w-24 h-24 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover/video:scale-110 transition-transform duration-300 shadow-xl">
-                        <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
-                          <Play className="w-6 h-6 fill-white text-white ml-1" />
-                        </div>
+                      <div className="order-1 md:order-2 grid grid-cols-2 gap-4">
+                        <img src="/worlds-strongest-man.jpg" className="rounded-2xl shadow-xl rotate-3 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover" alt="World's Strongest Man" />
+                        <img src="/torian-pro-champions.png" className="rounded-2xl shadow-xl -rotate-2 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover translate-y-8" alt="Torian Pro Champions" />
+                        <img src="/Sara.jpg" className="rounded-2xl shadow-xl -rotate-1 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover" alt="Sara Sigmundsdottir" />
+                        <img src="/Ricky.jpg" className="rounded-2xl shadow-xl rotate-2 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover translate-y-8" alt="Ricky Garard" />
                       </div>
                     </div>
+                  </div>
 
-                    <div className="absolute bottom-8 left-8 right-8 z-20">
-                      <p className="text-white font-black text-lg uppercase tracking-wider mb-2 drop-shadow-md">Watch His Story</p>
-                      <p className="text-white/90 text-sm line-clamp-2 font-medium drop-shadow-sm">See how Kevin transformed his strength at 66.</p>
+                  {/* "What Makes This Coaching Different" - Kevin Section (Organic & Designed) */}
+                  <div className="mb-32 mt-24 relative">
+                    {/* Background Blobs for specific section ambience */}
+                    <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 -z-10 mix-blend-multiply"></div>
+                    <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-50/60 rounded-full blur-3xl translate-x-1/2 -z-10 mix-blend-multiply"></div>
+
+                    <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center relative z-10">
+
+                      {/* Left Column: Video (Vimeo) - Moved to Left as requested */}
+                      <div className="relative w-full aspect-[4/5] md:aspect-square rounded-[32px] overflow-hidden shadow-2xl bg-black group/video cursor-pointer z-20 order-1 md:order-1"
+                        onClick={(e) => {
+                          const iframe = document.createElement('iframe');
+                          iframe.src = "https://player.vimeo.com/video/775627130?h=9d0e41e34e&autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479";
+                          iframe.width = "100%";
+                          iframe.height = "100%";
+                          iframe.frameBorder = "0";
+                          iframe.allow = "autoplay; fullscreen; picture-in-picture";
+                          iframe.title = "Kevin's Results";
+                          iframe.className = "absolute inset-0 w-full h-full";
+                          e.currentTarget.innerHTML = '';
+                          e.currentTarget.appendChild(iframe);
+                        }}>
+
+                        <img
+                          src="kevin4.jpg"
+                          alt="Kevin Training"
+                          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover/video:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+                        {/* Play Button */}
+                        <div className="absolute inset-0 flex items-center justify-center z-20">
+                          <div className="w-24 h-24 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover/video:scale-110 transition-transform duration-300 shadow-xl">
+                            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                              <Play className="w-6 h-6 fill-white text-white ml-1" />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="absolute bottom-8 left-8 right-8 z-20">
+                          <p className="text-white font-black text-lg uppercase tracking-wider mb-2 drop-shadow-md">Watch His Story</p>
+                          <p className="text-white/90 text-sm line-clamp-2 font-medium drop-shadow-sm">See how Kevin transformed his strength at 66.</p>
+                        </div>
+                      </div>
+
+                      {/* Right Column: Copy - Moved to Right as requested */}
+                      <div className="text-center md:text-left space-y-8 md:pl-8 order-2 md:order-2">
+                        {/* 'Client Spotlight' Pill Removed */}
+
+                        <h3 className="text-3xl md:text-5xl font-heading font-black text-slate-900 leading-tight tracking-tight whitespace-pre-line">
+                          What Makes This <br /> <span className="text-blue-600">Coaching Different.</span>
+                        </h3>
+
+                        <p className="text-slate-600 font-bold text-xl leading-relaxed border-l-4 border-blue-600 pl-8">
+                          Whether you're rebuilding, chasing performance, or refusing to slow down—the standard stays the same.
+                        </p>
+
+                        <div className="space-y-6 text-slate-500 font-medium text-lg leading-relaxed pl-8">
+                          <p>The same system used with the very best.</p>
+                          <p>Precision, accountability, and results that last.</p>
+                          <p className="text-slate-900 text-xl font-bold">
+                            Take Kevin, 66 years old, a Senior Creative Director.
+                          </p>
+                          <p>Still training like an athlete. Focused on strength, mobility, and longevity.</p>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* "Built By Olympians" Section - Dark Full Width */}
-              <div className="w-screen relative left-[calc(-50vw+50%)] bg-[#0f172a] py-24 mb-24 overflow-hidden border-t border-b border-slate-800">
-                {/* Subtle Mesh Grid Background */}
-                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+              <FadeInSection>
+                <div className="w-full bg-[#0f172a] py-24 mb-24 overflow-hidden border-t border-b border-slate-800 relative">
+                  {/* Subtle Mesh Grid Background */}
+                  <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
 
-                <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-                  {/* Left Column: Copy */}
-                  <div className="flex flex-col justify-center text-left space-y-10 relative z-10 order-2 lg:order-1">
-                    <div className="space-y-6">
-                      <h3 className="text-4xl md:text-6xl font-heading font-black text-white leading-[0.95]">
-                        When You Move <br /> Better, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Everything Improves.</span>
-                      </h3>
+                  <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+                    {/* Left Column: Copy */}
+                    <div className="flex flex-col justify-center text-left space-y-10 relative z-10 order-2 lg:order-1">
+                      <div className="space-y-6">
+                        <h3 className="text-3xl md:text-5xl font-heading font-black text-white leading-tight">
+                          When You Move <br /> Better, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Everything Improves.</span>
+                        </h3>
 
-                      <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full"></div>
+                        <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full"></div>
 
-                      <h4 className="text-xl md:text-2xl font-bold text-slate-300 leading-snug max-w-lg">
-                        Most athletes train to lift more weight. <br />
-                        <span className="text-white">We train you to move better.</span>
-                      </h4>
-                    </div>
-
-                    <div className="space-y-6">
-                      <p className="text-slate-400 font-medium leading-relaxed text-lg pl-6 border-l-2 border-slate-700">
-                        Because when the machine works efficiently, the numbers go up automatically. No stiffness. No plateaus. No pain holding you back.
-                      </p>
-
-                      <p className="text-slate-200 font-bold leading-relaxed text-lg">
-                        This isn't just about adding kilos. It's about building strength that lasts—powerful, mobile, and built for life.
-                      </p>
-                    </div>
-
-                    <button className="cursor-pointer bg-white text-slate-950 font-heading font-black px-10 py-5 rounded-full uppercase tracking-widest text-sm hover:bg-blue-50 hover:scale-105 transition-all w-full md:w-auto self-start shadow-[0_0_30px_rgba(255,255,255,0.15)]">
-                      Let's Do This Coach
-                    </button>
-                  </div>
-
-                  {/* Right Column: Image - Poster Style */}
-                  <div className="relative order-1 lg:order-2">
-                    {/* Light glow behind the image */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-500/20 rounded-full blur-[100px] pointer-events-none"></div>
-
-                    <img
-                      src="Built-By.jpg"
-                      alt="Built By Olympians"
-                      className="relative w-full h-auto rounded-3xl shadow-2xl border border-slate-700/50 transform rotate-1 hover:rotate-0 transition-transform duration-700"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* "Two Options" Comparison Section - Clean & Connected */}
-              <div className="max-w-6xl mx-auto mb-32 px-4 relative">
-                <div className="text-center mb-20 space-y-6">
-                  <span className="text-blue-600 font-black tracking-widest uppercase text-xs">The Choice Is Yours</span>
-                  <h3 className="text-4xl md:text-6xl font-heading font-black text-slate-900 leading-none">
-                    Want To Improve Your Lifting? <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-700">You Have Two Options.</span>
-                  </h3>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8 relative items-stretch">
-                  {/* Divider Desktop */}
-                  <div className="hidden md:block absolute top-8 bottom-8 left-1/2 w-px bg-gradient-to-b from-transparent via-slate-200 to-transparent -translate-x-1/2"></div>
-
-                  {/* Option 1 */}
-                  <div className="bg-white p-10 rounded-[40px] shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 group">
-                    <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                      <X className="w-8 h-8 text-red-500" />
-                    </div>
-                    <h4 className="text-3xl font-heading font-black text-slate-900 mb-8">Go It Alone</h4>
-                    <ul className="space-y-5">
-                      {[
-                        "Spend years stuck at the same numbers",
-                        "Film your lifts & hope you spot what's wrong",
-                        "Listen to vague cues that never seem to help",
-                        "Waste time with drills that don't help lifting",
-                        "Follow plans that aren't built for you"
-                      ].map((item, i) => (
-                        <li key={i} className="flex gap-4 items-start text-slate-500 font-medium text-base">
-                          <div className="bg-red-100 rounded-full p-1 mt-0.5 shrink-0"><X className="w-3 h-3 text-red-600 stroke-[3]" /></div>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Option 2 */}
-                  <div className="bg-slate-50 p-10 rounded-[40px] shadow-lg border border-blue-100 relative overflow-hidden group hover:shadow-2xl transition-all duration-300">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-bl-[100px] pointer-events-none"></div>
-
-                    <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-blue-600/30 group-hover:scale-110 transition-transform">
-                      <CheckCircle className="w-8 h-8 text-white" />
-                    </div>
-
-                    <h4 className="text-3xl font-heading font-black text-blue-900 mb-8">Lead To Success</h4>
-                    <ul className="space-y-5 relative z-10">
-                      {[
-                        "Break plateaus fixing exactly what's holding you back",
-                        "Get expert eyes on your lifts with daily feedback",
-                        "Learn to spot and fix your own technique issues",
-                        "Build mobility and strength that carry over to your lifts",
-                        "A plan that adjusts weekly to your real progress"
-                      ].map((item, i) => (
-                        <li key={i} className="flex gap-4 items-start text-slate-800 font-bold text-base">
-                          <div className="bg-green-500 rounded-full p-1 mt-0.5 shrink-0 shadow-sm"><CheckCircle className="w-3 h-3 text-white stroke-[3]" /></div>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mt-20 text-center">
-                  <button className="cursor-pointer bg-slate-900 text-white font-heading font-black px-16 py-6 rounded-2xl uppercase tracking-widest text-lg hover:bg-slate-800 hover:scale-105 transition-all shadow-2xl hover:shadow-blue-900/20 active:scale-95 group relative overflow-hidden">
-                    <span className="relative z-10">I'm Ready To Do This</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                  </button>
-                  <p className="text-slate-400 text-xs font-bold mt-6 uppercase tracking-widest">
-                    <span className="text-red-500">*</span> Limited Team Spots Available
-                  </p>
-                </div>
-              </div>
-
-              {/* The Process Timeline */}
-              <div id="process-timeline" className="mb-24 text-left p-4 scroll-mt-24">
-                <div className="text-center mb-16">
-                  <h3 className="text-3xl md:text-5xl font-heading font-black mb-6 uppercase text-slate-900 leading-tight">From Assessment <br /> To <span className="text-blue-600">Action.</span></h3>
-                  <p className="text-slate-600 max-w-2xl mx-auto text-lg font-medium">What happens when you join? We don't just throw a program at you. We build your lifting profile from the ground up.</p>
-                </div>
-
-                {/* Video Replacement for Steps */}
-                <div
-                  className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl group cursor-pointer border-4 border-slate-900 aspect-video bg-black"
-                  onClick={() => setIsPlaying(true)}
-                >
-                  {!isPlaying ? (
-                    <>
-                      <img src="https://img.youtube.com/vi/cRXR3UieHUc/maxresdefault.jpg" alt="How I Fix Lifts Video" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-
-                      {/* Play Button Overlay */}
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white p-6 rounded-full shadow-2xl group-hover:scale-110 transition-transform z-10">
-                        <Play className="w-10 h-10 fill-white ml-1" />
-                      </div>
-
-                      {/* Title Overlay */}
-                      <div className="absolute bottom-8 left-8 right-8 z-10">
-                        <h4 className="text-white font-heading font-black text-3xl md:text-5xl uppercase leading-none drop-shadow-lg glitch-text">
-                          HOW I FIX <span className="text-red-500">LIFTS</span>
+                        <h4 className="text-xl md:text-2xl font-bold text-slate-300 leading-snug max-w-lg">
+                          Most athletes train to lift more weight. <br />
+                          <span className="text-white">We train you to move better.</span>
                         </h4>
-                        <p className="text-slate-300 font-bold tracking-widest text-sm mt-2 uppercase">Watch The Breakdown</p>
                       </div>
-                    </>
-                  ) : (
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src="https://www.youtube.com/embed/cRXR3UieHUc?autoplay=1"
-                      title="How I Fix Lifts Check"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      className="absolute inset-0 w-full h-full"
-                    ></iframe>
-                  )}
-                </div>
-              </div>
 
-              {/* Real Results / Testimonials */}
-              <div className="mb-24">
-                <h3 className="text-3xl md:text-5xl font-heading font-black mb-4 uppercase text-center text-slate-900 leading-tight">Real Lifters. <span className="text-blue-600">Real Results.</span></h3>
-                <p className="text-slate-500 text-center text-xs font-bold tracking-widest uppercase mb-12">Don't just take our word for it</p>
+                      <div className="space-y-6">
+                        <p className="text-slate-400 font-medium leading-relaxed text-lg pl-6 border-l-2 border-slate-700">
+                          Because when the machine works efficiently, the numbers go up automatically. No stiffness. No plateaus. No pain holding you back.
+                        </p>
 
-                <div className="grid md:grid-cols-3 gap-6">
-                  {[
-                    { name: "James T.", result: "+15kg Total", quote: "I was stuck at the same plateau for 3 years. Sonny fixed my jerk in 3 weeks.", img: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=400" },
-                    { name: "Sarah M.", result: "Pain Free", quote: "I thought my knees were done. The technical changes took the load off my joints completely.", img: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=400" },
-                    { name: "David K.", result: "First Competition", quote: "Walked onto the platform with total confidence. Went 6 for 6. Unbelievable coaching.", img: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&q=80&w=400" }
-                  ].map((testimonial, i) => (
-                    <div key={i} className="bg-white rounded-[24px] overflow-hidden border border-slate-100 shadow-xl group hover:-translate-y-1 transition-transform duration-300">
-                      <div className="h-48 overflow-hidden relative">
-                        <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors"></div>
-                        <img src={testimonial.img} alt={testimonial.name} className="w-full h-full object-cover" />
-                        <div className="absolute bottom-4 left-4">
-                          <span className="bg-green-500 text-white text-[10px] font-black px-2 py-1 rounded uppercase tracking-wide shadow-sm">{testimonial.result}</span>
-                        </div>
+                        <p className="text-slate-200 font-bold leading-relaxed text-lg">
+                          This isn't just about adding kilos. It's about building strength that lasts—powerful, mobile, and built for life.
+                        </p>
                       </div>
-                      <div className="p-8">
-                        <div className="flex gap-1 text-orange-400 mb-3">
-                          <Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" />
-                        </div>
-                        <p className="text-slate-600 text-sm font-medium mb-4 leading-relaxed">"{testimonial.quote}"</p>
-                        <p className="text-slate-900 font-heading font-bold text-xs uppercase tracking-widest">- {testimonial.name}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Final CTA Area */}
-              {/* Pricing Section */}
-              <div className="mb-24">
-                <h3 className="text-3xl md:text-5xl font-heading font-black mb-16 uppercase text-center text-slate-900 leading-tight">Choose Your <span className="text-blue-600">Protocol</span></h3>
-
-                <div className="grid lg:grid-cols-3 gap-6 items-start max-w-7xl mx-auto">
-                  {/* Option 1: SOLO */}
-                  <div className="bg-white rounded-[32px] p-8 border border-slate-200 shadow-xl relative group hover:-translate-y-2 transition-transform duration-300">
-                    <div className="mb-6">
-                      <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400">The Maintenance Option</span>
-                      <h4 className="text-3xl font-heading font-black text-slate-900 mt-2 uppercase">Solo <br />Protocol</h4>
+                      <button className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-10 py-5 rounded-2xl uppercase tracking-widest text-sm w-full md:w-auto self-start shadow-2xl shadow-blue-600/20 transition-all">
+                        Let's Do This Coach
+                      </button>
                     </div>
 
-                    <div className="mb-8">
-                      <span className="text-5xl font-heading font-black text-slate-900">£199</span><span className="text-slate-500 font-medium">/mo</span>
-                      <div className="mt-4 p-4 bg-slate-50 rounded-xl">
-                        <div className="text-[10px] uppercase font-bold text-slate-400 mb-1">Annual Commitment</div>
-                        <div className="flex items-center gap-3">
-                          <span className="text-xl font-bold text-slate-900">£2,034</span>
-                          <span className="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded">SAVE £354</span>
-                        </div>
-                      </div>
-                    </div>
+                    {/* Right Column: Image - Poster Style */}
+                    <div className="relative order-1 lg:order-2">
+                      {/* Light glow behind the image */}
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-500/20 rounded-full blur-[100px] pointer-events-none"></div>
 
-                    <ul className="space-y-4 mb-8 text-left">
-                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> Custom Program (Mobility OR Lift)</li>
-                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> 3x Video Reviews Per Week</li>
-                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> Monthly Community Call</li>
-                    </ul>
-
-                    <button className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Select Solo</button>
-                    <p className="text-center text-[10px] text-red-400 font-bold mt-4 uppercase tracking-wider">Warning: 48hr feedback delay.</p>
-                  </div>
-
-                  {/* Option 2: ELITE (Highlighted) */}
-                  <div className="bg-white rounded-[32px] p-8 border-2 border-blue-500 shadow-2xl relative transform lg:-translate-y-6 z-10">
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-6 py-2 rounded-full font-heading font-bold text-[10px] uppercase tracking-widest shadow-lg">Most Popular</div>
-
-                    <div className="mb-6">
-                      <span className="text-[10px] uppercase font-bold tracking-widest text-blue-500">For Serious Athletes</span>
-                      <h4 className="text-4xl font-heading font-black text-slate-900 mt-2 uppercase">Elite <br />Protocol</h4>
-                    </div>
-
-                    <div className="mb-8">
-                      <span className="text-6xl font-heading font-black text-slate-900">£349</span><span className="text-slate-500 font-medium">/mo</span>
-                      <div className="mt-4 p-4 bg-blue-50 rounded-xl border border-blue-100">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="text-[10px] uppercase font-bold text-blue-600">Best Value (Yearly)</span>
-                          <span className="bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded">SAVE £630</span>
-                        </div>
-                        <span className="text-2xl font-bold text-slate-900">£3,558</span><span className="text-sm font-medium text-slate-500"> /year</span>
-                      </div>
-                    </div>
-
-                    <ul className="space-y-4 mb-8 text-left">
-                      <li className="flex gap-3 text-sm font-bold text-slate-700">
-                        <Zap className="w-5 h-5 text-blue-500 shrink-0" />
-                        <div>
-                          Daily "Rapid-Response" Audits
-                          <p className="text-[10px] text-slate-400 font-normal">Mon-Fri frame-by-frame analysis.</p>
-                        </div>
-                      </li>
-                      <li className="flex gap-3 text-sm font-bold text-slate-700">
-                        <Target className="w-5 h-5 text-blue-500 shrink-0" />
-                        <div>
-                          The "Tribrid" Architecture
-                          <p className="text-[10px] text-slate-400 font-normal">Mobility + Weightlifting + Accessories.</p>
-                        </div>
-                      </li>
-                      <li className="flex gap-3 text-sm font-bold text-slate-700">
-                        <Calendar className="w-5 h-5 text-blue-500 shrink-0" />
-                        <div>
-                          Live Strategy Onboarding
-                          <p className="text-[10px] text-slate-400 font-normal">1-on-1 Zoom call to map your year.</p>
-                        </div>
-                      </li>
-                    </ul>
-
-                    <button className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply For Elite</button>
-
-                    <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-slate-500 bg-slate-50 py-3 rounded-lg border border-slate-100">
-                      <ShieldCheck className="w-3.5 h-3.5 text-blue-500" /> 90-DAY PR GUARANTEE INCLUDED
-                    </div>
-                  </div>
-
-                  {/* Option 3: INNER CIRCLE */}
-                  <div className="bg-white rounded-[32px] p-8 border border-slate-200 shadow-xl relative group hover:-translate-y-2 transition-transform duration-300">
-                    <div className="mb-6">
-                      <span className="text-[10px] uppercase font-bold tracking-widest text-orange-500">The Mentorship</span>
-                      <h4 className="text-3xl font-heading font-black text-slate-900 mt-2 uppercase">Inner <br />Circle</h4>
-                    </div>
-
-                    <div className="mb-8">
-                      <span className="text-5xl font-heading font-black text-slate-900">£500</span><span className="text-slate-500 font-medium">/mo</span>
-                      <div className="mt-4 p-4 bg-slate-50 rounded-xl">
-                        <div className="text-[10px] uppercase font-bold text-slate-400 mb-1">Annual Commitment</div>
-                        <div className="flex items-center gap-3">
-                          <span className="text-xl font-bold text-slate-900">£5,100</span>
-                          <span className="bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded">SAVE £900</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <ul className="space-y-4 mb-8 text-left">
-                      <li className="flex gap-3 text-sm font-bold text-slate-900"><Star className="w-5 h-5 text-orange-400 shrink-0 fill-orange-400" /> Everything in Elite, plus:</li>
-                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Weekly 1-1 Private Coach Call</li>
-                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Weekly Tech Session with Sonny</li>
-                      <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Unlimited Video Reviews</li>
-                    </ul>
-
-                    <button className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Join Inner Circle</button>
-                  </div>
-                </div>
-
-                {/* Add-Ons */}
-                <div className="max-w-4xl mx-auto mt-16">
-                  <h4 className="text-xl font-heading font-black text-slate-400 uppercase tracking-widest mb-6 text-center">Available Add-Ons</h4>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg">
-                      <div className="text-left">
-                        <div className="font-heading font-black text-slate-900 uppercase">VIP Onboarding</div>
-                        <div className="text-[10px] text-slate-500 font-medium">30-min strategy session w/ Sonny Webster.</div>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-bold text-slate-900">£500</div>
-                        <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
-                      </div>
-                    </div>
-                    <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg">
-                      <div className="text-left">
-                        <div className="font-heading font-black text-slate-900 uppercase">Performance Nutrition</div>
-                        <div className="text-[10px] text-slate-500 font-medium">Dietitian support & monthly check-ins.</div>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-bold text-slate-900">£100</div>
-                        <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
-                      </div>
+                      <img
+                        src="Built-By.jpg"
+                        alt="Built By Olympians"
+                        className="relative w-full h-auto rounded-3xl shadow-2xl border border-slate-700/50 transform rotate-1 hover:rotate-0 transition-transform duration-700"
+                      />
                     </div>
                   </div>
                 </div>
-              </div>
-            </FadeInSection>
+              </FadeInSection>
+
+              <FadeInSection>
+                <div className="max-w-6xl mx-auto px-6">
+                  {/* "Two Options" Comparison Section - Clean & Connected */}
+                  <div className="mb-32 relative">
+                    <div className="text-center mb-20 space-y-6">
+                      <span className="text-blue-600 font-black tracking-widest uppercase text-xs">The Choice Is Yours</span>
+                      <h3 className="text-3xl md:text-5xl font-heading font-black text-slate-900 leading-tight">
+                        Want To Improve Your Lifting? <br />
+                        <span className="text-slate-900">You Have Two Options.</span>
+                      </h3>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6 relative items-stretch max-w-5xl mx-auto">
+
+                      {/* VS Badge - Absolute Center */}
+                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center w-12 h-12 bg-white rounded-full border-4 border-slate-50 shadow-xl">
+                        <span className="text-slate-900 font-heading font-black text-xs">VS</span>
+                      </div>
+
+                      {/* Option 1: Go It Alone (De-emphasized) */}
+                      <div className="bg-slate-50 p-8 rounded-[32px] border border-slate-100 transition-all duration-300 relative overflow-hidden group hover:bg-white hover:shadow-lg">
+                        <div className="relative z-10 opacity-70 group-hover:opacity-100 transition-opacity">
+                          <div className="w-12 h-12 bg-slate-200 rounded-xl flex items-center justify-center mb-6">
+                            <X className="w-5 h-5 text-slate-500" />
+                          </div>
+                          <h4 className="text-2xl font-heading font-bold text-slate-500 mb-2">Go It Alone</h4>
+                          <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-8">The Hard Way</p>
+
+                          <ul className="space-y-4">
+                            {[
+                              "Stuck at the same plateau for years",
+                              "Guessing what's wrong with your form",
+                              "Generic programs not built for you",
+                              "Risk of injury from poor technique",
+                              "No accountability or support"
+                            ].map((item, i) => (
+                              <li key={i} className="flex gap-3 items-center text-slate-400 text-sm font-medium">
+                                <X className="w-4 h-4 text-slate-300 shrink-0" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* Option 2: Lead To Success (Premium/Highlighted) */}
+                      <div className="bg-white p-8 rounded-[32px] border-2 border-blue-600 shadow-2xl shadow-blue-900/10 relative overflow-hidden transform md:-translate-y-4 md:scale-105 z-10">
+                        <div className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-widest">Recommended</div>
+
+                        <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-blue-600/30">
+                          <CheckCircle className="w-7 h-7 text-white" />
+                        </div>
+
+                        <h4 className="text-3xl font-heading font-black text-slate-900 mb-2 leading-tight">Lead To Success</h4>
+                        <p className="text-blue-600 text-xs font-bold uppercase tracking-wider mb-8">The Proven Path</p>
+
+                        <ul className="space-y-4 relative z-10">
+                          {[
+                            "Break plateaus with expert analysis",
+                            "Daily video feedback on your lifts",
+                            "Custom roadmap built for your goals",
+                            "Fix pain & improve mobility fast",
+                            "Join a team of high performers"
+                          ].map((item, i) => (
+                            <li key={i} className="flex gap-3 items-start text-slate-700 font-bold text-sm">
+                              <div className="bg-blue-100 rounded-full p-0.5 mt-0.5 shrink-0"><CheckCircle className="w-4 h-4 text-blue-600" /></div>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        {/* Decorative gradient blob */}
+                        <div className="absolute bottom-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -z-10 translate-x-10 translate-y-10"></div>
+                      </div>
+                    </div>
+
+                    <div className="mt-12 text-center">
+                      <button className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-12 py-5 rounded-xl uppercase tracking-widest text-sm shadow-2xl shadow-blue-600/20 transition-all group relative overflow-hidden">
+                        <span className="relative z-10">I'm Ready To Do This</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                      </button>
+                      <p className="text-slate-400 text-[10px] font-bold mt-4 uppercase tracking-widest">
+                        <span className="text-red-500">*</span> Limited Team Spots Available
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* The Process Timeline */}
+                  {/* The Process Timeline - Redesigned Vertical Connection */}
+                  {/* The Process Timeline */}
+                  <ProcessTimeline />
+
+                  {/* Assessment to Action - Clean/Transparent Section */}
+                  <div className="w-full py-16 relative text-center mb-12">
+                    <div className="max-w-4xl mx-auto px-6 relative z-10">
+                      <h4 className="text-blue-600 font-bold uppercase tracking-widest text-xs mb-4">Elite Coaching Personalised From Day One</h4>
+                      <h2 className="text-3xl md:text-5xl font-heading font-black text-slate-900 mb-6 leading-tight tracking-tight">
+                        From Assessment to Action, <br /> What Happens When You Join
+                      </h2>
+
+                      <p className="text-slate-600 text-sm md:text-base max-w-2xl mx-auto mb-12 leading-relaxed font-bold">
+                        P.S. Julia's numbers are amazing, but don't let that scare you off.
+                        We use this same proven process for first-time lifters, 60-year-olds, and busy parents chasing strength, confidence, and better movement!
+                      </p>
+
+                      {/* Video Container */}
+                      <div className="relative aspect-video max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-slate-200 bg-black group cursor-pointer mb-12">
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src="https://www.youtube.com/embed/cRXR3UieHUc"
+                          title="How I Fix Lifts"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          className="absolute inset-0 w-full h-full"
+                        ></iframe>
+                      </div>
+
+                      <div className="flex flex-col items-center">
+                        <button className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-12 py-5 rounded-xl uppercase tracking-widest text-lg shadow-2xl shadow-blue-600/20 transition-all mb-4">
+                          I'm Ready For This
+                        </button>
+                        <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider italic">
+                          *Apply if you're tired of guessing and for results
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Real Results / Testimonials */}
+                  {/* Real Results / Testimonials - Redesigned Masonry Mix */}
+                  <div className="mb-20">
+                    <h3 className="text-3xl md:text-5xl font-heading font-black mb-4 text-center text-slate-900 leading-tight">Real Lifters. <span className="text-blue-600">Real Results.</span></h3>
+                    <p className="text-slate-500 text-center text-xs font-bold tracking-widest uppercase mb-12">SEE WHAT'S POSSIBLE</p>
+
+                    {/* Grid Layout - 7 Columns to fit on one line as requested on large screens */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 max-w-[1400px] mx-auto px-4">
+                      {[
+                        { type: "video", videoId: "1072004083", name: "Rebekah", thumbnail: "/Rebekah.jpg" },
+                        { type: "video", videoId: "1072003829", name: "Jack", thumbnail: "/Jack-Urquhart1.jpg" },
+                        { type: "video", videoId: "1072003978", name: "Laura", thumbnail: "/Laura-Meador-1-to-1.jpg" },
+                        { type: "video", videoId: "1072004031", name: "Rashida", thumbnail: "/Raashida-1-to-1.jpg" },
+                        { type: "video", videoId: "1072003668", name: "Dallas", thumbnail: "/Dallas-Smith.jpg" },
+                        { type: "video", videoId: "1072003732", name: "Eddy", thumbnail: "/Eddy-Soriano.jpg" },
+                        { type: "video", videoId: "1072003886", name: "Katie", thumbnail: "/Katie-Timasso.jpg" },
+                      ].map((item, i) => (
+                        <div key={i} className="bg-white rounded-[16px] overflow-hidden border border-slate-100 shadow-lg group hover:-translate-y-1 transition-transform duration-300">
+                          {/* Media Only - Aspect Ratio Forced to prevent collapse */}
+                          <div className="relative aspect-[9/16] bg-black group/play cursor-pointer" onClick={(e) => {
+                            const container = e.currentTarget;
+                            if (container.querySelector('iframe')) return;
+
+                            const iframe = document.createElement('iframe');
+                            iframe.src = `https://player.vimeo.com/video/${item.videoId}?autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479`;
+                            iframe.width = "100%";
+                            iframe.height = "100%";
+                            iframe.frameBorder = "0";
+                            iframe.allow = "autoplay; fullscreen; picture-in-picture";
+                            iframe.className = "absolute inset-0 w-full h-full object-cover z-20";
+
+                            container.innerHTML = '';
+                            container.appendChild(iframe);
+                          }}>
+                            <img src={item.thumbnail} alt={item.name} className="absolute inset-0 w-full h-full object-cover group-hover/play:scale-105 transition-transform duration-700 z-10" />
+                            <div className="absolute inset-0 bg-black/20 group-hover/play:bg-black/10 transition-colors z-10"></div>
+                            <div className="absolute inset-0 flex items-center justify-center z-10">
+                              <Play className="w-8 h-8 fill-white text-white drop-shadow-lg opacity-80 group-hover/play:opacity-100 transition-opacity" />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Final CTA Area */}
+                  {/* Pricing Section */}
+                  <div className="mb-24">
+                    <h3 className="text-3xl md:text-5xl font-heading font-black mb-8 text-center text-slate-900 leading-tight">Choose Your <span className="text-blue-600">Protocol</span></h3>
+
+                    {/* Pricing Toggle with Sliding Animation */}
+                    <div className="flex justify-center mb-16">
+                      <div className="bg-slate-100 p-1.5 rounded-full flex relative cursor-pointer" onClick={() => setIsAnnual(!isAnnual)}>
+                        {/* Sliding Background Pill */}
+                        <div className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-white rounded-full shadow-md transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1) ${isAnnual ? 'left-[calc(50%+3px)]' : 'left-1.5'}`}></div>
+
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setIsAnnual(false); }}
+                          className={`relative z-10 w-48 py-3 rounded-full text-xs font-heading font-black uppercase tracking-widest transition-colors duration-300 ${!isAnnual ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'}`}
+                        >
+                          Monthly
+                        </button>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setIsAnnual(true); }}
+                          className={`relative z-10 w-48 py-3 rounded-full text-xs font-heading font-black uppercase tracking-widest transition-colors duration-300 flex items-center justify-center gap-2 ${isAnnual ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'}`}
+                        >
+                          Annual <div className={`overflow-hidden transition-all duration-300 ${isAnnual ? 'max-w-[100px] opacity-100' : 'max-w-0 opacity-0'}`}><span className="bg-green-100 text-green-600 px-1.5 py-0.5 rounded text-[9px] whitespace-nowrap">SAVE 15%</span></div>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="grid lg:grid-cols-3 gap-6 items-start max-w-7xl mx-auto">
+                      {/* Option 1: SOLO */}
+                      <div className="bg-white rounded-[32px] p-8 border border-slate-200 shadow-xl relative group hover:-translate-y-2 transition-transform duration-300">
+                        <div className="mb-6">
+                          <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400">The Maintenance Option</span>
+                          <h4 className="text-3xl font-heading font-black text-slate-900 mt-2 uppercase">Solo <br />Protocol</h4>
+                        </div>
+
+                        <div className="mb-8 h-32 flex flex-col justify-center">
+                          <div key={isAnnual ? 'solo-yr' : 'solo-mo'} className="animate-pop-in">
+                            {isAnnual ? (
+                              <>
+                                <div><span className="text-5xl font-heading font-black text-slate-900">£2,034</span><span className="text-slate-500 font-medium">/yr</span></div>
+                                <div className="mt-2 inline-flex bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded w-max">SAVE £354</div>
+                              </>
+                            ) : (
+                              <>
+                                <div><span className="text-5xl font-heading font-black text-slate-900">£199</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="mt-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Billed Monthly</div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        <ul className="space-y-4 mb-8 text-left">
+                          <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> Custom Program (Mobility OR Lift)</li>
+                          <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> 3x Video Reviews Per Week</li>
+                          <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> Monthly Community Call</li>
+                        </ul>
+
+                        <button className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Select Solo</button>
+                        <p className="text-center text-[10px] text-red-400 font-bold mt-4 uppercase tracking-wider">Warning: 48hr feedback delay.</p>
+                      </div>
+
+                      {/* Option 2: ELITE (Highlighted) */}
+                      <div className="bg-white rounded-[32px] p-8 border-2 border-blue-500 shadow-2xl relative transform lg:-translate-y-6 z-10">
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-6 py-2 rounded-full font-heading font-bold text-[10px] uppercase tracking-widest shadow-lg">Most Popular</div>
+
+                        <div className="mb-6">
+                          <span className="text-[10px] uppercase font-bold tracking-widest text-blue-500">For Serious Athletes</span>
+                          <h4 className="text-4xl font-heading font-black text-slate-900 mt-2 uppercase">Elite <br />Protocol</h4>
+                        </div>
+
+                        <div className="mb-8 h-32 flex flex-col justify-center">
+                          <div key={isAnnual ? 'elite-yr' : 'elite-mo'} className="animate-pop-in">
+                            {isAnnual ? (
+                              <>
+                                <div><span className="text-6xl font-heading font-black text-slate-900">£3,558</span><span className="text-slate-500 font-medium">/yr</span></div>
+                                <div className="mt-2 inline-flex bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded w-max">SAVE £630</div>
+                              </>
+                            ) : (
+                              <>
+                                <div><span className="text-6xl font-heading font-black text-slate-900">£349</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="mt-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Billed Monthly</div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        <ul className="space-y-4 mb-8 text-left">
+                          <li className="flex gap-3 text-sm font-bold text-slate-700">
+                            <Zap className="w-5 h-5 text-blue-500 shrink-0" />
+                            <div>
+                              Daily "Rapid-Response" Audits
+                              <p className="text-[10px] text-slate-400 font-normal">Mon-Fri frame-by-frame analysis.</p>
+                            </div>
+                          </li>
+                          <li className="flex gap-3 text-sm font-bold text-slate-700">
+                            <Target className="w-5 h-5 text-blue-500 shrink-0" />
+                            <div>
+                              The "Tribrid" Architecture
+                              <p className="text-[10px] text-slate-400 font-normal">Mobility + Weightlifting + Accessories.</p>
+                            </div>
+                          </li>
+                          <li className="flex gap-3 text-sm font-bold text-slate-700">
+                            <Calendar className="w-5 h-5 text-blue-500 shrink-0" />
+                            <div>
+                              Live Strategy Onboarding
+                              <p className="text-[10px] text-slate-400 font-normal">1-on-1 Zoom call to map your year.</p>
+                            </div>
+                          </li>
+                        </ul>
+
+                        <button className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply For Elite</button>
+
+                        <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-slate-500 bg-slate-50 py-3 rounded-lg border border-slate-100">
+                          <ShieldCheck className="w-3.5 h-3.5 text-blue-500" /> 90-DAY PR GUARANTEE INCLUDED
+                        </div>
+                      </div>
+
+                      {/* Option 3: INNER CIRCLE */}
+                      <div className="bg-white rounded-[32px] p-8 border border-slate-200 shadow-xl relative group hover:-translate-y-2 transition-transform duration-300">
+                        <div className="mb-6">
+                          <span className="text-[10px] uppercase font-bold tracking-widest text-orange-500">The Mentorship</span>
+                          <h4 className="text-3xl font-heading font-black text-slate-900 mt-2 uppercase">Inner <br />Circle</h4>
+                        </div>
+
+                        <div className="mb-8 h-32 flex flex-col justify-center">
+                          <div key={isAnnual ? 'inner-yr' : 'inner-mo'} className="animate-pop-in">
+                            {isAnnual ? (
+                              <>
+                                <div><span className="text-5xl font-heading font-black text-slate-900">£5,100</span><span className="text-slate-500 font-medium">/yr</span></div>
+                                <div className="mt-2 inline-flex bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded w-max">SAVE £900</div>
+                              </>
+                            ) : (
+                              <>
+                                <div><span className="text-5xl font-heading font-black text-slate-900">£500</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="mt-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Billed Monthly</div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        <ul className="space-y-4 mb-8 text-left">
+                          <li className="flex gap-3 text-sm font-bold text-slate-900"><Star className="w-5 h-5 text-orange-400 shrink-0 fill-orange-400" /> Everything in Elite, plus:</li>
+                          <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Weekly 1-1 Private Coach Call</li>
+                          <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Weekly Tech Session with Sonny</li>
+                          <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Unlimited Video Reviews</li>
+                        </ul>
+
+                        <button className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Join Inner Circle</button>
+                      </div>
+                    </div>
+
+                    {/* Add-Ons */}
+                    <div className="max-w-4xl mx-auto mt-16">
+                      <h4 className="text-xl font-heading font-black text-slate-400 uppercase tracking-widest mb-6 text-center">Available Add-Ons</h4>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg">
+                          <div className="text-left">
+                            <div className="font-heading font-black text-slate-900 uppercase">VIP Onboarding</div>
+                            <div className="text-[10px] text-slate-500 font-medium">30-min strategy session w/ Sonny Webster.</div>
+                          </div>
+                          <div className="text-right">
+                            <div className="font-bold text-slate-900">£500</div>
+                            <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
+                          </div>
+                        </div>
+                        <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg">
+                          <div className="text-left">
+                            <div className="font-heading font-black text-slate-900 uppercase">Performance Nutrition</div>
+                            <div className="text-[10px] text-slate-500 font-medium">Dietitian support & monthly check-ins.</div>
+                          </div>
+                          <div className="text-right">
+                            <div className="font-bold text-slate-900">£100</div>
+                            <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </FadeInSection>
+            </>
           )}
-          {resultPage === 'sales' && (
-            <FadeInSection>
-              <span className="bg-slate-900 border border-slate-800 text-white shadow-xl shadow-slate-900/20 px-6 py-2 rounded-full text-[10px] font-heading font-bold mb-8 inline-block uppercase tracking-[0.3em]">THE SYSTEM UNLOCKED</span>
-              <h1 className="text-4xl md:text-6xl font-heading font-black mb-8 leading-[0.95] tracking-tight text-slate-900 uppercase">
-                THE OLYMPIAN'S <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">TECHNICAL HANDBOOK.</span>
-              </h1>
+          {
+            resultPage === 'sales' && (
+              <div className="max-w-6xl mx-auto px-6 py-12">
+                <FadeInSection>
+                  <span className="bg-slate-900 border border-slate-800 text-white shadow-xl shadow-slate-900/20 px-6 py-2 rounded-full text-[10px] font-heading font-bold mb-8 inline-block uppercase tracking-[0.3em]">THE SYSTEM UNLOCKED</span>
+                  <h1 className="text-4xl md:text-6xl font-heading font-black mb-8 leading-[0.95] tracking-tight text-slate-900 uppercase">
+                    THE OLYMPIAN'S <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">TECHNICAL HANDBOOK.</span>
+                  </h1>
 
-              {/* VIDEO PLAYER - Top for Sales */}
-              <div className="w-full max-w-3xl mx-auto mb-12">
-                <VideoPlaceholder src="https://images.unsplash.com/photo-1541534401786-2077eed87a74?auto=format&fit=crop&q=80&w=1200" alt="Technical Handbook Walkthrough" className="aspect-video" />
-              </div>
-
-              <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 text-left bg-white border border-slate-200 p-10 md:p-16 rounded-[40px] shadow-2xl relative overflow-hidden">
-                <div className="z-10 relative">
-                  <h3 className="text-xl font-heading font-bold uppercase mb-8 tracking-tight text-slate-900">WORLD CLASS <br />PROGRAMMING.</h3>
-                  <p className="text-slate-600 mb-8 font-medium text-base leading-relaxed">"You wanted a plan to fix your lifts. This is the exact 12-week technical cycle we use to build world-class technique."</p>
-                  <ul className="space-y-4">
-                    {[
-                      "12-Week Progressive Cycle",
-                      "High-Def Positional Matrix",
-                      "Technical Warm-up Bible",
-                      "Priority Access Included"
-                    ].map((item, i) => (
-                      <li key={i} className="flex gap-4 items-center">
-                        <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
-                        <span className="font-bold uppercase tracking-[0.2em] text-[10px] text-slate-700">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* BUY BUTTON AREA */}
-                <div className="flex flex-col justify-center">
-                  <div className="bg-slate-900 p-10 rounded-[32px] border border-slate-700 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl">
-                    <span className="text-slate-400 line-through text-xl mb-3 font-bold">£149.00</span>
-                    <span className="text-6xl font-heading font-black text-white mb-8 tracking-tighter">£99</span>
-                    <button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-bold py-5 rounded-xl shadow-xl shadow-blue-600/20 transition-all uppercase tracking-[0.2em] text-[10px]">
-                      BUY NOW
-                    </button>
+                  {/* VIDEO PLAYER - Top for Sales */}
+                  <div className="w-full max-w-3xl mx-auto mb-12">
+                    <VideoPlaceholder src="https://images.unsplash.com/photo-1541534401786-2077eed87a74?auto=format&fit=crop&q=80&w=1200" alt="Technical Handbook Walkthrough" className="aspect-video" />
                   </div>
-                </div>
+
+                  <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 text-left bg-white border border-slate-200 p-10 md:p-16 rounded-[40px] shadow-2xl relative overflow-hidden">
+                    <div className="z-10 relative">
+                      <h3 className="text-xl font-heading font-bold uppercase mb-8 tracking-tight text-slate-900">WORLD CLASS <br />PROGRAMMING.</h3>
+                      <p className="text-slate-600 mb-8 font-medium text-base leading-relaxed">"You wanted a plan to fix your lifts. This is the exact 12-week technical cycle we use to build world-class technique."</p>
+                      <ul className="space-y-4">
+                        {[
+                          "12-Week Progressive Cycle",
+                          "High-Def Positional Matrix",
+                          "Technical Warm-up Bible",
+                          "Priority Access Included"
+                        ].map((item, i) => (
+                          <li key={i} className="flex gap-4 items-center">
+                            <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+                            <span className="font-bold uppercase tracking-[0.2em] text-[10px] text-slate-700">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* BUY BUTTON AREA */}
+                    <div className="flex flex-col justify-center">
+                      <div className="bg-slate-900 p-10 rounded-[32px] border border-slate-700 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl">
+                        <span className="text-slate-400 line-through text-xl mb-3 font-bold">£149.00</span>
+                        <span className="text-6xl font-heading font-black text-white mb-8 tracking-tighter">£99</span>
+                        <button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-bold py-5 rounded-xl shadow-xl shadow-blue-600/20 transition-all uppercase tracking-[0.2em] text-[10px]">
+                          BUY NOW
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </FadeInSection>
               </div>
-            </FadeInSection>
-          )}
+            )
+          }
           {/* NOTE: 'free' result page logic is now handled by the BridgePage component. 
               The 'calculateResult' function sets resultPage='sales' or 'vip', but 'handleLeadSubmit' intercepts 'free' path to show BridgePage first.
           */}
-        </div>
-      </div>
+        </div >
+      </div >
     );
   };
 
@@ -1351,6 +1427,13 @@ const App = () => {
         @keyframes pulseGlow { 
             0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); } 
             50% { box-shadow: 0 0 40px rgba(37, 99, 235, 0.6); } 
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.9) translateY(10px); filter: blur(4px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+        .animate-pop-in {
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
         /* Hide scrollbar */
         .scrollbar-hide::-webkit-scrollbar { display: none; }
