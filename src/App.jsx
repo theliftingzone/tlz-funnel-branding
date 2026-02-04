@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { ChevronRight, Play, CheckCircle, Calendar, ArrowRight, Dumbbell, Zap, Target, Mail, Award, TrendingUp, ShieldCheck, Eye, ArrowLeft, X, Lock, Menu, Loader2, ExternalLink, Star } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Play, CheckCircle, Calendar, ArrowRight, Dumbbell, Zap, Target, Mail, Award, TrendingUp, ShieldCheck, Eye, ArrowLeft, X, Lock, Menu, Loader2, ExternalLink, Star } from 'lucide-react';
 import ProcessTimeline from './components/ProcessTimeline';
+import GuaranteeCTA from './components/GuaranteeCTA';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -1038,51 +1039,83 @@ const App = () => {
                   {/* Real Results / Testimonials */}
                   {/* Real Results / Testimonials - Redesigned Masonry Mix */}
                   <div className="mb-20">
-                    <h3 className="text-3xl md:text-5xl font-heading font-black mb-4 text-center text-slate-900 leading-tight">Real Lifters. <span className="text-blue-600">Real Results.</span></h3>
-                    <p className="text-slate-500 text-center text-xs font-bold tracking-widest uppercase mb-12">SEE WHAT'S POSSIBLE</p>
+                    <div className="text-center mb-12">
+                      <div className="flex justify-center mb-4">
+                        <img src="/Truecoach-favicons.png" alt="TrueCoach" className="h-8 md:h-10 object-contain" />
+                      </div>
+                      <p className="text-blue-600 font-heading font-black text-xl md:text-2xl mb-2">You've Heard The Promise</p>
+                      <h3 className="text-3xl md:text-5xl font-heading font-black text-slate-900 leading-tight mb-4">
+                        These Are Real Lifters. Real <br className="hidden md:block" />Breakthroughs. And Real Results.
+                      </h3>
+                      <p className="text-slate-500 text-sm md:text-base font-medium">...what lifters had to say after 12 weeks of one to one coaching.</p>
+                    </div>
 
-                    {/* Grid Layout - 7 Columns to fit on one line as requested on large screens */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 max-w-[1400px] mx-auto px-4">
-                      {[
-                        { type: "video", videoId: "1072004083", name: "Rebekah", thumbnail: "/Rebekah.jpg" },
-                        { type: "video", videoId: "1072003829", name: "Jack", thumbnail: "/Jack-Urquhart1.jpg" },
-                        { type: "video", videoId: "1072003978", name: "Laura", thumbnail: "/Laura-Meador-1-to-1.jpg" },
-                        { type: "video", videoId: "1072004031", name: "Rashida", thumbnail: "/Raashida-1-to-1.jpg" },
-                        { type: "video", videoId: "1072003668", name: "Dallas", thumbnail: "/Dallas-Smith.jpg" },
-                        { type: "video", videoId: "1072003732", name: "Eddy", thumbnail: "/Eddy-Soriano.jpg" },
-                        { type: "video", videoId: "1072003886", name: "Katie", thumbnail: "/Katie-Timasso.jpg" },
-                      ].map((item, i) => (
-                        <div key={i} className="bg-white rounded-[16px] overflow-hidden border border-slate-100 shadow-lg group hover:-translate-y-1 transition-transform duration-300">
-                          {/* Media Only - Aspect Ratio Forced to prevent collapse */}
-                          <div className="relative aspect-[9/16] bg-black group/play cursor-pointer" onClick={(e) => {
-                            const container = e.currentTarget;
-                            if (container.querySelector('iframe')) return;
+                    {/* Slider Layout - Horizontal Scroll with Buttons */}
+                    <div className="relative group/slider max-w-[1400px] mx-auto">
+                      <button
+                        onClick={() => {
+                          const container = document.getElementById('results-slider');
+                          container.scrollBy({ left: -340, behavior: 'smooth' });
+                        }}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full shadow-lg flex items-center justify-center border border-slate-100 text-slate-900 hover:bg-white hover:scale-110 transition-all md:opacity-0 md:group-hover/slider:opacity-100"
+                      >
+                        <ChevronLeft className="w-6 h-6" />
+                      </button>
 
-                            const iframe = document.createElement('iframe');
-                            iframe.src = `https://player.vimeo.com/video/${item.videoId}?autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479`;
-                            iframe.width = "100%";
-                            iframe.height = "100%";
-                            iframe.frameBorder = "0";
-                            iframe.allow = "autoplay; fullscreen; picture-in-picture";
-                            iframe.className = "absolute inset-0 w-full h-full object-cover z-20";
+                      <button
+                        onClick={() => {
+                          const container = document.getElementById('results-slider');
+                          container.scrollBy({ left: 340, behavior: 'smooth' });
+                        }}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full shadow-lg flex items-center justify-center border border-slate-100 text-slate-900 hover:bg-white hover:scale-110 transition-all md:opacity-0 md:group-hover/slider:opacity-100"
+                      >
+                        <ChevronRight className="w-6 h-6" />
+                      </button>
 
-                            container.innerHTML = '';
-                            container.appendChild(iframe);
-                          }}>
-                            <img src={item.thumbnail} alt={item.name} className="absolute inset-0 w-full h-full object-cover group-hover/play:scale-105 transition-transform duration-700 z-10" />
-                            <div className="absolute inset-0 bg-black/20 group-hover/play:bg-black/10 transition-colors z-10"></div>
-                            <div className="absolute inset-0 flex items-center justify-center z-10">
-                              <Play className="w-8 h-8 fill-white text-white drop-shadow-lg opacity-80 group-hover/play:opacity-100 transition-opacity" />
+                      <div id="results-slider" className="flex overflow-x-auto gap-6 snap-x snap-mandatory pb-12 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide">
+                        {[
+                          { type: "video", videoId: "1072004083", name: "Rebekah", thumbnail: "/Rebekah.jpg" },
+                          { type: "video", videoId: "1072003829", name: "Jack", thumbnail: "/Jack-Urquhart1.jpg" },
+                          { type: "video", videoId: "1072003978", name: "Laura", thumbnail: "/Laura-Meador-1-to-1.jpg" },
+                          { type: "video", videoId: "1072004031", name: "Rashida", thumbnail: "/Raashida-1-to-1.jpg" },
+                          { type: "video", videoId: "1072003668", name: "Dallas", thumbnail: "/Dallas-Smith.jpg" },
+                          { type: "video", videoId: "1072003732", name: "Eddy", thumbnail: "/Eddy-Soriano.jpg" },
+                          { type: "video", videoId: "1072003886", name: "Katie", thumbnail: "/Katie-Timasso.jpg" },
+                        ].map((item, i) => (
+                          <div key={i} className="flex-none w-[280px] md:w-[320px] snap-center bg-white rounded-[24px] overflow-hidden border border-slate-100 shadow-xl group hover:-translate-y-1 transition-transform duration-300">
+                            {/* Media Only - Aspect Ratio Forced to prevent collapse */}
+                            <div className="relative aspect-[9/16] bg-black group/play cursor-pointer" onClick={(e) => {
+                              const container = e.currentTarget;
+                              if (container.querySelector('iframe')) return;
+
+                              const iframe = document.createElement('iframe');
+                              iframe.src = `https://player.vimeo.com/video/${item.videoId}?autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479`;
+                              iframe.width = "100%";
+                              iframe.height = "100%";
+                              iframe.frameBorder = "0";
+                              iframe.allow = "autoplay; fullscreen; picture-in-picture";
+                              iframe.className = "absolute inset-0 w-full h-full object-cover z-20";
+
+                              container.innerHTML = '';
+                              container.appendChild(iframe);
+                            }}>
+                              <img src={item.thumbnail} alt={item.name} className="absolute inset-0 w-full h-full object-contain bg-black group-hover/play:scale-105 transition-transform duration-700 z-10" />
+                              <div className="absolute inset-0 bg-black/20 group-hover/play:bg-black/10 transition-colors z-10"></div>
+                              <div className="absolute inset-0 flex items-center justify-center z-10">
+                                <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/40 group-hover/play:scale-110 transition-transform shadow-2xl">
+                                  <Play className="w-6 h-6 fill-white text-white translate-x-0.5" />
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   </div>
-
                   {/* Final CTA Area */}
+                  <GuaranteeCTA />
                   {/* Pricing Section */}
-                  <div className="mb-24">
+                  <div id="pricing" className="mb-24 scroll-mt-24">
                     <h3 className="text-3xl md:text-5xl font-heading font-black mb-8 text-center text-slate-900 leading-tight">Choose Your <span className="text-blue-600">Protocol</span></h3>
 
                     {/* Pricing Toggle with Sliding Animation */}
