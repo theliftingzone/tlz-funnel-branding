@@ -314,8 +314,7 @@ const BridgePage = ({ resource, onUpsellClick, onBack }) => {
       setTimeLeft(prev => {
         if (prev <= 1) {
           clearInterval(timer);
-          // In a real implementation, this would be:
-          // window.location.href = resource.url;
+          window.location.href = resource.url;
           return 0;
         }
         return prev - 1;
@@ -517,7 +516,7 @@ const App = () => {
     if (issue === 'snatch' || issue === 'both') {
       return { title: "Unstable Overhead", name: "Free Snatch Plan", url: "https://start.theliftingzone.com/free-snatch-plan" };
     } else if (issue === 'cj') {
-      return { title: "Inconsistent Drive", name: "Free Clean & Jerk Plan", url: "#" }; // Add C&J URL when ready
+      return { title: "Inconsistent Drive", name: "Free Clean & Jerk Plan", url: "https://start.theliftingzone.com/clean-and-jerk-plan" };
     } else {
       return { title: "Positional Weakness", name: "Free Strength Protocol", url: "#" }; // Add Strength URL when ready
     }
