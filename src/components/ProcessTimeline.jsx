@@ -182,7 +182,10 @@ const ProcessTimeline = () => {
                 </div>
 
                 <div className="text-center mt-12">
-                    <button className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-12 py-5 rounded-2xl uppercase tracking-widest text-sm shadow-2xl shadow-blue-600/20 transition-all">
+                    <button
+                        onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-12 py-5 rounded-2xl uppercase tracking-widest text-sm shadow-2xl shadow-blue-600/20 transition-all"
+                    >
                         Apply For Coaching
                     </button>
                     <p className="text-[10px] text-slate-400 mt-4 italic font-medium">*Not everyone gets in, but if you do, we go all in.</p>

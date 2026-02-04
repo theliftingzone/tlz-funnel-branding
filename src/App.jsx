@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { ChevronRight, ChevronLeft, Play, CheckCircle, Calendar, ArrowRight, Dumbbell, Zap, Target, Mail, Award, TrendingUp, ShieldCheck, Eye, ArrowLeft, X, Lock, Menu, Loader2, ExternalLink, Star } from 'lucide-react';
 import ProcessTimeline from './components/ProcessTimeline';
 import GuaranteeCTA from './components/GuaranteeCTA';
+import DownsellSection from './components/DownsellSection';
+import SalesPage from './components/SalesPage';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -26,11 +28,19 @@ const useIntersectionObserver = (options = {}) => {
 };
 
 const FadeInSection = ({ children, className = "" }) => {
-  const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
+  const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.1 });
+  const [hasAppeared, setHasAppeared] = useState(false);
+
+  useEffect(() => {
+    if (isIntersecting) {
+      setHasAppeared(true);
+    }
+  }, [isIntersecting]);
+
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 transform ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      className={`transition-all duration-1000 transform ${hasAppeared ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         } ${className}`}
     >
       {children}
@@ -744,115 +754,123 @@ const App = () => {
             HOME
           </button>
         </div>
-        <div className="relative z-10 w-full text-center">
+        <div className="relative z-10 w-full">
           {resultPage === 'vip' && (
             <>
               {/* FadeInSection removed for top content to fix mobile loading/visibility issues */}
-              <div>
-                <div className="max-w-6xl mx-auto px-6 pt-12">
-                  <span className="bg-slate-900 border border-slate-800 text-white shadow-xl shadow-slate-900/20 px-6 py-2 rounded-full text-[10px] font-heading font-bold mb-8 inline-block uppercase tracking-[0.3em]">ELITE QUALIFICATION MET</span>
-                  <h1 className="text-4xl md:text-6xl font-heading font-black mb-8 leading-tight tracking-tight text-slate-900 uppercase">
-                    TRAIN LIKE AN OLYMPIAN. <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">WITH AN OLYMPIAN.</span>
-                  </h1>
+              <div className="max-w-6xl mx-auto px-6 pt-12 text-center flex flex-col items-center w-full">
+                <span className="bg-slate-900 border border-slate-800 text-white shadow-xl shadow-slate-900/20 px-6 py-2 rounded-full text-[10px] font-heading font-bold mb-8 inline-block uppercase tracking-[0.3em]">ELITE QUALIFICATION MET</span>
+                <h1 className="text-4xl md:text-6xl font-heading font-black mb-8 leading-tight tracking-tight text-slate-900 uppercase">
+                  TRAIN LIKE AN OLYMPIAN. <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">WITH AN OLYMPIAN.</span>
+                </h1>
 
-                  {/* VIDEO PLAYER - Top for VIP */}
-                  <VimeoPlayer videoId="1128121321" thumbnail="https://i.vimeocdn.com/video/2071093259-e1f82c45f19badfe0e72d5ffbbf34379ea2860f9eb30c2343dedab3ebe3dcf19-d_1280" />
+                {/* VIDEO PLAYER - Top for VIP */}
+                <VimeoPlayer videoId="1128121321" thumbnail="https://i.vimeocdn.com/video/2071093259-e1f82c45f19badfe0e72d5ffbbf34379ea2860f9eb30c2343dedab3ebe3dcf19-d_1280" />
 
-                  {/* Trusted By Section */}
-                  {/* Authority / Trusted By Section - Redesigned */}
-                  <div className="max-w-6xl mx-auto mb-24 text-center relative">
-                    <div className="grid md:grid-cols-2 gap-12 items-center">
-                      <div className="text-left order-2 md:order-1 relative z-10">
-                        <div className="w-12 h-1 bg-blue-600 mb-8 ml-1"></div>
-                        <h3 className="text-3xl md:text-5xl font-heading font-black mb-6  text-slate-900 leading-[0.9]">Trusted By The Best.</h3>
-                        <p className="text-slate-800 text-lg font-bold leading-relaxed mb-6 font-heading border-l-4 border-slate-200 pl-6 py-1">
-                          "We’ve coached with CrossFit Games champions, the World’s Strongest Man alongside founders, CEOs, and high performers who expect results."
-                        </p>
-                        <p className="text-slate-500 text-sm font-medium leading-relaxed pl-7">
-                          The same system we use with world champions is the one we use with every client—adapted to your goals, schedule, and life.
-                        </p>
-                      </div>
+                <div className="mt-8 mb-24">
+                  <button
+                    onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-12 py-5 rounded-xl uppercase tracking-widest text-sm shadow-2xl shadow-blue-600/20 transition-all group relative overflow-hidden"
+                  >
+                    <span className="relative z-10">I'm Ready To Join</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                  </button>
+                  <p className="text-slate-400 text-[10px] font-bold mt-4 uppercase tracking-widest">
+                    <span className="text-red-500">*</span> Limited Team Spots Available
+                  </p>
+                </div>
+              </div>
 
-                      <div className="order-1 md:order-2 grid grid-cols-2 gap-4">
-                        <img src="/worlds-strongest-man.jpg" className="rounded-2xl shadow-xl rotate-3 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover" alt="World's Strongest Man" />
-                        <img src="/torian-pro-champions.png" className="rounded-2xl shadow-xl -rotate-2 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover translate-y-8" alt="Torian Pro Champions" />
-                        <img src="/Sara.jpg" className="rounded-2xl shadow-xl -rotate-1 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover" alt="Sara Sigmundsdottir" />
-                        <img src="/Ricky.jpg" className="rounded-2xl shadow-xl rotate-2 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover translate-y-8" alt="Ricky Garard" />
-                      </div>
-                    </div>
+              {/* Trusted By Section */}
+              {/* Authority / Trusted By Section - Redesigned */}
+              <div className="max-w-6xl mx-auto mb-24 text-center relative">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div className="text-left order-2 md:order-1 relative z-10">
+                    <div className="w-12 h-1 bg-blue-600 mb-8 ml-1"></div>
+                    <h3 className="text-3xl md:text-5xl font-heading font-black mb-6  text-slate-900 leading-[0.9]">Trusted By The Best.</h3>
+                    <p className="text-slate-800 text-lg font-bold leading-relaxed mb-6 font-heading border-l-4 border-slate-200 pl-6 py-1">
+                      "We’ve coached with CrossFit Games champions, the World’s Strongest Man alongside founders, CEOs, and high performers who expect results."
+                    </p>
+                    <p className="text-slate-500 text-sm font-medium leading-relaxed pl-7">
+                      The same system we use with world champions is the one we use with every client—adapted to your goals, schedule, and life.
+                    </p>
                   </div>
 
-                  {/* "What Makes This Coaching Different" - Kevin Section (Organic & Designed) */}
-                  <div className="mb-32 mt-24 relative">
-                    {/* Background Blobs for specific section ambience */}
-                    <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 -z-10 mix-blend-multiply"></div>
-                    <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-50/60 rounded-full blur-3xl translate-x-1/2 -z-10 mix-blend-multiply"></div>
-
-                    <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center relative z-10">
-
-                      {/* Left Column: Video (Vimeo) - Moved to Left as requested */}
-                      <div className="relative w-full aspect-[4/5] md:aspect-square rounded-[32px] overflow-hidden shadow-2xl bg-black group/video cursor-pointer z-20 order-1 md:order-1"
-                        onClick={(e) => {
-                          const iframe = document.createElement('iframe');
-                          iframe.src = "https://player.vimeo.com/video/775627130?h=9d0e41e34e&autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479";
-                          iframe.width = "100%";
-                          iframe.height = "100%";
-                          iframe.frameBorder = "0";
-                          iframe.allow = "autoplay; fullscreen; picture-in-picture";
-                          iframe.title = "Kevin's Results";
-                          iframe.className = "absolute inset-0 w-full h-full";
-                          e.currentTarget.innerHTML = '';
-                          e.currentTarget.appendChild(iframe);
-                        }}>
-
-                        <img
-                          src="kevin4.jpg"
-                          alt="Kevin Training"
-                          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover/video:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-
-                        {/* Play Button */}
-                        <div className="absolute inset-0 flex items-center justify-center z-20">
-                          <div className="w-24 h-24 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover/video:scale-110 transition-transform duration-300 shadow-xl">
-                            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
-                              <Play className="w-6 h-6 fill-white text-white ml-1" />
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="absolute bottom-8 left-8 right-8 z-20">
-                          <p className="text-white font-black text-lg uppercase tracking-wider mb-2 drop-shadow-md">Watch His Story</p>
-                          <p className="text-white/90 text-sm line-clamp-2 font-medium drop-shadow-sm">See how Kevin transformed his strength at 66.</p>
-                        </div>
-                      </div>
-
-                      {/* Right Column: Copy - Moved to Right as requested */}
-                      <div className="text-center md:text-left space-y-8 md:pl-8 order-2 md:order-2">
-                        {/* 'Client Spotlight' Pill Removed */}
-
-                        <h3 className="text-3xl md:text-5xl font-heading font-black text-slate-900 leading-tight tracking-tight whitespace-pre-line">
-                          What Makes This <br /> <span className="text-blue-600">Coaching Different.</span>
-                        </h3>
-
-                        <p className="text-slate-600 font-bold text-xl leading-relaxed border-l-4 border-blue-600 pl-8">
-                          Whether you're rebuilding, chasing performance, or refusing to slow down—the standard stays the same.
-                        </p>
-
-                        <div className="space-y-6 text-slate-500 font-medium text-lg leading-relaxed pl-8">
-                          <p>The same system used with the very best.</p>
-                          <p>Precision, accountability, and results that last.</p>
-                          <p className="text-slate-900 text-xl font-bold">
-                            Take Kevin, 66 years old, a Senior Creative Director.
-                          </p>
-                          <p>Still training like an athlete. Focused on strength, mobility, and longevity.</p>
-                        </div>
-                      </div>
-
-                    </div>
+                  <div className="order-1 md:order-2 grid grid-cols-2 gap-4">
+                    <img src="/worlds-strongest-man.jpg" className="rounded-2xl shadow-xl rotate-3 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover" alt="World's Strongest Man" />
+                    <img src="/torian-pro-champions.png" className="rounded-2xl shadow-xl -rotate-2 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover translate-y-8" alt="Torian Pro Champions" />
+                    <img src="/Sara.jpg" className="rounded-2xl shadow-xl -rotate-1 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover" alt="Sara Sigmundsdottir" />
+                    <img src="/Ricky.jpg" className="rounded-2xl shadow-xl rotate-2 hover:rotate-0 transition-all duration-500 w-full h-48 object-cover translate-y-8" alt="Ricky Garard" />
                   </div>
                 </div>
               </div>
+
+              {/* "What Makes This Coaching Different" - Kevin Section (Organic & Designed) */}
+              <div className="max-w-6xl mx-auto px-6 mb-24 mt-12 relative">
+                <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center relative z-10">
+
+                  {/* Left Column: Video (Vimeo) - Moved to Left as requested */}
+                  <div className="relative w-full aspect-[4/5] md:aspect-square rounded-[32px] overflow-hidden shadow-2xl bg-black group/video cursor-pointer z-20 order-1 md:order-1"
+                    onClick={(e) => {
+                      const iframe = document.createElement('iframe');
+                      iframe.src = "https://player.vimeo.com/video/775627130?h=9d0e41e34e&autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479";
+                      iframe.width = "100%";
+                      iframe.height = "100%";
+                      iframe.frameBorder = "0";
+                      iframe.allow = "autoplay; fullscreen; picture-in-picture";
+                      iframe.title = "Kevin's Results";
+                      iframe.className = "absolute inset-0 w-full h-full";
+                      e.currentTarget.innerHTML = '';
+                      e.currentTarget.appendChild(iframe);
+                    }}>
+
+                    <img
+                      src="kevin4.jpg"
+                      alt="Kevin Training"
+                      className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover/video:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+                    {/* Play Button */}
+                    <div className="absolute inset-0 flex items-center justify-center z-20">
+                      <div className="w-24 h-24 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover/video:scale-110 transition-transform duration-300 shadow-xl">
+                        <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                          <Play className="w-6 h-6 fill-white text-white ml-1" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="absolute bottom-8 left-8 right-8 z-20">
+                      <p className="text-white font-black text-lg uppercase tracking-wider mb-2 drop-shadow-md">Watch His Story</p>
+                      <p className="text-white/90 text-sm line-clamp-2 font-medium drop-shadow-sm">See how Kevin transformed his strength at 66.</p>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Copy - Moved to Right as requested */}
+                  <div className="text-center md:text-left space-y-8 md:pl-8 order-2 md:order-2">
+                    {/* 'Client Spotlight' Pill Removed */}
+
+                    <h3 className="text-2xl md:text-4xl font-heading font-black text-slate-900 leading-tight tracking-tight whitespace-pre-line">
+                      What Makes This <br /> <span className="text-blue-600">Coaching Different.</span>
+                    </h3>
+
+                    <p className="text-slate-600 font-bold text-lg leading-relaxed border-l-4 border-blue-600 pl-8">
+                      Whether you're rebuilding, chasing performance, or refusing to slow down—the standard stays the same.
+                    </p>
+
+                    <div className="space-y-6 text-slate-500 font-medium text-base leading-relaxed pl-8">
+                      <p>The same system used with the very best.</p>
+                      <p>Precision, accountability, and results that last.</p>
+                      <p className="text-slate-900 text-lg font-black uppercase">
+                        Take Kevin, 66 years old, a Senior Creative Director.
+                      </p>
+                      <p>Still training like an athlete. Focused on strength, mobility, and longevity.</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
 
               {/* "Built By Olympians" Section - Dark Full Width */}
               <FadeInSection>
@@ -886,7 +904,10 @@ const App = () => {
                         </p>
                       </div>
 
-                      <button className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-10 py-5 rounded-2xl uppercase tracking-widest text-sm w-full md:w-auto self-start shadow-2xl shadow-blue-600/20 transition-all">
+                      <button
+                        onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-10 py-5 rounded-2xl uppercase tracking-widest text-sm w-full md:w-auto self-start shadow-2xl shadow-blue-600/20 transition-all"
+                      >
                         Let's Do This Coach
                       </button>
                     </div>
@@ -983,7 +1004,10 @@ const App = () => {
                     </div>
 
                     <div className="mt-12 text-center">
-                      <button className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-12 py-5 rounded-xl uppercase tracking-widest text-sm shadow-2xl shadow-blue-600/20 transition-all group relative overflow-hidden">
+                      <button
+                        onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-12 py-5 rounded-xl uppercase tracking-widest text-sm shadow-2xl shadow-blue-600/20 transition-all group relative overflow-hidden"
+                      >
                         <span className="relative z-10">I'm Ready To Do This</span>
                         <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                       </button>
@@ -1026,7 +1050,10 @@ const App = () => {
                       </div>
 
                       <div className="flex flex-col items-center">
-                        <button className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-12 py-5 rounded-xl uppercase tracking-widest text-lg shadow-2xl shadow-blue-600/20 transition-all mb-4">
+                        <button
+                          onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                          className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black px-12 py-5 rounded-xl uppercase tracking-widest text-lg shadow-2xl shadow-blue-600/20 transition-all mb-4"
+                        >
                           I'm Ready For This
                         </button>
                         <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider italic">
@@ -1139,15 +1166,15 @@ const App = () => {
                       </div>
                     </div>
 
-                    <div className="grid lg:grid-cols-3 gap-6 items-start max-w-7xl mx-auto">
+                    <div className="grid lg:grid-cols-3 gap-6 items-start max-w-7xl mx-auto px-6">
                       {/* Option 1: SOLO */}
                       <div className="bg-white rounded-[32px] p-8 border border-slate-200 shadow-xl relative group hover:-translate-y-2 transition-transform duration-300">
-                        <div className="mb-6">
+                        <div className="mb-6 text-center">
                           <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400">The Maintenance Option</span>
                           <h4 className="text-3xl font-heading font-black text-slate-900 mt-2 uppercase">Solo <br />Protocol</h4>
                         </div>
 
-                        <div className="mb-8 h-32 flex flex-col justify-center">
+                        <div className="mb-8 h-32 flex flex-col justify-center items-center">
                           <div key={isAnnual ? 'solo-yr' : 'solo-mo'} className="animate-pop-in">
                             {isAnnual ? (
                               <>
@@ -1177,12 +1204,12 @@ const App = () => {
                       <div className="bg-white rounded-[32px] p-8 border-2 border-blue-500 shadow-2xl relative transform lg:-translate-y-6 z-10">
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-6 py-2 rounded-full font-heading font-bold text-[10px] uppercase tracking-widest shadow-lg">Most Popular</div>
 
-                        <div className="mb-6">
+                        <div className="mb-6 text-center">
                           <span className="text-[10px] uppercase font-bold tracking-widest text-blue-500">For Serious Athletes</span>
                           <h4 className="text-4xl font-heading font-black text-slate-900 mt-2 uppercase">Elite <br />Protocol</h4>
                         </div>
 
-                        <div className="mb-8 h-32 flex flex-col justify-center">
+                        <div className="mb-8 h-32 flex flex-col justify-center items-center">
                           <div key={isAnnual ? 'elite-yr' : 'elite-mo'} className="animate-pop-in">
                             {isAnnual ? (
                               <>
@@ -1231,12 +1258,12 @@ const App = () => {
 
                       {/* Option 3: INNER CIRCLE */}
                       <div className="bg-white rounded-[32px] p-8 border border-slate-200 shadow-xl relative group hover:-translate-y-2 transition-transform duration-300">
-                        <div className="mb-6">
+                        <div className="mb-6 text-center">
                           <span className="text-[10px] uppercase font-bold tracking-widest text-orange-500">The Mentorship</span>
                           <h4 className="text-3xl font-heading font-black text-slate-900 mt-2 uppercase">Inner <br />Circle</h4>
                         </div>
 
-                        <div className="mb-8 h-32 flex flex-col justify-center">
+                        <div className="mb-8 h-32 flex flex-col justify-center items-center">
                           <div key={isAnnual ? 'inner-yr' : 'inner-mo'} className="animate-pop-in">
                             {isAnnual ? (
                               <>
@@ -1291,57 +1318,19 @@ const App = () => {
                     </div>
                   </div>
                 </div>
+
               </FadeInSection>
+
+              {/* Downsell / Sales Page Link */}
+              <DownsellSection onNavigate={() => {
+                window.scrollTo({ top: 0, behavior: 'instant' });
+                setResultPage('sales');
+              }} />
             </>
           )}
-          {
-            resultPage === 'sales' && (
-              <div className="max-w-6xl mx-auto px-6 py-12">
-                <FadeInSection>
-                  <span className="bg-slate-900 border border-slate-800 text-white shadow-xl shadow-slate-900/20 px-6 py-2 rounded-full text-[10px] font-heading font-bold mb-8 inline-block uppercase tracking-[0.3em]">THE SYSTEM UNLOCKED</span>
-                  <h1 className="text-4xl md:text-6xl font-heading font-black mb-8 leading-[0.95] tracking-tight text-slate-900 uppercase">
-                    THE OLYMPIAN'S <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">TECHNICAL HANDBOOK.</span>
-                  </h1>
-
-                  {/* VIDEO PLAYER - Top for Sales */}
-                  <div className="w-full max-w-3xl mx-auto mb-12">
-                    <VideoPlaceholder src="https://images.unsplash.com/photo-1541534401786-2077eed87a74?auto=format&fit=crop&q=80&w=1200" alt="Technical Handbook Walkthrough" className="aspect-video" />
-                  </div>
-
-                  <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 text-left bg-white border border-slate-200 p-10 md:p-16 rounded-[40px] shadow-2xl relative overflow-hidden">
-                    <div className="z-10 relative">
-                      <h3 className="text-xl font-heading font-bold uppercase mb-8 tracking-tight text-slate-900">WORLD CLASS <br />PROGRAMMING.</h3>
-                      <p className="text-slate-600 mb-8 font-medium text-base leading-relaxed">"You wanted a plan to fix your lifts. This is the exact 12-week technical cycle we use to build world-class technique."</p>
-                      <ul className="space-y-4">
-                        {[
-                          "12-Week Progressive Cycle",
-                          "High-Def Positional Matrix",
-                          "Technical Warm-up Bible",
-                          "Priority Access Included"
-                        ].map((item, i) => (
-                          <li key={i} className="flex gap-4 items-center">
-                            <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
-                            <span className="font-bold uppercase tracking-[0.2em] text-[10px] text-slate-700">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* BUY BUTTON AREA */}
-                    <div className="flex flex-col justify-center">
-                      <div className="bg-slate-900 p-10 rounded-[32px] border border-slate-700 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl">
-                        <span className="text-slate-400 line-through text-xl mb-3 font-bold">£149.00</span>
-                        <span className="text-6xl font-heading font-black text-white mb-8 tracking-tighter">£99</span>
-                        <button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-bold py-5 rounded-xl shadow-xl shadow-blue-600/20 transition-all uppercase tracking-[0.2em] text-[10px]">
-                          BUY NOW
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </FadeInSection>
-              </div>
-            )
-          }
+          {resultPage === 'sales' && (
+            <SalesPage onBack={() => setResultPage('vip')} />
+          )}
           {/* NOTE: 'free' result page logic is now handled by the BridgePage component. 
               The 'calculateResult' function sets resultPage='sales' or 'vip', but 'handleLeadSubmit' intercepts 'free' path to show BridgePage first.
           */}
