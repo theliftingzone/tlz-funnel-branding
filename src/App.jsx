@@ -104,7 +104,7 @@ const VideoPlaceholder = ({ src, alt, className = "" }) => (
 );
 
 // Custom Vimeo Player with Cover
-const VimeoPlayer = ({ videoId, thumbnail }) => {
+const VimeoPlayer = ({ videoId, thumbnail, hash }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
@@ -126,7 +126,7 @@ const VimeoPlayer = ({ videoId, thumbnail }) => {
         </>
       ) : (
         <iframe
-          src={`https://player.vimeo.com/video/${videoId}?h=9d0e41e34e&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1`}
+          src={`https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1${hash ? `&h=${hash}` : ''}`}
           frameBorder="0"
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
           className="absolute top-0 left-0 w-full h-full"
@@ -473,9 +473,9 @@ const App = () => {
       id: 'solution_preference',
       text: "Based on your goals, how would you prefer to solve this?",
       options: [
-        { label: "I want a world-class coach to analyze my videos weekly and handle my entire bespoke program with fast results.", value: "A" },
-        { label: "I want a proven, step-by-step technical program to follow on my own.", value: "B" },
-        { label: "I just want some free tips to try in my next session.", value: "C" }
+        { label: "I want a world-class coach to analyze my videos weekly and handle my entire bespoke program with fast results.", value: "coach" },
+        { label: "I want a proven, step-by-step technical program to follow on my own.", value: "program" },
+        { label: "I just want some free tips to try in my next session.", value: "free" }
       ]
     }
   ], []);
@@ -502,8 +502,8 @@ const App = () => {
   const calculateResult = (finalAnswers) => {
     const pref = finalAnswers.solution_preference;
     const goal = finalAnswers.fix_one_thing;
-    if (pref === 'A') setResultPage('vip');
-    else if (pref === 'B') setResultPage('sales');
+    if (pref === 'coach') setResultPage('vip');
+    else if (pref === 'program') setResultPage('sales');
     else {
       if (goal === 'snatch' || goal === 'both') setResultPage('free-snatch');
       else if (goal === 'cj') setResultPage('free-cj');
@@ -514,11 +514,11 @@ const App = () => {
   const getFreeResource = () => {
     const issue = answers.fix_one_thing;
     if (issue === 'snatch' || issue === 'both') {
-      return { title: "Unstable Overhead", name: "Free Snatch Plan", url: "https://start.theliftingzone.com/free-snatch-plan" };
+      return { title: "Snatch Error", name: "Free Snatch Plan", url: "https://start.theliftingzone.com/free-snatch-plan" };
     } else if (issue === 'cj') {
-      return { title: "Inconsistent Drive", name: "Free Clean & Jerk Plan", url: "https://start.theliftingzone.com/clean-and-jerk-plan" };
+      return { title: "Clean and Jerk Error", name: "Free Clean & Jerk Plan", url: "https://start.theliftingzone.com/clean-and-jerk-plan" };
     } else {
-      return { title: "Positional Weakness", name: "Free Strength Protocol", url: "#" }; // Add Strength URL when ready
+      return { title: "Strength Error", name: "Free Squat Strength Plan", url: "https://start.theliftingzone.com/squat-strength-plan" };
     }
   };
 
@@ -527,9 +527,49 @@ const App = () => {
     calculateResult(answers);
     setStep('analyzing');
 
+    // --- INTEGRATION: Send Data to Zapier / GHL / Sheets ---
+    // 1. Calculate the result path locally to send immediately
+    let calculatedPath = 'unknown';
+    const pref = answers.solution_preference;
+    const goal = answers.fix_one_thing;
+
+    if (pref === 'coach') calculatedPath = 'vip';
+    else if (pref === 'program') calculatedPath = 'sales';
+    else {
+      if (goal === 'snatch' || goal === 'both') calculatedPath = 'free-snatch';
+      else if (goal === 'cj') calculatedPath = 'free-cj';
+      else calculatedPath = 'free-strength';
+    }
+
+    // 2. Prepare the payload
+    const payload = {
+      ...leadData,          // firstName, lastName, email, phone
+      ...answers,           // quiz answers
+      result_path: calculatedPath,
+      submitted_at: new Date().toISOString(),
+      source: 'tlz_funnel_quiz'
+    };
+
+    // 3. Send to Zapier Webhook
+    // REPLACE THIS URL with your specific Zapier Webhook URL (e.g., https://hooks.zapier.com/hooks/catch/...)
+    const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/5054309/ul7nl6x/';
+
+    if (ZAPIER_WEBHOOK_URL) {
+      fetch(ZAPIER_WEBHOOK_URL, {
+        method: 'POST',
+        // mode: 'no-cors', // Uncomment if you encounter CORS issues (note: this hides response status)
+        body: JSON.stringify(payload)
+      }).then(() => {
+        console.log("Data sent to Zapier successfully");
+      }).catch(err => {
+        console.error("Failed to send to Zapier:", err);
+      });
+    }
+    // ------------------------------------------------*******
+
     setTimeout(() => {
       // If it's a free result, show the Bridge Page first
-      if (answers.solution_preference === 'C') {
+      if (answers.solution_preference === 'free') {
         setStep('bridge');
       } else {
         setStep('result');
@@ -563,7 +603,7 @@ const App = () => {
           </p>
 
           {/* VSL Video - Vimeo Player - Custom component used here */}
-          <VimeoPlayer videoId="1156819181" thumbnail="/images/sonny-main-video.png" />
+          <VimeoPlayer videoId="1156819181" thumbnail="/images/sonny-main-video.png" hash="9d0e41e34e" />
 
           <button
             onClick={() => setStep('quiz')}
@@ -1246,6 +1286,13 @@ const App = () => {
                               <p className="text-[10px] text-slate-400 font-normal">1-on-1 Zoom call to map your year.</p>
                             </div>
                           </li>
+                          <li className="flex gap-3 text-sm font-bold text-slate-700">
+                            <Eye className="w-5 h-5 text-blue-500 shrink-0" />
+                            <div>
+                              Weekly Technical Analysis Call
+                              <p className="text-[10px] text-slate-400 font-normal">Live group technique review.</p>
+                            </div>
+                          </li>
                         </ul>
 
                         <button className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply For Elite</button>
@@ -1293,7 +1340,7 @@ const App = () => {
                     <div className="max-w-4xl mx-auto mt-16">
                       <h4 className="text-xl font-heading font-black text-slate-400 uppercase tracking-widest mb-6 text-center">Available Add-Ons</h4>
                       <div className="grid md:grid-cols-2 gap-6">
-                        <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg">
+                        <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-blue-400 cursor-pointer group">
                           <div className="text-left">
                             <div className="font-heading font-black text-slate-900 uppercase">VIP Onboarding</div>
                             <div className="text-[10px] text-slate-500 font-medium">30-min strategy session w/ Sonny Webster.</div>
@@ -1303,13 +1350,13 @@ const App = () => {
                             <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
                           </div>
                         </div>
-                        <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg">
+                        <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-blue-400 cursor-pointer group">
                           <div className="text-left">
                             <div className="font-heading font-black text-slate-900 uppercase">Performance Nutrition</div>
                             <div className="text-[10px] text-slate-500 font-medium">Dietitian support & monthly check-ins.</div>
                           </div>
                           <div className="text-right">
-                            <div className="font-bold text-slate-900">£100</div>
+                            <div className="font-bold text-slate-900">£100<span className="text-slate-500 text-xs font-medium">/mo</span></div>
                             <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
                           </div>
                         </div>

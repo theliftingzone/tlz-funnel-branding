@@ -24,7 +24,7 @@ const DownsellSection = ({ onNavigate }) => {
                     </p>
 
                     <button
-                        className="inline-flex items-center gap-2 text-white font-bold uppercase tracking-widest text-xs md:text-sm group-hover:gap-4 transition-all duration-300"
+                        className="cursor-pointer inline-flex items-center gap-2 text-white font-bold uppercase tracking-widest text-xs md:text-sm group-hover:gap-4 transition-all duration-300"
                     >
                         View The Technical Handbook <ArrowRight className="w-4 h-4 text-blue-500" />
                     </button>
