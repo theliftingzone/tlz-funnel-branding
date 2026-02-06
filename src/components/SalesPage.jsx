@@ -20,6 +20,7 @@ import {
     Mail,
     Dumbbell
 } from 'lucide-react';
+import VimeoPlayer from './VimeoPlayer';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -94,10 +95,17 @@ const SalesPage = ({ onBack }) => {
                             For lifters who want world-class mechanics without the world-class price tag. The 22-session technical protocol for precision and power.
                         </p>
 
+                        <div className="w-full max-w-3xl mx-auto mb-12">
+                            <VimeoPlayer
+                                videoId="1162142044"
+                                hash="68c474dfd6"
+                            />
+                        </div>
+
                         <div className="flex flex-col items-center gap-8">
                             <button
                                 onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="cursor-pointer group relative bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] text-white font-heading font-black text-xl md:text-2xl uppercase tracking-[0.15em] px-14 py-6 rounded-2xl shadow-2xl shadow-blue-600/30 hover:brightness-110 transition-all duration-300 transform"
+                                className="cursor-pointer group relative bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] text-white font-heading font-black text-xl md:text-2xl uppercase tracking-[0.15em] px-14 py-6 rounded-2xl shadow-2xl shadow-blue-600/30 hover:brightness-110 transition-all duration-300 transform btn-shine-effect"
                             >
                                 Get Instant Access - £99
                             </button>
@@ -120,8 +128,8 @@ const SalesPage = ({ onBack }) => {
             <section className="py-16 md:py-24 bg-[#0f172a] text-white overflow-hidden relative border-y border-white/5">
                 <div className="absolute inset-0 bg-grid opacity-[0.03] pointer-events-none"></div>
                 <div className="max-w-5xl mx-auto px-6 relative">
-                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-600/10 rounded-full blur-[100px]"></div>
-                    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-900/20 rounded-full blur-[100px]"></div>
+                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-600/10 rounded-full blur-[100px] animate-float"></div>
+                    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-900/20 rounded-full blur-[100px] animate-float delay-500"></div>
 
                     <FadeInSection className="text-center">
                         <div className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-8">The Hard Truth</div>
@@ -474,7 +482,7 @@ const SalesPage = ({ onBack }) => {
                             <div className="absolute -inset-8 bg-gradient-to-r from-blue-600 to-blue-400 rounded-[40px] blur-3xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
                             <button
                                 onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="cursor-pointer relative bg-gradient-to-r from-blue-600 to-blue-700 border-b-[10px] border-blue-800 active:border-b-0 active:translate-y-[10px] text-white font-heading font-black text-2xl md:text-4xl uppercase tracking-[0.2em] px-20 py-10 rounded-[40px] shadow-[0_25px_60px_-15px_rgba(37,99,235,0.4)] hover:brightness-110 transition-all duration-300 transform-gpu"
+                                className="cursor-pointer relative bg-gradient-to-r from-blue-600 to-blue-700 border-b-[10px] border-blue-800 active:border-b-0 active:translate-y-[10px] text-white font-heading font-black text-2xl md:text-4xl uppercase tracking-[0.2em] px-20 py-10 rounded-[40px] shadow-[0_25px_60px_-15px_rgba(37,99,235,0.4)] hover:brightness-110 transition-all duration-300 transform-gpu btn-shine-effect hover:scale-105"
                             >
                                 Start Accelerator
                             </button>

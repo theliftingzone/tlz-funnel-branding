@@ -4,6 +4,7 @@ import ProcessTimeline from './components/ProcessTimeline';
 import GuaranteeCTA from './components/GuaranteeCTA';
 import DownsellSection from './components/DownsellSection';
 import SalesPage from './components/SalesPage';
+import VimeoPlayer from './components/VimeoPlayer';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -77,10 +78,10 @@ const AnimatedBackground = () => {
         }}
       />
 
-      {/* Static Ambient Blobs */}
-      <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-blue-200/20 rounded-full blur-[120px] animate-pulse-glow"></div>
-      <div className="absolute bottom-[10%] left-[-10%] w-[30%] h-[30%] bg-indigo-200/20 rounded-full blur-[100px]"></div>
-      <div className="absolute top-[40%] left-[20%] w-[20%] h-[20%] bg-sky-200/10 rounded-full blur-[80px]"></div>
+      {/* Static Ambient Blobs with Float Animation */}
+      <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-blue-200/20 rounded-full blur-[120px] animate-pulse-glow animate-float"></div>
+      <div className="absolute bottom-[10%] left-[-10%] w-[30%] h-[30%] bg-indigo-200/20 rounded-full blur-[100px] animate-float delay-700"></div>
+      <div className="absolute top-[40%] left-[20%] w-[20%] h-[20%] bg-sky-200/10 rounded-full blur-[80px] animate-float delay-500"></div>
 
       {/* Premium Grid Pattern */}
       <div className="absolute inset-0 bg-grid opacity-[0.4]"></div>
@@ -103,39 +104,7 @@ const VideoPlaceholder = ({ src, alt, className = "" }) => (
   </div>
 );
 
-// Custom Vimeo Player with Cover
-const VimeoPlayer = ({ videoId, thumbnail, hash }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
 
-  return (
-    <div className="relative aspect-video bg-slate-900 rounded-[24px] overflow-hidden mb-12 border-4 border-slate-200 shadow-2xl group max-w-3xl mx-auto ring-1 ring-slate-100 cursor-pointer" onClick={() => setIsPlaying(true)}>
-      {!isPlaying ? (
-        <>
-          {/* Custom Thumbnail & Play Button Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center bg-slate-900/10 group-hover:bg-slate-900/5 transition-all z-20">
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(37,99,235,0.5)] group-hover:scale-110 transition-transform duration-500 border-4 border-white animate-pulse-glow">
-              <Play className="fill-white text-white w-8 h-8 md:w-10 md:h-10 ml-1" />
-            </div>
-          </div>
-          <img
-            src={thumbnail || "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=1200"}
-            className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-1000"
-            alt="Video Thumbnail"
-          />
-
-        </>
-      ) : (
-        <iframe
-          src={`https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1${hash ? `&h=${hash}` : ''}`}
-          frameBorder="0"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-          className="absolute top-0 left-0 w-full h-full"
-          title="VSL Video"
-        ></iframe>
-      )}
-    </div>
-  );
-};
 
 const LogoPlaceholder = ({ className = "" }) => (
   <div className={`${className}`}>
@@ -386,6 +355,63 @@ const BridgePage = ({ resource, onUpsellClick, onBack }) => {
   );
 };
 
+const NavMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const menuItems = [
+    { label: 'Education', href: '#' },
+    { label: 'Courses', href: '#' },
+    { label: 'Meet the Team', href: '#' }
+  ];
+
+  return (
+    <div className="relative" ref={menuRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors group p-2 rounded-lg hover:bg-slate-100/50"
+      >
+        <span className="hidden md:block text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:translate-x-0">
+          Menu
+        </span>
+        <Menu className="w-5 h-5 md:w-6 md:h-6" />
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 top-full mt-2 w-56 bg-white/90 backdrop-blur-xl border border-white/50 rounded-2xl shadow-2xl overflow-hidden animate-scale-in z-[60] ring-1 ring-slate-900/5 origin-top-right">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-blue-50/40 pointer-events-none"></div>
+          <div className="p-2 space-y-1 relative z-10">
+            {menuItems.map((item, idx) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="block px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:bg-white hover:shadow-sm hover:text-blue-600 rounded-xl transition-all duration-200 hover:translate-x-1"
+                style={{ animationDelay: `${idx * 50}ms` }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(false);
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const App = () => {
   const [step, setStep] = useState('landing');
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -582,32 +608,40 @@ const App = () => {
       <AnimatedBackground />
       <WebinarPopup isOpen={showWebinar} onClose={() => setShowWebinar(false)} />
 
-      <nav className="relative z-50 p-6 flex justify-center items-center bg-transparent max-w-7xl mx-auto">
-        <LogoPlaceholder />
+      <nav className="relative z-50 p-6 grid grid-cols-3 items-center bg-transparent max-w-7xl mx-auto">
+        <div></div>
+        <div className="flex justify-center">
+          <LogoPlaceholder />
+        </div>
+        <div className="flex justify-end">
+          <NavMenu />
+        </div>
       </nav>
 
       {/* Hero Header */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 pt-12 pb-8 text-center">
         <FadeInSection>
-          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-slate-900 border border-slate-800 text-white text-xs font-bold uppercase tracking-[0.2em] mb-10 shadow-xl shadow-slate-900/20 hover:scale-105 transition-transform duration-300">
-            <Award className="w-4 h-4 text-blue-500" /> By The Lifting Zone Sonny Webster
+          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-slate-900 border border-slate-800 text-white text-xs font-bold uppercase tracking-[0.2em] mb-10 shadow-xl shadow-slate-900/20 hover:scale-105 transition-transform duration-300 animate-fade-in-down">
+            <Award className="w-4 h-4 text-blue-500 animate-pulse" /> By The Lifting Zone Sonny Webster
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black mb-10 tracking-tight leading-[0.95] text-slate-900">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black mb-10 tracking-tight leading-[0.95] text-slate-900 animate-fade-in-up">
             MASTER THE ART OF <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 drop-shadow-sm">WEIGHTLIFTING.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 drop-shadow-sm animate-text-glow">WEIGHTLIFTING.</span>
           </h1>
 
-          <p className="text-slate-600 font-medium text-base md:text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-600 font-medium text-base md:text-lg mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-100">
             Give us <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">60 seconds</span> to identify exactly where you need to be focusing your energy to reach your true potential and provide you with the next steps to action it. Could be a <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">free course</span> could be a <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">direct mentorship with Sonny Webster</span>. Let's find out.
           </p>
 
           {/* VSL Video - Vimeo Player - Custom component used here */}
-          <VimeoPlayer videoId="1156819181" thumbnail="/images/sonny-main-video.png" hash="9d0e41e34e" />
+          <div className="animate-fade-in-up delay-200">
+            <VimeoPlayer videoId="1156819181" thumbnail="/images/sonny-main-video.png" hash="9d0e41e34e" />
+          </div>
 
           <button
             onClick={() => setStep('quiz')}
-            className="font-heading bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-black py-5 px-12 rounded-2xl transition-all uppercase tracking-widest text-sm mb-6 shadow-2xl shadow-blue-600/20"
+            className="font-heading btn-shine-effect bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-black py-5 px-12 rounded-2xl transition-all uppercase tracking-widest text-sm mb-6 shadow-2xl shadow-blue-600/20 animate-fade-in-up delay-300 hover:scale-105"
           >
             ASSESS YOUR LIFTING
           </button>
