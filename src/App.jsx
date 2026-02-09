@@ -373,7 +373,8 @@ const NavMenu = ({ onNavigate }) => {
   }, []);
 
   const menuItems = [
-    { label: 'Education', href: '#', action: 'education' },
+    { label: 'Technique Accelerator', href: '?page=olympian-technique-accelerator', action: 'olympian-technique-accelerator' },
+    { label: 'Level 1 Coach Certification', href: '#', action: 'education' },
     { label: 'Courses', href: '#', action: 'courses' },
     { label: 'Meet the Team', href: '#', action: 'meet-the-team' }
   ];
@@ -427,6 +428,7 @@ const App = () => {
   const [resultPage, setResultPage] = useState(null);
   const [showDevTools, setShowDevTools] = useState(false);
   const [showWebinar, setShowWebinar] = useState(false);
+  const [trackingParams, setTrackingParams] = useState({});
 
   useEffect(() => {
     if (step === 'landing') {
@@ -436,6 +438,39 @@ const App = () => {
       setShowWebinar(false);
     }
   }, [step]);
+
+  // Handle URL Query Params for direct linking & UTM tracking
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    // Capture UTMs
+    const utms = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(param => {
+      const value = params.get(param);
+      if (value) utms[param] = value;
+    });
+    setTrackingParams(utms);
+
+    // Handle Page Routing
+    const page = params.get('page');
+    if (page === 'olympian-technique-accelerator' || page === 'sales') {
+      setStep('result');
+      setResultPage('sales');
+    } else if (page === 'education') {
+      setStep('education');
+    } else if (page === 'meet-the-team') {
+      setStep('meet-the-team');
+    }
+  }, []);
+
+  const handleNavigation = (action) => {
+    if (action === 'olympian-technique-accelerator') {
+      setStep('result');
+      setResultPage('sales');
+    } else {
+      setStep(action);
+    }
+  };
 
   const questions = useMemo(() => [
     {
@@ -578,6 +613,7 @@ const App = () => {
     const payload = {
       ...leadData,          // firstName, lastName, email, phone
       ...answers,           // quiz answers
+      ...trackingParams,    // utm_source, utm_medium, etc.
       result_path: calculatedPath,
       submitted_at: new Date().toISOString(),
       source: 'tlz_funnel_quiz'
@@ -621,7 +657,7 @@ const App = () => {
           <LogoPlaceholder />
         </div>
         <div className="flex justify-end">
-          <NavMenu onNavigate={setStep} />
+          <NavMenu onNavigate={handleNavigation} />
         </div>
       </nav>
 
