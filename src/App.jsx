@@ -373,7 +373,6 @@ const NavMenu = ({ onNavigate }) => {
   }, []);
 
   const menuItems = [
-    { label: 'Technique Accelerator', href: '?page=olympian-technique-accelerator', action: 'olympian-technique-accelerator' },
     { label: 'Level 1 Coach Certification', href: '#', action: 'education' },
     { label: 'Courses', href: '#', action: 'courses' },
     { label: 'Meet the Team', href: '#', action: 'meet-the-team' }
