@@ -5,6 +5,9 @@ import GuaranteeCTA from './components/GuaranteeCTA';
 import DownsellSection from './components/DownsellSection';
 import SalesPage from './components/SalesPage';
 import VimeoPlayer from './components/VimeoPlayer';
+import MeetTheTeam from './components/MeetTheTeam';
+import Education from './components/Education';
+import Courses from './components/Courses';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -355,7 +358,7 @@ const BridgePage = ({ resource, onUpsellClick, onBack }) => {
   );
 };
 
-const NavMenu = () => {
+const NavMenu = ({ onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -370,9 +373,9 @@ const NavMenu = () => {
   }, []);
 
   const menuItems = [
-    { label: 'Education', href: '#' },
-    { label: 'Courses', href: '#' },
-    { label: 'Meet the Team', href: '#' }
+    { label: 'Education', href: '#', action: 'education' },
+    { label: 'Courses', href: '#', action: 'courses' },
+    { label: 'Meet the Team', href: '#', action: 'meet-the-team' }
   ];
 
   return (
@@ -400,6 +403,9 @@ const NavMenu = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   setIsOpen(false);
+                  if (item.action && onNavigate) {
+                    onNavigate(item.action);
+                  }
                 }}
               >
                 {item.label}
@@ -407,8 +413,9 @@ const NavMenu = () => {
             ))}
           </div>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
@@ -614,7 +621,7 @@ const App = () => {
           <LogoPlaceholder />
         </div>
         <div className="flex justify-end">
-          <NavMenu />
+          <NavMenu onNavigate={setStep} />
         </div>
       </nav>
 
@@ -1448,6 +1455,9 @@ const App = () => {
       {step === 'lead-form' && <LeadCaptureForm data={leadData} setData={setLeadData} onSubmit={handleLeadSubmit} onBack={() => setStep('landing')} />}
       {step === 'analyzing' && <AnalyzingScreen />}
       {step === 'bridge' && <BridgePage resource={getFreeResource()} onUpsellClick={() => { setStep('result'); setResultPage('sales'); }} onBack={() => setStep('landing')} />}
+      {step === 'meet-the-team' && <MeetTheTeam onBack={() => setStep('landing')} onStartQuiz={() => setStep('quiz')} />}
+      {step === 'education' && <Education onBack={() => setStep('landing')} />}
+      {step === 'courses' && <Courses onBack={() => setStep('landing')} />}
       {step === 'result' && <ResultView onBack={() => setStep('landing')} />}
 
       <DevToolbar />
