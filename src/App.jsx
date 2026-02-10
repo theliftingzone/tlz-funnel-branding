@@ -1321,7 +1321,7 @@ const App = () => {
                           <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> Monthly Community Call</li>
                         </ul>
 
-                        <button onClick={() => window.open('https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=solo_protocol', '_blank')} className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Apply for Solo</button>
+                        <button onClick={() => window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=solo_protocol_${isAnnual ? 'annual' : 'monthly'}`, '_blank')} className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Apply for Solo</button>
 
                       </div>
 
@@ -1381,7 +1381,7 @@ const App = () => {
                           </li>
                         </ul>
 
-                        <button onClick={() => window.open('https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=elite_protocol', '_blank')} className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply for Elite</button>
+                        <button onClick={() => window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=elite_protocol_${isAnnual ? 'annual' : 'monthly'}`, '_blank')} className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply for Elite</button>
 
                         <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-slate-500 bg-slate-50 py-3 rounded-lg border border-slate-100">
                           <ShieldCheck className="w-3.5 h-3.5 text-blue-500" /> 90-DAY PR GUARANTEE INCLUDED
@@ -1418,7 +1418,7 @@ const App = () => {
                           <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Unlimited Video Reviews</li>
                         </ul>
 
-                        <button onClick={() => window.open('https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=inner_circle', '_blank')} className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Apply for Inner Circle</button>
+                        <button onClick={() => window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=inner_circle_${isAnnual ? 'annual' : 'monthly'}`, '_blank')} className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Apply for Inner Circle</button>
                       </div>
                     </div>
 

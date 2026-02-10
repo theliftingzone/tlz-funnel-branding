@@ -104,7 +104,7 @@ const SalesPage = ({ onBack }) => {
 
                         <div className="flex flex-col items-center gap-8">
                             <button
-                                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                                onClick={() => window.location.href = 'https://learn.theliftingzone.com/offers/jZMpuB9E/?utm_source=quiz_funnel'}
                                 className="cursor-pointer group relative bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] text-white font-heading font-black text-xl md:text-2xl uppercase tracking-[0.15em] px-14 py-6 rounded-2xl shadow-2xl shadow-blue-600/30 hover:brightness-110 transition-all duration-300 transform btn-shine-effect"
                             >
                                 Get Instant Access - £99
@@ -324,47 +324,42 @@ const SalesPage = ({ onBack }) => {
                         </h2>
                     </FadeInSection>
 
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div className="space-y-6">
-                            <div className="bg-slate-800/40 backdrop-blur-xl border border-slate-700 p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden group">
-                                <div className="absolute top-0 left-0 w-2 h-full bg-blue-600"></div>
-                                <h3 className="text-2xl font-heading font-black text-white mb-8 uppercase tracking-tight">The Curriculum</h3>
-                                <div className="grid sm:grid-cols-2 gap-6">
-                                    {[
-                                        { title: "22 Step-by-Step Sessions", img: "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop" },
-                                        { title: "HD Video Encyclopedia", img: "https://images.unsplash.com/photo-1574680096141-1c570926b753?q=80&w=2070&auto=format&fit=crop" },
-                                        { title: "Safety First Protocols", img: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=2070&auto=format&fit=crop" },
-                                        { title: "Self-Check System", img: "https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=1984&auto=format&fit=crop" }
-                                    ].map((item, i) => (
-                                        <div key={i} className="relative h-24 rounded-2xl overflow-hidden group/item cursor-pointer">
-                                            <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-500" />
-                                            <div className="absolute inset-0 bg-black/60 group-hover/item:bg-black/40 transition-colors"></div>
-                                            <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                                                <p className="text-white text-xs font-bold leading-tight uppercase tracking-wider">{item.title}</p>
-                                            </div>
+                    <div className="max-w-4xl mx-auto space-y-12">
+                        <div className="bg-slate-800/40 backdrop-blur-xl border border-slate-700 p-8 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden group">
+                            <div className="absolute top-0 left-0 w-2 h-full bg-blue-600"></div>
+                            <h3 className="text-2xl font-heading font-black text-white mb-8 uppercase tracking-tight text-center">The Curriculum</h3>
+                            <div className="grid md:grid-cols-2 gap-4">
+                                {[
+                                    "Introduction: The Road to Mastery",
+                                    "Module 1: Assessment & Line of Drive",
+                                    "Module 2: The Perfect Setup",
+                                    "Module 3: The First Pull (Standard vs Elite)",
+                                    "Module 4: The Transition (Knees to Hip)",
+                                    "Module 5: The Explosion (Power Position)",
+                                    "Module 6: The Catch & Stability (Snatch)",
+                                    "Module 7: The Clean Architecture",
+                                    "Module 8: The Jerk Dip & Drive",
+                                    "Module 9: Overhead Mechanics",
+                                    "Module 10: Accessory Work & Pre-Hab",
+                                    "Bonus: Your First 4-Week Program"
+                                ].map((lesson, i) => (
+                                    <div key={i} className="flex items-center gap-4 bg-slate-900/50 p-4 rounded-xl border border-slate-700/50 hover:border-blue-500/30 hover:bg-slate-800/80 transition-all duration-300 group/item hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-900/10">
+                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600/10 flex items-center justify-center text-blue-500 font-bold text-xs ring-1 ring-blue-500/20 group-hover/item:bg-blue-600 group-hover/item:text-white group-hover/item:ring-blue-500 transition-all">
+                                            {i + 1 < 10 ? `0${i + 1}` : i + 1}
                                         </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="p-8 md:p-12 border-2 border-dashed border-slate-800 rounded-[40px]">
-                                <p className="text-slate-400 text-lg font-medium leading-relaxed italic">
-                                    "Not everyone is ready for the intensity of our 1-1 Mentorship yet. We designed The Accelerator to be the ultimate starting point for self-paced lifters."
-                                </p>
+                                        <p className="text-slate-300 text-sm font-bold uppercase tracking-wide flex-grow group-hover/item:text-white transition-colors">{lesson}</p>
+                                        <div className="flex-shrink-0 opacity-0 group-hover/item:opacity-100 transition-opacity -translate-x-2 group-hover/item:translate-x-0 duration-300">
+                                            <Play className="w-3 h-3 text-blue-400 fill-blue-400" />
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
-                        <div className="relative group perspective-1000">
-                            <div className="bg-gradient-to-br from-blue-600 to-blue-900 rounded-[50px] aspect-[4/5] md:aspect-square flex items-center justify-center p-12 overflow-hidden relative shadow-[0_50px_100px_-20px_rgba(37,99,235,0.3)] group-hover:scale-[1.05] transition-transform duration-700 transform-gpu">
-                                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay"></div>
-                                <Trophy className="w-48 h-48 text-white opacity-20 group-hover:scale-110 transition-transform duration-1000 relative z-10" />
-                                <div className="absolute bottom-10 left-10 right-10 z-20">
-                                    <div className="bg-white/10 backdrop-blur-3xl border border-white/20 p-8 rounded-[32px] text-white">
-                                        <p className="text-[10px] font-black uppercase tracking-[0.4em] mb-2 opacity-60">Status: Elite</p>
-                                        <h4 className="text-3xl font-heading font-black uppercase tracking-tighter italic leading-none">Technique <br />Bible Vol.1</h4>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="p-8 md:p-12 border-2 border-dashed border-slate-800 rounded-[40px] text-center max-w-3xl mx-auto">
+                            <p className="text-slate-400 text-lg font-medium leading-relaxed italic">
+                                "Not everyone is ready for the intensity of our 1-1 Mentorship yet. We designed The Accelerator to be the ultimate starting point for self-paced lifters."
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -481,7 +476,7 @@ const SalesPage = ({ onBack }) => {
                         <div className="relative inline-block group mb-12 transform hover:scale-105 transition-transform duration-500">
                             <div className="absolute -inset-8 bg-gradient-to-r from-blue-600 to-blue-400 rounded-[40px] blur-3xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
                             <button
-                                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                                onClick={() => window.location.href = 'https://learn.theliftingzone.com/offers/jZMpuB9E/?utm_source=quiz_funnel'}
                                 className="cursor-pointer relative bg-gradient-to-r from-blue-600 to-blue-700 border-b-[10px] border-blue-800 active:border-b-0 active:translate-y-[10px] text-white font-heading font-black text-2xl md:text-4xl uppercase tracking-[0.2em] px-20 py-10 rounded-[40px] shadow-[0_25px_60px_-15px_rgba(37,99,235,0.4)] hover:brightness-110 transition-all duration-300 transform-gpu btn-shine-effect hover:scale-105"
                             >
                                 Start Accelerator

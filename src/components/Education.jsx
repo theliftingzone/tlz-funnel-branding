@@ -329,6 +329,17 @@ const Education = ({ onBack }) => {
                         <p className="text-slate-500 text-lg leading-relaxed max-w-3xl mx-auto mt-4">
                             From assessing athletes and creating tailored warm-up routines, to breaking down the snatch and clean & jerk step-by-step, you’ll gain the skills, knowledge, and systems that work through the seasons.
                         </p>
+
+                        <div className="mt-12 w-full max-w-4xl mx-auto aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-200 relative group">
+                            <iframe
+                                className="w-full h-full"
+                                src="https://www.youtube.com/embed/BF0Zs4pdvQk"
+                                title="Coach Certification Overview"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
                     </FadeInSection>
 
                     <FadeInSection>
@@ -456,7 +467,6 @@ const Education = ({ onBack }) => {
                                     <span className="text-5xl md:text-7xl font-heading font-black text-blue-600 tracking-tighter">£249.50</span>
                                 </div>
                                 <span className="mt-3 bg-red-100 text-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-red-200">Save 50% Today</span>
-                                <p className="mt-2 text-slate-400 text-[10px] font-bold uppercase tracking-widest italic opacity-80">*Only Available For The First 100 Students</p>
                             </div>
 
                             <div className="bg-slate-50 rounded-3xl p-8 mb-10 text-left border border-slate-100">
