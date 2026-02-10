@@ -208,15 +208,15 @@ const SalesPage = ({ onBack }) => {
                                 <ul className="space-y-6">
                                     <li className="flex gap-4 items-start text-slate-500 font-medium">
                                         <X className="w-5 h-5 text-slate-300 shrink-0 mt-0.5" />
-                                        <span>Focuses on "muscling" the weight up.</span>
+                                        <span>Not enough feedback.</span>
                                     </li>
                                     <li className="flex gap-4 items-start text-slate-500 font-medium">
                                         <X className="w-5 h-5 text-slate-300 shrink-0 mt-0.5" />
-                                        <span>Cues based on generic textbooks.</span>
+                                        <span>Cues that don’t get explained.</span>
                                     </li>
                                     <li className="flex gap-4 items-start text-slate-500 font-medium">
                                         <X className="w-5 h-5 text-slate-300 shrink-0 mt-0.5" />
-                                        <span>Treats the Snatch like a gym exercise.</span>
+                                        <span>Exercises that don’t fix your unique issues.</span>
                                     </li>
                                 </ul>
 

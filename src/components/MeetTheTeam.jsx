@@ -223,12 +223,17 @@ const MeetTheTeam = ({ onBack, onStartQuiz }) => {
                             <p className="text-slate-400 text-lg md:text-xl mb-12 max-w-xl mx-auto font-medium">
                                 Join the thousands of athletes who have transformed their lifting with our proven systems.
                             </p>
-                            <button
-                                onClick={onStartQuiz}
-                                className="bg-white text-blue-900 border-b-[6px] border-blue-200 active:border-b-0 active:translate-y-[6px] hover:brightness-110 font-heading font-black py-6 px-12 rounded-2xl shadow-2xl shadow-blue-900/50 hover:-translate-y-1 transition-all uppercase tracking-widest text-sm"
-                            >
-                                Start Your Assessment
-                            </button>
+                            <div className="flex flex-col items-center gap-2">
+                                <button
+                                    onClick={onStartQuiz}
+                                    className="bg-white text-blue-900 border-b-[6px] border-blue-200 active:border-b-0 active:translate-y-[6px] hover:brightness-110 font-heading font-black py-5 px-12 rounded-2xl shadow-2xl shadow-blue-900/50 hover:-translate-y-1 transition-all uppercase tracking-widest text-sm"
+                                >
+                                    <span>Start Your Assessment</span>
+                                </button>
+                                <span className="text-[12px] opacity-70 font-bold text-white normal-case tracking-normal flex items-center gap-1">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> Takes 60 Seconds • 100% Free
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </FadeInSection>

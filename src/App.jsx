@@ -681,12 +681,17 @@ const App = () => {
             <VimeoPlayer videoId="1156819181" thumbnail="/images/sonny-main-video.png" hash="9d0e41e34e" />
           </div>
 
-          <button
-            onClick={() => setStep('quiz')}
-            className="font-heading btn-shine-effect bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-black py-5 px-12 rounded-2xl transition-all uppercase tracking-widest text-sm mb-6 shadow-2xl shadow-blue-600/20 animate-fade-in-up delay-300 hover:scale-105"
-          >
-            ASSESS YOUR LIFTING
-          </button>
+          <div className="flex flex-col items-center gap-2">
+            <button
+              onClick={() => setStep('quiz')}
+              className="font-heading btn-shine-effect bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-black py-4 px-12 rounded-2xl transition-all uppercase tracking-widest text-sm shadow-2xl shadow-blue-600/20 animate-fade-in-up delay-300 hover:scale-105"
+            >
+              <span>ASSESS YOUR LIFTING</span>
+            </button>
+            <span className="text-[12px] opacity-80 font-bold normal-case tracking-normal flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> Takes 60 Seconds • 100% Free
+            </span>
+          </div>
         </FadeInSection>
       </div>
 
@@ -728,12 +733,17 @@ const App = () => {
                   </li>
                 ))}
               </ul>
-              <button
-                onClick={() => setStep('quiz')}
-                className="font-heading bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-black py-5 px-12 rounded-xl transition-all shadow-xl shadow-blue-600/20 uppercase tracking-widest text-xs"
-              >
-                ASSESS YOUR LIFTING
-              </button>
+              <div className="flex flex-col items-center justify-center sm:items-start md:items-start gap-2">
+                <button
+                  onClick={() => setStep('quiz')}
+                  className="font-heading bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-black py-4 px-12 rounded-xl transition-all shadow-xl shadow-blue-600/20 uppercase tracking-widest text-xs"
+                >
+                  <span>ASSESS YOUR LIFTING</span>
+                </button>
+                <span className="text-[12px] text-slate-500 font-bold normal-case tracking-normal pl-1 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Takes 60 Seconds • 100% Free
+                </span>
+              </div>
             </FadeInSection>
 
             <FadeInSection className="relative w-full flex items-center justify-center perspective-1000">
@@ -1311,8 +1321,8 @@ const App = () => {
                           <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> Monthly Community Call</li>
                         </ul>
 
-                        <button className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Select Solo</button>
-                        <p className="text-center text-[10px] text-red-400 font-bold mt-4 uppercase tracking-wider">Warning: 48hr feedback delay.</p>
+                        <button onClick={() => window.open('https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=solo_protocol', '_blank')} className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Apply for Solo</button>
+
                       </div>
 
                       {/* Option 2: ELITE (Highlighted) */}
@@ -1371,7 +1381,7 @@ const App = () => {
                           </li>
                         </ul>
 
-                        <button className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply For Elite</button>
+                        <button onClick={() => window.open('https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=elite_protocol', '_blank')} className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply for Elite</button>
 
                         <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-slate-500 bg-slate-50 py-3 rounded-lg border border-slate-100">
                           <ShieldCheck className="w-3.5 h-3.5 text-blue-500" /> 90-DAY PR GUARANTEE INCLUDED
@@ -1408,7 +1418,7 @@ const App = () => {
                           <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Unlimited Video Reviews</li>
                         </ul>
 
-                        <button className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Join Inner Circle</button>
+                        <button onClick={() => window.open('https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=inner_circle', '_blank')} className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Apply for Inner Circle</button>
                       </div>
                     </div>
 
