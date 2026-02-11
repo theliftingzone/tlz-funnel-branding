@@ -7,7 +7,7 @@ import SalesPage from './components/SalesPage';
 import VimeoPlayer from './components/VimeoPlayer';
 import MeetTheTeam from './components/MeetTheTeam';
 import Education from './components/Education';
-import Courses from './components/Courses';
+import Resources from './components/Resources';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -374,7 +374,7 @@ const NavMenu = ({ onNavigate }) => {
 
   const menuItems = [
     { label: 'Level 1 Coach Certification', href: '#', action: 'education' },
-    { label: 'Courses', href: '#', action: 'courses' },
+    { label: 'Resources', href: '#', action: 'resources' },
     { label: 'Meet the Team', href: '#', action: 'meet-the-team' }
   ];
 
@@ -673,7 +673,7 @@ const App = () => {
           </h1>
 
           <p className="text-slate-600 font-medium text-base md:text-lg mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-100">
-            Give us <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">60 seconds</span> to identify exactly where you need to be focusing your energy to reach your true potential and provide you with the next steps to action it. Could be a <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">free course</span> could be a <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">direct mentorship with Sonny Webster</span>. Let's find out.
+            Give us <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">60 seconds</span> to identify exactly where you need to be focusing your energy to reach your true potential and provide you with the next steps to action it. Could be a <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">free resource</span> could be a <span className="text-blue-900 font-bold bg-blue-100 px-2 py-0.5 rounded text-blue-700">direct mentorship with Sonny Webster</span>. Let's find out.
           </p>
 
           {/* VSL Video - Vimeo Player - Custom component used here */}
@@ -1502,7 +1502,7 @@ const App = () => {
       {step === 'bridge' && <BridgePage resource={getFreeResource()} onUpsellClick={() => { setStep('result'); setResultPage('sales'); }} onBack={() => setStep('landing')} />}
       {step === 'meet-the-team' && <MeetTheTeam onBack={() => setStep('landing')} onStartQuiz={() => setStep('quiz')} />}
       {step === 'education' && <Education onBack={() => setStep('landing')} />}
-      {step === 'courses' && <Courses onBack={() => setStep('landing')} />}
+      {step === 'resources' && <Resources onBack={() => setStep('landing')} />}
       {step === 'result' && <ResultView onBack={() => setStep('landing')} />}
 
       <DevToolbar />

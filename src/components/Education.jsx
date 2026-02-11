@@ -226,30 +226,31 @@ const Education = ({ onBack }) => {
                 <div className="max-w-6xl mx-auto px-6">
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <FadeInSection>
-                            <h2 className="text-3xl md:text-5xl font-heading font-black text-slate-900 uppercase leading-none mb-8">
-                                On average, you'll spend over <span className="text-blue-600">twelve thousand hours</span> of your career coaching.
+                            <h2 className="text-2xl md:text-4xl font-heading font-black text-slate-900 uppercase leading-[1.1] mb-8">
+                                On average, you'll spend over <br />
+                                <span className="text-blue-600">twelve thousand hours</span> <br />
+                                of your career coaching.
                             </h2>
-                            <p className="text-slate-600 text-2xl font-black leading-relaxed mb-8 uppercase italic border-l-4 border-slate-900 pl-6">
-                                Why not spend just twelve hours learning how to do it well?
+                            <p className="text-slate-700 text-lg md:text-xl font-black leading-tight mb-12 uppercase italic border-l-[6px] border-slate-900 pl-8 max-w-lg">
+                                Why not spend just twelve hours <br />learning how to do it well?
                             </p>
-                            <p className="text-slate-500 leading-relaxed font-medium">
+                            <p className="text-slate-500 leading-relaxed font-medium text-sm md:text-base">
                                 Get the secrets I’ve gained from leading over <span className="text-slate-900 font-bold">200 seminars</span>, helping over <span className="text-slate-900 font-bold">40,000 people</span> improve their mobility, and helping over <span className="text-slate-900 font-bold">10,000 athletes</span> hit personal bests. I’ve never shared all of this until now.
                             </p>
                         </FadeInSection>
-                        <FadeInSection delay={200}>
-                            {/* Stats visual */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100 text-center">
-                                    <div className="text-4xl font-heading font-black text-blue-600 mb-2">200+</div>
-                                    <div className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Seminars Led</div>
-                                </div>
-                                <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100 text-center">
-                                    <div className="text-4xl font-heading font-black text-blue-600 mb-2">40K+</div>
-                                    <div className="text-[10px] uppercase font-bold tracking-widest text-slate-400">People Helped</div>
-                                </div>
-                                <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100 text-center col-span-2">
-                                    <div className="text-5xl font-heading font-black text-slate-900 mb-2">10,000+</div>
-                                    <div className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Athletes Hit Personal Bests</div>
+                        <FadeInSection delay={200} className="relative">
+                            {/* Decorative Elements */}
+                            <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl"></div>
+                            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-indigo-600/10 rounded-full blur-3xl"></div>
+
+                            <div className="relative group perspective-1000">
+                                <div className="absolute inset-0 bg-blue-600/5 rounded-[40px] transform rotate-3 scale-[1.02] group-hover:rotate-0 transition-transform duration-700"></div>
+                                <div className="relative rounded-[32px] overflow-hidden shadow-2xl border-2 border-white">
+                                    <img
+                                        src="/Sonny-teaching.jpg"
+                                        alt="Sonny Webster Teaching"
+                                        className="w-full h-full object-cover aspect-[4/5] transform group-hover:scale-105 transition-transform duration-1000"
+                                    />
                                 </div>
                             </div>
                         </FadeInSection>
@@ -367,84 +368,109 @@ const Education = ({ onBack }) => {
             </section>
 
             {/* 6. BONUSES */}
-            {/* 6. BONUSES - REDESIGNED */}
-            <section className="py-32 bg-[#020617] relative overflow-hidden">
-                {/* Background ambient effects */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl opacity-30 pointer-events-none">
-                    <div className="absolute top-20 left-20 w-96 h-96 bg-blue-600 rounded-full blur-[150px]"></div>
-                    <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-600 rounded-full blur-[150px]"></div>
-                </div>
-
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
+            {/* 6. BONUSES - PREMIUM SHOWCASE */}
+            <section className="py-32 bg-[#f8fafc] relative overflow-hidden">
+                {/* Background Decor */}
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-400/5 rounded-full blur-[120px] -mr-64 -mt-64"></div>
+                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-400/5 rounded-full blur-[120px] -ml-64 -mb-64"></div>
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <FadeInSection className="text-center mb-24">
-                        <h2 className="text-5xl md:text-7xl font-heading font-black uppercase mb-8 leading-none tracking-tight text-white drop-shadow-2xl">
-                            But Wait... <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">There Is More.</span>
-                        </h2>
-                        <p className="text-slate-400 max-w-2xl mx-auto text-xl font-medium leading-relaxed">
-                            We don't just give you a course. We give you an entire coaching ecosystem.
-                        </p>
-                    </FadeInSection>
+                    <div className="grid lg:grid-cols-12 gap-16 items-center">
+                        {/* Left Column: Heading & Introduction */}
+                        <div className="lg:col-span-12 text-center mb-16">
+                            <FadeInSection>
+                                <span className="text-blue-600 font-black tracking-[0.3em] uppercase text-xs mb-4 inline-block">The Coaching Powerhouse</span>
+                                <h2 className="text-5xl md:text-7xl font-heading font-black text-slate-900 uppercase leading-[0.9] tracking-tighter mb-8">
+                                    But Wait... <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-900">There Is More.</span>
+                                </h2>
+                                <p className="text-slate-500 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
+                                    This isn't just a course. It's the complete <span className="text-slate-900 font-bold italic">Elite Ecosystem</span> Sonny uses to build world-class athletes.
+                                </p>
+                            </FadeInSection>
+                        </div>
 
-                    <div className="grid md:grid-cols-2 gap-10">
-                        {[
-                            {
-                                title: "20 In-Depth “How-To” Videos",
-                                desc: "Access to videos from the Ultimate Guide to Weightlifting, covering common faults and fine details of specific techniques.",
-                                image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2069&auto=format&fit=crop",
-                                tag: "Technical Library"
-                            },
-                            {
-                                title: "Sonny’s Secret Software",
-                                desc: "The exact tools used to create viral technical breakdowns with top lifters like C.J. Cummings and Mattie Rogers.",
-                                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-                                tag: "Exclusive Tool"
-                            },
-                            {
-                                title: "12-Week Program Template",
-                                desc: "The same structure used for high-ticket clients. Worth £500, now included so you can apply elite-level programming immediately.",
-                                image: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?q=80&w=2071&auto=format&fit=crop",
-                                tag: "Plug & Play"
-                            },
-                            {
-                                title: "Level 1 Certification",
-                                desc: "Your badge of expertise. A physical and digital certificate to display your mastery and attract new clients.",
-                                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop",
-                                tag: "Accreditation"
-                            }
-                        ].map((bonus, i) => (
-                            <FadeInSection key={i} delay={i * 100}>
-                                <div className="group relative h-96 rounded-[40px] overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_50px_-12px_rgba(37,99,235,0.25)] hover:-translate-y-2">
-                                    {/* Background Image with Zoom Effect */}
-                                    <div className="absolute inset-0">
-                                        <img
-                                            src={bonus.image}
-                                            alt={bonus.title}
-                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/90 to-transparent/20 group-hover:via-[#020617]/70 transition-all duration-500"></div>
+                        {/* Showcase Grid */}
+                        <div className="lg:col-span-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {/* Feature 1: The Library */}
+                            <FadeInSection delay={100} className="md:col-span-2 lg:col-span-1">
+                                <div className="bg-white rounded-[40px] p-8 h-full border border-slate-100 shadow-xl group hover:-translate-y-2 transition-all duration-500 flex flex-col">
+                                    <div className="mb-8 relative rounded-3xl overflow-hidden aspect-video shadow-lg">
+                                        <img src="/laptop-showing-videos.webp" alt="Technical Library" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                        <div className="absolute inset-0 bg-blue-600/10 group-hover:opacity-0 transition-opacity"></div>
                                     </div>
-
-                                    {/* Content Overlay */}
-                                    <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-end items-start text-left">
-                                        <div className="mb-auto self-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">
-                                            <span className="bg-blue-600 text-white px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg shadow-blue-600/20">
-                                                {bonus.tag}
-                                            </span>
-                                        </div>
-
-                                        <h3 className="text-2xl md:text-4xl font-heading font-black text-white uppercase mb-4 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-blue-200 transition-all">
-                                            {bonus.title}
-                                        </h3>
-                                        <p className="text-slate-400 text-base md:text-lg font-medium leading-relaxed max-w-lg group-hover:text-slate-200 transition-colors">
-                                            {bonus.desc}
-                                        </p>
+                                    <span className="bg-blue-50 text-blue-600 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest self-start mb-6">Bonus #1</span>
+                                    <h3 className="text-2xl font-heading font-black text-slate-900 uppercase mb-4 leading-tight">20 In-Depth "How-To" Videos</h3>
+                                    <p className="text-slate-500 font-medium text-sm leading-relaxed mb-8 flex-grow">
+                                        Covering the common faults and fine details of technique. From thumb taping to squat mechanics—it's all here.
+                                    </p>
+                                    <div className="flex items-center gap-2 text-blue-600 font-black text-[10px] uppercase tracking-widest">
+                                        <Video className="w-4 h-4" /> 20+ Exclusive Lessons
                                     </div>
                                 </div>
                             </FadeInSection>
-                        ))}
+
+                            {/* Feature 2: The Software (Large Highlight) */}
+                            <FadeInSection delay={200} className="md:col-span-2 lg:col-span-2">
+                                <div className="bg-slate-900 rounded-[40px] p-8 md:p-12 h-full relative overflow-hidden group shadow-2xl">
+                                    <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] -mr-32 -mt-32"></div>
+
+                                    <div className="grid md:grid-cols-2 gap-8 items-center relative z-10 h-full">
+                                        <div className="order-2 md:order-1">
+                                            <span className="bg-blue-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest self-start mb-8 inline-block shadow-lg shadow-blue-600/30">Bonus #2</span>
+                                            <h3 className="text-3xl md:text-4xl font-heading font-black text-white uppercase mb-6 leading-tight">Sonny's Secret <br /><span className="text-blue-400">Analysis Software</span></h3>
+                                            <p className="text-slate-400 font-medium text-base leading-relaxed mb-8">
+                                                The exact software used to create viral technical breakdowns for Olympians like Gui Malheiros and Clarence Kennedy. Now yours to master.
+                                            </p>
+                                            <div className="flex items-center gap-4">
+                                                <div className="flex -space-x-3">
+                                                    {[1, 2, 3].map(i => <div key={i} className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-800 flex items-center justify-center"><Star className="w-3 h-3 text-blue-400" /></div>)}
+                                                </div>
+                                                <span className="text-slate-300 text-[10px] font-bold uppercase tracking-widest">Industry Gold Standard</span>
+                                            </div>
+                                        </div>
+                                        <div className="order-1 md:order-2 group-hover:scale-105 transition-transform duration-700">
+                                            <img src="/sonny-secret-software.webp" alt="Secret Software" className="w-full h-auto drop-shadow-[0_20px_50px_rgba(37,99,235,0.3)] rounded-2xl" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </FadeInSection>
+
+                            {/* Feature 3: The Program Template */}
+                            <FadeInSection delay={300} className="md:col-span-1">
+                                <div className="bg-white rounded-[40px] p-8 h-full border border-slate-100 shadow-xl group hover:-translate-y-2 transition-all duration-500 flex flex-col">
+                                    <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                                        <BookOpen className="w-8 h-8" />
+                                    </div>
+                                    <span className="text-blue-600 font-black text-[10px] uppercase tracking-widest mb-2">Bonus #3</span>
+                                    <h3 className="text-2xl font-heading font-black text-slate-900 uppercase mb-4 leading-tight">12-Week Client Template</h3>
+                                    <p className="text-slate-500 font-medium text-sm leading-relaxed mb-8 flex-grow">
+                                        The same structure used for high-ticket clients paying £2,500+. Plug and play elite programming for your own athletes.
+                                    </p>
+                                    <div className="pt-6 border-t border-slate-100 mt-auto">
+                                        <span className="text-slate-400 font-bold text-[10px] uppercase">Value: £500.00</span>
+                                    </div>
+                                </div>
+                            </FadeInSection>
+
+                            {/* Feature 4: The Certification Level 1 */}
+                            <FadeInSection delay={400} className="md:col-span-2 lg:col-span-2">
+                                <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[40px] p-8 h-full relative overflow-hidden group shadow-xl flex items-center">
+                                    <div className="absolute inset-0 bg-grid opacity-[0.1]"></div>
+                                    <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center w-full">
+                                        <div className="w-24 h-24 md:w-32 md:h-32 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 shrink-0">
+                                            <Award className="w-12 h-12 md:w-16 md:h-16 text-white" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-3xl font-heading font-black text-white uppercase mb-4 leading-tight">Level 1 <br />Certification</h3>
+                                            <p className="text-blue-100 font-medium text-base leading-relaxed opacity-80">
+                                                Your badge of expertise and credibility. A world-recognized accreditation as an Olympic weightlifting coach.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </FadeInSection>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -591,25 +617,30 @@ const Education = ({ onBack }) => {
                 </div>
             </section>
 
-            {/* 11. SOCIAL PROOF */}
+            {/* 11. SOCIAL PROOF - UPDATED WITH IMAGES */}
             <section className="py-24 bg-slate-900 text-white relative">
                 <div className="max-w-6xl mx-auto px-6 text-center">
                     <FadeInSection>
                         <h2 className="text-3xl md:text-5xl font-heading font-black uppercase mb-16">Real Results, Proven Success</h2>
-                        <div className="grid md:grid-cols-3 gap-8 items-center opacity-70">
-                            {/* Placeholders for logos/names */}
-                            <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                                <h3 className="font-heading font-black text-xl uppercase mb-2">Mitchell Hooper</h3>
-                                <p className="text-xs font-bold uppercase tracking-widest text-blue-500">World’s Strongest Man</p>
-                            </div>
-                            <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                                <h3 className="font-heading font-black text-xl uppercase mb-2">Khan Porter</h3>
-                                <p className="text-xs font-bold uppercase tracking-widest text-blue-500">CrossFit Games Champion</p>
-                            </div>
-                            <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-                                <h3 className="font-heading font-black text-xl uppercase mb-2">Sara Sigmundsdottir</h3>
-                                <p className="text-xs font-bold uppercase tracking-widest text-blue-500">CrossFit Legend</p>
-                            </div>
+                        <div className="grid md:grid-cols-3 gap-8 items-center">
+                            {[
+                                { name: "Mitchell Hooper", title: "World’s Strongest Man", image: "/Mitchell-Hooper.jpg" },
+                                { name: "Khan Porter", title: "CrossFit Games Champion", image: "/Khan-Porter.webp" },
+                                { name: "Sara Sigmundsdottir", title: "CrossFit Legend", image: "/Sara Sigmundsdóttir.webp" }
+                            ].map((athlete, i) => (
+                                <div key={i} className="group relative aspect-[4/5] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl hover:-translate-y-2 transition-transform duration-500">
+                                    <img
+                                        src={athlete.image}
+                                        alt={athlete.name}
+                                        className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                                    <div className="absolute bottom-0 left-0 right-0 p-8 text-left">
+                                        <h3 className="font-heading font-black text-xl uppercase mb-1">{athlete.name}</h3>
+                                        <p className="text-[10px] font-bold uppercase tracking-widest text-blue-500">{athlete.title}</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </FadeInSection>
                 </div>
