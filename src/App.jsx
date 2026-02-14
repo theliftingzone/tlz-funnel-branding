@@ -425,7 +425,6 @@ const App = () => {
   const [answers, setAnswers] = useState({ fix_one_thing: 'snatch', athlete_type: 'Weightlifter' });
   const [leadData, setLeadData] = useState({ firstName: '', lastName: '', email: '', phone: '' });
   const [resultPage, setResultPage] = useState(null);
-  const [showDevTools, setShowDevTools] = useState(false);
   const [showWebinar, setShowWebinar] = useState(false);
   const [trackingParams, setTrackingParams] = useState({});
 
@@ -614,6 +613,7 @@ const App = () => {
       ...answers,           // quiz answers
       ...trackingParams,    // utm_source, utm_medium, etc.
       result_path: calculatedPath,
+      quiz_tag: `quiz-funnel-${calculatedPath}`,
       submitted_at: new Date().toISOString(),
       source: 'tlz_funnel_quiz'
     };
@@ -1471,24 +1471,7 @@ const App = () => {
     );
   };
 
-  const DevToolbar = () => (
-    <div className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-[100] bg-white/95 border border-slate-200 backdrop-blur-xl p-2 rounded-2xl shadow-2xl flex items-center gap-1 transition-all duration-500 ${showDevTools ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-      <div className="px-4 py-1.5 text-[10px] font-heading font-bold text-blue-600 uppercase tracking-[0.2em] border-r border-slate-200 flex items-center gap-2">
-        <Eye className="w-3.5 h-3.5" /> Preview
-      </div>
-      <button onClick={() => setStep('landing')} className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase transition-all tracking-widest ${step === 'landing' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-blue-600'}`}>Landing</button>
-      <button onClick={() => setStep('quiz')} className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase transition-all tracking-widest ${step === 'quiz' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-blue-600'}`}>Quiz</button>
-      <button onClick={() => setStep('lead-form')} className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase transition-all tracking-widest ${step === 'lead-form' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-blue-600'}`}>Leads</button>
-      <button onClick={() => setStep('analyzing')} className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase transition-all tracking-widest ${step === 'analyzing' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-blue-600'}`}>Loading</button>
-      <button onClick={() => setStep('bridge')} className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase transition-all tracking-widest ${step === 'bridge' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-blue-600'}`}>Bridge</button>
-      <button onClick={() => { setStep('result'); setResultPage('vip'); }} className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase transition-all tracking-widest ${resultPage === 'vip' && step === 'result' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-blue-600'}`}>VIP</button>
-      <button onClick={() => { setStep('result'); setResultPage('sales'); }} className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase transition-all tracking-widest ${resultPage === 'sales' && step === 'result' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-blue-600'}`}>Sales</button>
-      <button onClick={() => { setStep('result'); setResultPage('free-snatch'); }} className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase transition-all tracking-widest ${resultPage === 'free-snatch' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-blue-600'}`}>Snatch</button>
-      <button onClick={() => { setStep('result'); setResultPage('free-cj'); }} className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase transition-all tracking-widest ${resultPage === 'free-cj' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-blue-600'}`}>CJ</button>
-      <button onClick={() => { setStep('result'); setResultPage('free-strength'); }} className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase transition-all tracking-widest ${resultPage === 'free-strength' ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-blue-600'}`}>Str</button>
-      <button onClick={() => setShowDevTools(false)} className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-600 transition-colors ml-2 font-bold">×</button>
-    </div>
-  );
+
 
   return (
     <div className="font-sans antialiased bg-[#f8fafc] overflow-x-hidden selection:bg-[#2563eb] selection:text-white">
@@ -1505,13 +1488,7 @@ const App = () => {
       {step === 'resources' && <Resources onBack={() => setStep('landing')} />}
       {step === 'result' && <ResultView onBack={() => setStep('landing')} />}
 
-      <DevToolbar />
 
-      {!showDevTools && (
-        <button onClick={() => setShowDevTools(true)} className="fixed bottom-4 right-4 z-[100] w-12 h-12 bg-[#2563eb] rounded-2xl flex items-center justify-center text-white shadow-2xl opacity-60 hover:opacity-100 transition-opacity">
-          <Eye className="w-5 h-5" />
-        </button>
-      )}
 
       <style>{`
         .font-heading { font-family: 'Plus Jakarta Sans', sans-serif; }
