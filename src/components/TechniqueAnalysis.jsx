@@ -59,8 +59,8 @@ const TechniqueAnalysis = ({ onBack }) => {
 
                         <div className="flex flex-col items-center justify-center gap-4 mb-12">
                             <div className="flex items-baseline gap-3">
-                                <span className="text-slate-400 text-xl font-bold line-through decoration-red-500 decoration-2">$249 USD</span>
-                                <span className="text-5xl md:text-6xl font-heading font-black text-blue-600 tracking-tighter">$99 USD</span>
+                                <span className="text-slate-400 text-xl font-bold line-through decoration-red-500 decoration-2">$249</span>
+                                <span className="text-5xl md:text-6xl font-heading font-black text-blue-600 tracking-tighter">$99</span>
                             </div>
                             <span className="bg-red-100 text-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-red-200">Exclusive Offer</span>
                         </div>
