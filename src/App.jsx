@@ -8,6 +8,7 @@ import VimeoPlayer from './components/VimeoPlayer';
 import MeetTheTeam from './components/MeetTheTeam';
 import Education from './components/Education';
 import Resources from './components/Resources';
+import TechniqueAnalysis from './components/TechniqueAnalysis';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -419,6 +420,74 @@ const NavMenu = ({ onNavigate }) => {
   );
 };
 
+const DevTools = ({ step, setStep, setResultPage }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (import.meta.env.PROD) return null;
+
+  const steps = [
+    { label: 'Landing', value: 'landing' },
+    { label: 'Quiz', value: 'quiz' },
+    { label: 'Lead Form', value: 'lead-form' },
+    { label: 'Analyzing', value: 'analyzing' },
+    { label: 'Bridge Page', value: 'bridge' },
+    { label: 'Meet Team', value: 'meet-the-team' },
+    { label: 'Education', value: 'education' },
+    { label: 'Resources', value: 'resources' },
+    { label: 'Technique Analysis', value: 'technique-analysis' },
+  ];
+
+  const resultPages = [
+    { label: 'Result: Sales', value: 'sales' },
+    { label: 'Result: VIP', value: 'vip' },
+    { label: 'Result: Free Snatch', value: 'free-snatch' },
+    { label: 'Result: Free C&J', value: 'free-cj' },
+    { label: 'Result: Free Strength', value: 'free-strength' },
+  ];
+
+  return (
+    <div className="fixed bottom-4 left-4 z-[9999] font-sans">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="bg-slate-900 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest shadow-xl border border-slate-700 hover:bg-slate-800 transition-colors"
+      >
+        {isOpen ? 'Close Dev Tools' : 'Dev Tools'}
+      </button>
+
+      {isOpen && (
+        <div className="absolute bottom-12 left-0 bg-white border border-slate-200 rounded-2xl shadow-2xl p-4 w-64 animate-fade-in-up">
+          <div className="space-y-2 max-h-[70vh] overflow-y-auto">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Main Flows</p>
+            {steps.map(s => (
+              <button
+                key={s.value}
+                onClick={() => setStep(s.value)}
+                className={`block w-full text-left px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors ${step === s.value ? 'bg-blue-600 text-white' : 'bg-slate-50 text-slate-600 hover:bg-slate-100'}`}
+              >
+                {s.label}
+              </button>
+            ))}
+
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-4 mb-2">Result Pages</p>
+            {resultPages.map(r => (
+              <button
+                key={r.value}
+                onClick={() => {
+                  setStep('result');
+                  setResultPage(r.value);
+                }}
+                className="block w-full text-left px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider bg-slate-50 text-slate-600 hover:bg-slate-100 transition-colors mb-1"
+              >
+                {r.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const App = () => {
   const [step, setStep] = useState('landing');
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -458,6 +527,8 @@ const App = () => {
       setStep('education');
     } else if (page === 'meet-the-team') {
       setStep('meet-the-team');
+    } else if (page === 'technique-analysis') {
+      setStep('technique-analysis');
     }
   }, []);
 
@@ -1486,7 +1557,11 @@ const App = () => {
       {step === 'meet-the-team' && <MeetTheTeam onBack={() => setStep('landing')} onStartQuiz={() => setStep('quiz')} />}
       {step === 'education' && <Education onBack={() => setStep('landing')} />}
       {step === 'resources' && <Resources onBack={() => setStep('landing')} />}
+      {step === 'technique-analysis' && <TechniqueAnalysis onBack={() => setStep('landing')} />}
       {step === 'result' && <ResultView onBack={() => setStep('landing')} />}
+
+      {/* DEV TOOLS - REMOVE FOR PRODUCTION */}
+      <DevTools step={step} setStep={setStep} setResultPage={setResultPage} />
 
 
 

@@ -66,6 +66,7 @@ const SalesPage = ({ onBack }) => {
         <div className="min-h-screen font-sans text-slate-900 selection:bg-blue-600 selection:text-white overflow-x-hidden">
 
 
+
             {/* SECTION 1: THE HERO */}
             <section className="relative pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden flex flex-col items-center justify-center min-h-[70vh]">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-50/50 via-transparent to-transparent -z-10"></div>
