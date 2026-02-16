@@ -1514,13 +1514,16 @@ const App = () => {
                     <div className="max-w-4xl mx-auto mt-16">
                       <h4 className="text-xl font-heading font-black text-slate-400 uppercase tracking-widest mb-6 text-center">Available Add-Ons</h4>
                       <div className="grid md:grid-cols-2 gap-6">
-                        <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-blue-400 cursor-pointer group">
+                        <div
+                          className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-blue-400 cursor-pointer group"
+                          onClick={() => setStep('technique-analysis')}
+                        >
                           <div className="text-left">
-                            <div className="font-heading font-black text-slate-900 uppercase">VIP Onboarding</div>
-                            <div className="text-[10px] text-slate-500 font-medium">30-min strategy session w/ Sonny Webster.</div>
+                            <div className="font-heading font-black text-slate-900 uppercase">Technique Analysis</div>
+                            <div className="text-[10px] text-slate-500 font-medium">30-min Technical Analysis Call w/ Sonny Webster.</div>
                           </div>
                           <div className="text-right">
-                            <div className="font-bold text-slate-900">£500</div>
+                            <div className="font-bold text-slate-900">$99</div>
                             <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
                           </div>
                         </div>
