@@ -9,6 +9,9 @@ import MeetTheTeam from './components/MeetTheTeam';
 import Education from './components/Education';
 import Resources from './components/Resources';
 import TechniqueAnalysis from './components/TechniqueAnalysis';
+import SEO from './components/SEO';
+import TrackingScripts from './components/TrackingScripts';
+import { Helmet } from 'react-helmet-async';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -137,7 +140,7 @@ const WebinarPopup = ({ isOpen, onClose }) => {
           <h3 className="text-3xl md:text-4xl font-heading font-black mb-4 uppercase italic leading-none">
             The Efficiency <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">Masterclass</span>
           </h3>
-          <p className="text-slate-600 text-sm mb-2 leading-relaxed font-bold">Sunday 15th Feb @ 6pm Dubai</p>
+          <p className="text-slate-600 text-sm mb-2 leading-relaxed font-bold">Monday 23rd February @ 9pm Dubai</p>
           <p className="text-slate-500 text-xs mb-8 leading-relaxed max-w-xs mx-auto">
             Join me as I reveal the "Olympic Efficiency" framework that adds kilos to your total without you needing to gain a single pound of muscle.
           </p>
@@ -153,6 +156,7 @@ const WebinarPopup = ({ isOpen, onClose }) => {
 
 const LeadCaptureForm = ({ data, setData, onSubmit, onBack }) => (
   <div className="bg-[#f8fafc] min-h-screen relative font-body flex flex-col items-center justify-center p-6 text-slate-900 overflow-hidden selection:bg-[#2563eb] selection:text-white">
+    <SEO title="Your Results Are Ready | The Lifting Zone" />
     <AnimatedBackground />
     {/* Navigation */}
     <div className="flex justify-center pt-8 pb-4 relative z-30">
@@ -298,6 +302,7 @@ const BridgePage = ({ resource, onUpsellClick, onBack }) => {
 
   return (
     <div className="bg-[#f8fafc] min-h-screen relative font-body overflow-x-hidden selection:bg-[#2563eb] selection:text-white">
+      <SEO title="Your Diagnosis | The Lifting Zone" />
       <AnimatedBackground />
       {/* Navigation */}
       <div className="flex justify-center pt-8 pb-0 relative z-30">
@@ -718,6 +723,10 @@ const App = () => {
 
   const LandingPage = () => (
     <div className="relative text-slate-900 min-h-screen bg-[#f8fafc] font-body">
+      <SEO
+        title="The Lifting Zone | Sonny Webster"
+        description="Master the art of weightlifting with Olympian Sonny Webster. Get personalized coaching enabling you to hit new PRs."
+      />
       <AnimatedBackground />
       <WebinarPopup isOpen={showWebinar} onClose={() => setShowWebinar(false)} />
 
@@ -862,6 +871,10 @@ const App = () => {
 
     return (
       <div className="bg-[#f8fafc] h-screen text-slate-900 font-body overflow-hidden relative selection:bg-[#2563eb] selection:text-white">
+        <SEO
+          title="Free Assessment | The Lifting Zone"
+          description="Identify your lifting weaknesses in 60 seconds with our free assessment tool."
+        />
         <AnimatedBackground />
 
         {/* Top Navigation - Centered */}
@@ -939,6 +952,10 @@ const App = () => {
 
     return (
       <div className="bg-[#f8fafc] text-slate-900 min-h-screen relative font-body">
+        <SEO
+          title="Your Results | The Lifting Zone"
+          description="See your personalized lifting analysis and recommended path forward from Sonny Webster."
+        />
         <AnimatedBackground />
         {/* Navigation */}
         <div className="flex justify-center pt-12 pb-6 relative z-30">
@@ -1548,6 +1565,9 @@ const App = () => {
     <div className="font-sans antialiased bg-[#f8fafc] overflow-x-hidden selection:bg-[#2563eb] selection:text-white">
       {/* Import Google Fonts */}
       <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+      <SEO /> {/* Default SEO */}
+      <TrackingScripts />
 
       {step === 'landing' && <LandingPage />}
       {step === 'quiz' && <QuizStep />}

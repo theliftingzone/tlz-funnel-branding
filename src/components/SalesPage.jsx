@@ -21,6 +21,7 @@ import {
     Dumbbell
 } from 'lucide-react';
 import VimeoPlayer from './VimeoPlayer';
+import SEO from './SEO';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -64,6 +65,10 @@ const FadeInSection = ({ children, className = "", delay = 0 }) => {
 const SalesPage = ({ onBack }) => {
     return (
         <div className="min-h-screen font-sans text-slate-900 selection:bg-blue-600 selection:text-white overflow-x-hidden">
+            <SEO
+                title="Olympian Technique Accelerator | The Lifting Zone"
+                description="Install the Olympian Operating System in just 12 weeks. The 22-session technical protocol for precision and power."
+            />
 
 
 

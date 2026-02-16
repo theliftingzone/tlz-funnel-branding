@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, Star, Medal, Award, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Star, Medal, Award, ShieldCheck, Instagram, Linkedin, Globe, Mail, Trophy, Dumbbell } from 'lucide-react';
+import SEO from './SEO';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -174,7 +175,11 @@ const MeetTheTeam = ({ onBack, onStartQuiz }) => {
     ];
 
     return (
-        <div className="bg-[#f8fafc] min-h-screen relative font-body text-slate-900 selection:bg-[#2563eb] selection:text-white overflow-x-hidden">
+        <div className="min-h-screen font-sans text-slate-900 selection:bg-blue-600 selection:text-white overflow-x-hidden bg-[#f8fafc]">
+            <SEO
+                title="Meet The Team | The Lifting Zone"
+                description="Meet the Olympians and expert coaches behind The Lifting Zone."
+            />
             <AnimatedBackground />
 
             {/* Navigation */}

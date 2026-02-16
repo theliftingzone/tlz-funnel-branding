@@ -1,5 +1,7 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, Video, Play, FileText, Calculator, GraduationCap, Utensils, Download, ArrowUpRight, Library } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Download, Play, CheckCircle, FileText, Video, Dumbbell, Star, Lock, Library, ArrowUpRight, Calculator, GraduationCap, Utensils } from 'lucide-react';
+import SEO from './SEO';
 
 // Reusing the same animation hooks and components for consistency
 const useIntersectionObserver = (options = {}) => {
@@ -30,9 +32,9 @@ const FadeInSection = ({ children, className = "", delay = 0 }) => {
     return (
         <div
             ref={ref}
-            style={{ transitionDelay: `${delay}ms` }}
-            className={`transition-all duration-1000 transform ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                } ${className}`}
+            style={{ transitionDelay: `${delay} ms` }}
+            className={`transition - all duration - 1000 transform ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                } ${className} `}
         >
             {children}
         </div>
@@ -46,8 +48,8 @@ const AnimatedBackground = () => {
         if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia("(pointer: fine)").matches) {
             const handleMouseMove = (e) => {
                 if (bgRef.current) {
-                    bgRef.current.style.setProperty('--mouse-x', `${e.clientX}px`);
-                    bgRef.current.style.setProperty('--mouse-y', `${e.clientY}px`);
+                    bgRef.current.style.setProperty('--mouse-x', `${e.clientX} px`);
+                    bgRef.current.style.setProperty('--mouse-y', `${e.clientY} px`);
                 }
             };
             window.addEventListener('mousemove', handleMouseMove);
@@ -146,6 +148,10 @@ const Resources = ({ onBack }) => {
 
     return (
         <div className="bg-[#f8fafc] min-h-screen relative font-body text-slate-900 overflow-x-hidden">
+            <SEO
+                title="Free Resources | The Lifting Zone"
+                description="Download free weightlifting guides, plans, and resources to improve your technique."
+            />
             <AnimatedBackground />
 
             {/* Navigation */}

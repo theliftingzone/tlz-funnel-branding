@@ -1,0 +1,50 @@
+
+import React, { useEffect } from 'react';
+
+// Replace with your actual IDs
+const GTM_ID = 'GTM-XXXXXXX'; // Google Tag Manager ID
+const PIXEL_ID = 'XXXXXXXXXXXXXXX'; // Facebook Pixel ID
+
+const TrackingScripts = () => {
+    useEffect(() => {
+        // 1. Google Tag Manager (GTM) Initialization
+        if (GTM_ID !== 'GTM-XXXXXXX') {
+            const gtmScript = document.createElement('script');
+            gtmScript.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','${GTM_ID}');`;
+            document.head.appendChild(gtmScript);
+
+            // GTM NoScript (Optional, for body)
+            const gtmNoScript = document.createElement('noscript');
+            gtmNoScript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+            document.body.insertBefore(gtmNoScript, document.body.firstChild);
+        }
+
+        // 2. Facebook Pixel Initialization
+        if (PIXEL_ID !== 'XXXXXXXXXXXXXXX') {
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq) return; n = f.fbq = function () {
+                    n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+                n.queue = []; t = b.createElement(e); t.async = !0;
+                t.src = v; s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+
+            // Initialize Pixel
+            window.fbq('init', PIXEL_ID);
+            window.fbq('track', 'PageView');
+        }
+    }, []);
+
+    return null; // This component renders nothing, just injects scripts
+};
+
+export default TrackingScripts;

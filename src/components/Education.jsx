@@ -14,9 +14,11 @@ import {
     ChevronDown,
     ChevronUp,
     AlertTriangle,
-    Check
+    Check,
+    GraduationCap
 } from 'lucide-react';
 import VimeoPlayer from './VimeoPlayer';
+import SEO from './SEO';
 
 // Animation Hooks
 const useIntersectionObserver = (options = {}) => {
@@ -183,6 +185,10 @@ const Education = ({ onBack }) => {
 
     return (
         <div className="min-h-screen font-sans text-slate-900 selection:bg-blue-600 selection:text-white overflow-x-hidden bg-[#f8fafc]">
+            <SEO
+                title="Coach Certification | The Lifting Zone"
+                description="Become a certified weightlifting coach. Master the art of teaching lifting."
+            />
             {/* Fixed Navigation */}
             <div className="fixed top-0 left-0 right-0 z-50 flex justify-between px-6 py-6 pointer-events-none">
                 <button

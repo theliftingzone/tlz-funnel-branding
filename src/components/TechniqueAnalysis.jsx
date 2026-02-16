@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, Clock, Calendar, CheckCircle, Video, Play, ShieldCheck, Mail } from 'lucide-react';
+import SEO from './SEO';
 
 const useIntersectionObserver = (options = {}) => {
     const [isIntersecting, setIsIntersecting] = useState(false);
@@ -38,6 +39,10 @@ const FadeInSection = ({ children, className = "", delay = 0 }) => {
 const TechniqueAnalysis = ({ onBack }) => {
     return (
         <div className="min-h-screen font-sans text-slate-900 selection:bg-blue-600 selection:text-white overflow-x-hidden bg-[#f8fafc]">
+            <SEO
+                title="Technique Analysis Call | The Lifting Zone"
+                description="Book a 30-Minute Technical Analysis Call with Olympian Sonny Webster to receive expert feedback on your lifts."
+            />
 
 
             {/* HERO SECTION */}
