@@ -423,7 +423,7 @@ const NavMenu = ({ onNavigate }) => {
 const DevTools = ({ step, setStep, setResultPage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  if (import.meta.env.PROD) return null;
+  // if (import.meta.env.PROD) return null;
 
   const steps = [
     { label: 'Landing', value: 'landing' },
