@@ -11,6 +11,7 @@ import Resources from './components/Resources';
 import TechniqueAnalysis from './components/TechniqueAnalysis';
 import SEO from './components/SEO';
 import TrackingScripts, { trackPixelEvent } from './components/TrackingScripts';
+import CookieConsent from './components/CookieConsent';
 import { Helmet } from 'react-helmet-async';
 
 // Custom Hook for Scroll Reveal Animations
@@ -872,7 +873,7 @@ const App = () => {
       {/* Footer */}
       < footer className="relative z-10 py-10 px-6 border-t border-slate-200 bg-slate-50" >
         <div className="text-center">
-          <p className="text-slate-400 text-[10px] uppercase font-bold tracking-[0.4em]">© 2026 THE LIFTING ZONE v2.0</p>
+          <p className="text-slate-400 text-[10px] uppercase font-bold tracking-[0.4em]">© 2026 THE LIFTING ZONE</p>
         </div>
       </footer >
     </div >
@@ -1611,6 +1612,7 @@ const App = () => {
 
       <SEO /> {/* Default SEO */}
       <TrackingScripts />
+      <CookieConsent />
 
       {step === 'landing' && <LandingPage />}
       {step === 'quiz' && <QuizStep />}
