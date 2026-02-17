@@ -171,6 +171,13 @@ const MeetTheTeam = ({ onBack, onStartQuiz }) => {
             image: "/Coaches/coach-sam.jpeg",
             bio: "CrossFit Games Regional athlete and former Head Coach at one of the world's largest CrossFit franchises. With over 15 years of weightlifting coaching experience, Sam has helped more than 150 athletes achieve new personal bests. He specializes in building structured, competition ready programming for CrossFit athletes who want to elevate their weightlifting performance and technical consistency.",
             icon: Award
+        },
+        {
+            name: "Mike Nicholson",
+            roles: ["MSc Sports Nutritionist", "20+ Years Experience"],
+            image: "/Coaches/coach-mike.jpeg",
+            bio: "Mike Nicholson is an MSc-qualified sports nutritionist with over 20 years of experience in performance, body composition, and long-term health. A member of the British Association of Dietitians and listed on the Sport and Exercise Nutrition Register, he specialises in strength, endurance, and hybrid athletes. His creatine research was published through the American College of Sports Medicine, underpinning his evidence-based approach, and he integrates nutrition with strength coaching to optimise training, recovery, and measurable results.",
+            icon: ShieldCheck
         }
     ];
 
