@@ -1,9 +1,17 @@
 
 import React, { useEffect } from 'react';
 
+
 // Replace with your actual IDs
-const GTM_ID = 'GTM-XXXXXXX'; // Google Tag Manager ID
-const PIXEL_ID = 'XXXXXXXXXXXXXXX'; // Facebook Pixel ID
+// Prefer using environment variables
+const GTM_ID = import.meta.env.VITE_GTM_ID || 'GTM-TLM2QPZ6'; // Google Tag Manager ID
+const PIXEL_ID = import.meta.env.VITE_FB_PIXEL_ID || '927028009376552'; // Facebook Pixel ID
+
+export const trackPixelEvent = (eventName, options = {}) => {
+    if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', eventName, options);
+    }
+};
 
 const TrackingScripts = () => {
     useEffect(() => {
@@ -29,7 +37,7 @@ const TrackingScripts = () => {
             !function (f, b, e, v, n, t, s) {
                 if (f.fbq) return; n = f.fbq = function () {
                     n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
                 };
                 if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
                 n.queue = []; t = b.createElement(e); t.async = !0;

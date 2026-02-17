@@ -10,7 +10,7 @@ import Education from './components/Education';
 import Resources from './components/Resources';
 import TechniqueAnalysis from './components/TechniqueAnalysis';
 import SEO from './components/SEO';
-import TrackingScripts from './components/TrackingScripts';
+import TrackingScripts, { trackPixelEvent } from './components/TrackingScripts';
 import { Helmet } from 'react-helmet-async';
 
 // Custom Hook for Scroll Reveal Animations
@@ -537,6 +537,11 @@ const App = () => {
     }
   }, []);
 
+  // Track ViewContent on step change
+  useEffect(() => {
+    trackPixelEvent('ViewContent', { content_name: step, result_page: resultPage || 'none' });
+  }, [step, resultPage]);
+
   const handleNavigation = (action) => {
     if (action === 'olympian-technique-accelerator') {
       setStep('result');
@@ -710,6 +715,14 @@ const App = () => {
       });
     }
     // ------------------------------------------------*******
+
+    // 4. Track FB Lead
+    trackPixelEvent('Lead', {
+      content_name: calculatedPath,
+      content_category: 'Quiz Funnel',
+      value: 0.00,
+      currency: 'GBP'
+    });
 
     setTimeout(() => {
       // If it's a free result, show the Bridge Page first
@@ -1409,7 +1422,15 @@ const App = () => {
                           <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-slate-300 shrink-0" /> Monthly Community Call</li>
                         </ul>
 
-                        <button onClick={() => window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=solo_protocol_${isAnnual ? 'annual' : 'monthly'}`, '_blank')} className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Apply for Solo</button>
+                        <button onClick={() => {
+                          trackPixelEvent('InitiateCheckout', {
+                            content_name: 'Solo Protocol',
+                            value: isAnnual ? 2034 : 199,
+                            currency: 'GBP',
+                            period: isAnnual ? 'annual' : 'monthly'
+                          });
+                          window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=solo_protocol_${isAnnual ? 'annual' : 'monthly'}`, '_blank');
+                        }} className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Apply for Solo</button>
 
                       </div>
 
@@ -1469,7 +1490,15 @@ const App = () => {
                           </li>
                         </ul>
 
-                        <button onClick={() => window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=elite_protocol_${isAnnual ? 'annual' : 'monthly'}`, '_blank')} className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply for Elite</button>
+                        <button onClick={() => {
+                          trackPixelEvent('InitiateCheckout', {
+                            content_name: 'Elite Protocol',
+                            value: isAnnual ? 3558 : 349,
+                            currency: 'GBP',
+                            period: isAnnual ? 'annual' : 'monthly'
+                          });
+                          window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=elite_protocol_${isAnnual ? 'annual' : 'monthly'}`, '_blank');
+                        }} className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply for Elite</button>
 
                         <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-slate-500 bg-slate-50 py-3 rounded-lg border border-slate-100">
                           <ShieldCheck className="w-3.5 h-3.5 text-blue-500" /> 90-DAY PR GUARANTEE INCLUDED
@@ -1506,7 +1535,15 @@ const App = () => {
                           <li className="flex gap-3 text-sm font-medium text-slate-500"><CheckCircle className="w-5 h-5 text-orange-400 shrink-0" /> Unlimited Video Reviews</li>
                         </ul>
 
-                        <button onClick={() => window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=inner_circle_${isAnnual ? 'annual' : 'monthly'}`, '_blank')} className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Apply for Inner Circle</button>
+                        <button onClick={() => {
+                          trackPixelEvent('InitiateCheckout', {
+                            content_name: 'Inner Circle',
+                            value: isAnnual ? 5100 : 500,
+                            currency: 'GBP',
+                            period: isAnnual ? 'annual' : 'monthly'
+                          });
+                          window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=inner_circle_${isAnnual ? 'annual' : 'monthly'}`, '_blank');
+                        }} className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Apply for Inner Circle</button>
                       </div>
                     </div>
 
@@ -1516,7 +1553,10 @@ const App = () => {
                       <div className="grid md:grid-cols-2 gap-6">
                         <div
                           className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-blue-400 cursor-pointer group"
-                          onClick={() => setStep('technique-analysis')}
+                          onClick={() => {
+                            trackPixelEvent('ViewContent', { content_name: 'Technique Analysis Page' });
+                            setStep('technique-analysis');
+                          }}
                         >
                           <div className="text-left">
                             <div className="font-heading font-black text-slate-900 uppercase">Technique Analysis</div>

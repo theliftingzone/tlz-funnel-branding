@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import VimeoPlayer from './VimeoPlayer';
 import SEO from './SEO';
+import { trackPixelEvent } from './TrackingScripts';
 
 // Custom Hook for Scroll Reveal Animations
 const useIntersectionObserver = (options = {}) => {
@@ -110,7 +111,14 @@ const SalesPage = ({ onBack }) => {
 
                         <div className="flex flex-col items-center gap-8">
                             <button
-                                onClick={() => window.location.href = 'https://learn.theliftingzone.com/offers/jZMpuB9E/?utm_source=quiz_funnel'}
+                                onClick={() => {
+                                    trackPixelEvent('InitiateCheckout', {
+                                        content_name: 'Olympian Technique Accelerator',
+                                        value: 99.00,
+                                        currency: 'GBP'
+                                    });
+                                    window.location.href = 'https://learn.theliftingzone.com/offers/jZMpuB9E/?utm_source=quiz_funnel';
+                                }}
                                 className="cursor-pointer group relative bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] text-white font-heading font-black text-xl md:text-2xl uppercase tracking-[0.15em] px-14 py-6 rounded-2xl shadow-2xl shadow-blue-600/30 hover:brightness-110 transition-all duration-300 transform btn-shine-effect"
                             >
                                 Get Instant Access - £99
@@ -482,7 +490,14 @@ const SalesPage = ({ onBack }) => {
                         <div className="relative inline-block group mb-12 transform hover:scale-105 transition-transform duration-500">
                             <div className="absolute -inset-8 bg-gradient-to-r from-blue-600 to-blue-400 rounded-[40px] blur-3xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
                             <button
-                                onClick={() => window.location.href = 'https://learn.theliftingzone.com/offers/jZMpuB9E/?utm_source=quiz_funnel'}
+                                onClick={() => {
+                                    trackPixelEvent('InitiateCheckout', {
+                                        content_name: 'Olympian Technique Accelerator',
+                                        value: 99.00,
+                                        currency: 'GBP'
+                                    });
+                                    window.location.href = 'https://learn.theliftingzone.com/offers/jZMpuB9E/?utm_source=quiz_funnel';
+                                }}
                                 className="cursor-pointer relative bg-gradient-to-r from-blue-600 to-blue-700 border-b-[10px] border-blue-800 active:border-b-0 active:translate-y-[10px] text-white font-heading font-black text-2xl md:text-4xl uppercase tracking-[0.2em] px-20 py-10 rounded-[40px] shadow-[0_25px_60px_-15px_rgba(37,99,235,0.4)] hover:brightness-110 transition-all duration-300 transform-gpu btn-shine-effect hover:scale-105"
                             >
                                 Start Accelerator

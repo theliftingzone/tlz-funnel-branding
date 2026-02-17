@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, Clock, Calendar, CheckCircle, Video, Play, ShieldCheck, Mail } from 'lucide-react';
 import SEO from './SEO';
+import { trackPixelEvent } from './TrackingScripts';
 
 const useIntersectionObserver = (options = {}) => {
     const [isIntersecting, setIsIntersecting] = useState(false);
@@ -74,6 +75,11 @@ const TechniqueAnalysis = ({ onBack }) => {
                             href="https://calendly.com/sonnywebsterappointments/30minute-technical-analysis-with-sonny-webster"
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => trackPixelEvent('InitiateCheckout', {
+                                content_name: 'Technique Analysis Call',
+                                value: 99.00,
+                                currency: 'USD'
+                            })}
                             className="inline-block bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black py-5 px-10 rounded-2xl text-lg uppercase tracking-widest shadow-2xl shadow-blue-600/20 transition-all hover:scale-105"
                         >
                             Book My Session Now
@@ -210,6 +216,11 @@ const TechniqueAnalysis = ({ onBack }) => {
                                 href="https://calendly.com/sonnywebsterappointments/30minute-technical-analysis-with-sonny-webster"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={() => trackPixelEvent('InitiateCheckout', {
+                                    content_name: 'Technique Analysis Call',
+                                    value: 99.00,
+                                    currency: 'USD'
+                                })}
                                 className="block w-full bg-white text-slate-900 font-heading font-black py-4 rounded-xl text-lg uppercase tracking-widest hover:bg-blue-50 transition-colors"
                             >
                                 Secure Your Spot
