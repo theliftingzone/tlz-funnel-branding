@@ -407,12 +407,8 @@ const NavMenu = ({ onNavigate }) => {
                 href={item.href}
                 className="block px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:bg-white hover:shadow-sm hover:text-blue-600 rounded-xl transition-all duration-200 hover:translate-x-1"
                 style={{ animationDelay: `${idx * 50}ms` }}
-                onClick={(e) => {
-                  e.preventDefault();
+                onClick={() => {
                   setIsOpen(false);
-                  if (item.action && onNavigate) {
-                    onNavigate(item.action);
-                  }
                 }}
               >
                 {item.label}
@@ -533,6 +529,8 @@ const App = () => {
       setStep('education');
     } else if (page === 'meet-the-team') {
       setStep('meet-the-team');
+    } else if (page === 'resources') {
+      setStep('resources');
     } else if (page === 'technique-analysis') {
       setStep('technique-analysis');
     }
@@ -1594,14 +1592,14 @@ const App = () => {
 
       {step === 'landing' && <LandingPage />}
       {step === 'quiz' && <QuizStep />}
-      {step === 'lead-form' && <LeadCaptureForm data={leadData} setData={setLeadData} onSubmit={handleLeadSubmit} onBack={() => setStep('landing')} />}
+      {step === 'lead-form' && <LeadCaptureForm data={leadData} setData={setLeadData} onSubmit={handleLeadSubmit} onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
       {step === 'analyzing' && <AnalyzingScreen />}
-      {step === 'bridge' && <BridgePage resource={getFreeResource()} onUpsellClick={() => { setStep('result'); setResultPage('sales'); }} onBack={() => setStep('landing')} />}
-      {step === 'meet-the-team' && <MeetTheTeam onBack={() => setStep('landing')} onStartQuiz={() => setStep('quiz')} />}
-      {step === 'education' && <Education onBack={() => setStep('landing')} />}
-      {step === 'resources' && <Resources onBack={() => setStep('landing')} />}
-      {step === 'technique-analysis' && <TechniqueAnalysis onBack={() => setStep('landing')} />}
-      {step === 'result' && <ResultView onBack={() => setStep('landing')} />}
+      {step === 'bridge' && <BridgePage resource={getFreeResource()} onUpsellClick={() => { setStep('result'); setResultPage('sales'); }} onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
+      {step === 'meet-the-team' && <MeetTheTeam onBack={() => window.location.href = window.location.origin + window.location.pathname} onStartQuiz={() => setStep('quiz')} />}
+      {step === 'education' && <Education onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
+      {step === 'resources' && <Resources onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
+      {step === 'technique-analysis' && <TechniqueAnalysis onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
+      {step === 'result' && <ResultView onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
 
       {/* DEV TOOLS - REMOVE FOR PRODUCTION */}
       <DevTools step={step} setStep={setStep} setResultPage={setResultPage} />
