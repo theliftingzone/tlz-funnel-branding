@@ -380,9 +380,9 @@ const NavMenu = ({ onNavigate }) => {
   }, []);
 
   const menuItems = [
-    { label: 'Level 1 Coach Certification', href: '#', action: 'education' },
-    { label: 'Resources', href: '#', action: 'resources' },
-    { label: 'Meet the Team', href: '#', action: 'meet-the-team' }
+    { label: 'Level 1 Coach Certification', href: '?page=education', action: 'education' },
+    { label: 'Resources', href: '?page=resources', action: 'resources' },
+    { label: 'Meet the Team', href: '?page=meet-the-team', action: 'meet-the-team' }
   ];
 
   return (
@@ -1388,7 +1388,7 @@ const App = () => {
                           onClick={(e) => { e.stopPropagation(); setIsAnnual(true); }}
                           className={`relative z-10 w-48 py-3 rounded-full text-xs font-heading font-black uppercase tracking-widest transition-colors duration-300 flex items-center justify-center gap-2 ${isAnnual ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'}`}
                         >
-                          Annual <div className={`overflow-hidden transition-all duration-300 ${isAnnual ? 'max-w-[100px] opacity-100' : 'max-w-0 opacity-0'}`}><span className="bg-green-100 text-green-600 px-1.5 py-0.5 rounded text-[9px] whitespace-nowrap">SAVE 15%</span></div>
+                          Annual <div className="ml-1"><span className="bg-green-100 text-green-600 px-1.5 py-0.5 rounded text-[9px] whitespace-nowrap">SAVE 15%</span></div>
                         </button>
                       </div>
                     </div>
@@ -1405,8 +1405,8 @@ const App = () => {
                           <div key={isAnnual ? 'solo-yr' : 'solo-mo'} className="animate-pop-in">
                             {isAnnual ? (
                               <>
-                                <div><span className="text-5xl font-heading font-black text-slate-900">£2,034</span><span className="text-slate-500 font-medium">/yr</span></div>
-                                <div className="mt-2 inline-flex bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded w-max">SAVE £354</div>
+                                <div><span className="text-5xl font-heading font-black text-slate-900">£2,029</span><span className="text-slate-500 font-medium">/yr</span></div>
+                                <div className="mt-2 inline-flex bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded w-max">Just £169.50/mo</div>
                               </>
                             ) : (
                               <>
@@ -1424,13 +1424,16 @@ const App = () => {
                         </ul>
 
                         <button onClick={() => {
+                          const url = isAnnual
+                            ? 'https://buy.stripe.com/9B63cvgnn1ve5PWcixbV62s'
+                            : 'https://buy.stripe.com/3cI7sL5IJ0radio82hbV62p';
                           trackPixelEvent('InitiateCheckout', {
                             content_name: 'Solo Protocol',
-                            value: isAnnual ? 2034 : 199,
+                            value: isAnnual ? 2029 : 199,
                             currency: 'GBP',
                             period: isAnnual ? 'annual' : 'monthly'
                           });
-                          window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=solo_protocol_${isAnnual ? 'annual' : 'monthly'}`, '_blank');
+                          window.open(url + '?utm_source=quiz_funnel', '_blank');
                         }} className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Apply for Solo</button>
 
                       </div>
@@ -1448,8 +1451,8 @@ const App = () => {
                           <div key={isAnnual ? 'elite-yr' : 'elite-mo'} className="animate-pop-in">
                             {isAnnual ? (
                               <>
-                                <div><span className="text-6xl font-heading font-black text-slate-900">£3,558</span><span className="text-slate-500 font-medium">/yr</span></div>
-                                <div className="mt-2 inline-flex bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded w-max">SAVE £630</div>
+                                <div><span className="text-6xl font-heading font-black text-slate-900">£3,559</span><span className="text-slate-500 font-medium">/yr</span></div>
+                                <div className="mt-2 inline-flex bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded w-max">Just £296/mo</div>
                               </>
                             ) : (
                               <>
@@ -1492,14 +1495,17 @@ const App = () => {
                         </ul>
 
                         <button onClick={() => {
+                          const url = isAnnual
+                            ? 'https://buy.stripe.com/3cI14n5IJ8XG2DK1DTbV62t'
+                            : 'https://buy.stripe.com/bJefZheff0rafqwdmBbV62q';
                           trackPixelEvent('InitiateCheckout', {
                             content_name: 'Elite Protocol',
-                            value: isAnnual ? 3558 : 349,
+                            value: isAnnual ? 3559 : 349,
                             currency: 'GBP',
                             period: isAnnual ? 'annual' : 'monthly'
                           });
-                          window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=elite_protocol_${isAnnual ? 'annual' : 'monthly'}`, '_blank');
-                        }} className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-xs tracking-widest mb-4">Apply for Elite</button>
+                          window.open(url + '?utm_source=quiz_funnel', '_blank');
+                        }} className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-sm tracking-widest mb-4 hover:scale-105 transition-all">Start Now</button>
 
                         <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-slate-500 bg-slate-50 py-3 rounded-lg border border-slate-100">
                           <ShieldCheck className="w-3.5 h-3.5 text-blue-500" /> 90-DAY PR GUARANTEE INCLUDED
@@ -1518,7 +1524,7 @@ const App = () => {
                             {isAnnual ? (
                               <>
                                 <div><span className="text-5xl font-heading font-black text-slate-900">£5,100</span><span className="text-slate-500 font-medium">/yr</span></div>
-                                <div className="mt-2 inline-flex bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded w-max">SAVE £900</div>
+                                <div className="mt-2 inline-flex bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded w-max">Just £425/mo</div>
                               </>
                             ) : (
                               <>
@@ -1537,49 +1543,21 @@ const App = () => {
                         </ul>
 
                         <button onClick={() => {
+                          const url = isAnnual
+                            ? 'https://buy.stripe.com/fZu8wPc77a1KfqwgyNbV62u'
+                            : 'https://buy.stripe.com/9B6dR94EFfm4cek1DTbV62r';
                           trackPixelEvent('InitiateCheckout', {
                             content_name: 'Inner Circle',
                             value: isAnnual ? 5100 : 500,
                             currency: 'GBP',
                             period: isAnnual ? 'annual' : 'monthly'
                           });
-                          window.open(`https://calendly.com/sonnywebsterappointments/coaching-discovery?utm_content=inner_circle_${isAnnual ? 'annual' : 'monthly'}`, '_blank');
+                          window.open(url + '?utm_source=quiz_funnel', '_blank');
                         }} className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Apply for Inner Circle</button>
                       </div>
                     </div>
 
-                    {/* Add-Ons */}
-                    <div className="max-w-4xl mx-auto mt-16">
-                      <h4 className="text-xl font-heading font-black text-slate-400 uppercase tracking-widest mb-6 text-center">Available Add-Ons</h4>
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div
-                          className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-blue-400 cursor-pointer group"
-                          onClick={() => {
-                            trackPixelEvent('ViewContent', { content_name: 'Technique Analysis Page' });
-                            setStep('technique-analysis');
-                          }}
-                        >
-                          <div className="text-left">
-                            <div className="font-heading font-black text-slate-900 uppercase">Technique Analysis</div>
-                            <div className="text-[10px] text-slate-500 font-medium">30-min Technical Analysis Call w/ Sonny Webster.</div>
-                          </div>
-                          <div className="text-right">
-                            <div className="font-bold text-slate-900">$99</div>
-                            <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
-                          </div>
-                        </div>
-                        <div className="bg-white border border-slate-200 rounded-2xl p-6 flex justify-between items-center shadow-lg transform transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-blue-400 cursor-pointer group">
-                          <div className="text-left">
-                            <div className="font-heading font-black text-slate-900 uppercase">Performance Nutrition</div>
-                            <div className="text-[10px] text-slate-500 font-medium">Dietitian support & monthly check-ins.</div>
-                          </div>
-                          <div className="text-right">
-                            <div className="font-bold text-slate-900">£100<span className="text-slate-500 text-xs font-medium">/mo</span></div>
-                            <button className="cursor-pointer text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:text-blue-800">Add +</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+
                   </div>
                 </div>
 

@@ -86,9 +86,9 @@ const ResourceTypeIcon = ({ type, className }) => {
     }
 };
 
-const ResourceCard = ({ title, category, type, index, image }) => (
+const ResourceCard = ({ title, category, type, index, image, url }) => (
     <FadeInSection delay={index * 100}>
-        <div className="group cursor-pointer">
+        <a href={url || "#"} className="group cursor-pointer block">
             {/* Image Container */}
             <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden mb-6 bg-slate-100 shadow-sm border border-slate-100">
                 <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-all duration-500 z-10"></div>
@@ -132,18 +132,18 @@ const ResourceCard = ({ title, category, type, index, image }) => (
                     </h3>
                 </div>
             </div>
-        </div>
+        </a>
     </FadeInSection>
 );
 
 const Resources = ({ onBack }) => {
     const resources = [
-        { title: "Snatch Mastery", category: "Technique", type: "Video", image: "https://placehold.co/800x600/e2e8f0/1e293b?text=Snatch+Mastery" },
-        { title: "Sonny Squat Protocol", category: "Strength", type: "Blueprint", image: "https://placehold.co/800x600/e2e8f0/1e293b?text=Sonny+Squat" },
-        { title: "Clean & Jerk Blueprint", category: "Program", type: "Blueprint", image: "https://placehold.co/800x600/e2e8f0/1e293b?text=Clean+%26+Jerk" },
-        { title: "Efficiency Calculator", category: "Analysis", type: "Tool", image: "https://placehold.co/800x600/e2e8f0/1e293b?text=Efficiency" },
-        { title: "Nutrition Guide", category: "Health", type: "Nutrition", image: "https://placehold.co/800x600/e2e8f0/1e293b?text=Nutrition" },
-        { title: "Coaching & Programming", category: "Professional", type: "Coach", image: "https://placehold.co/800x600/e2e8f0/1e293b?text=Coaching" },
+        { title: "Snatch Mastery", category: "Technique", type: "Blueprint", image: "/Resources/Snatch-Mastery.jpeg", url: "https://start.theliftingzone.com/free-snatch-plan?utm_source=resources" },
+        { title: "Squat Protocol", category: "Strength", type: "Blueprint", image: "/Resources/Squat Protocol.jpeg", url: "https://start.theliftingzone.com/squat-strength-plan?utm_source=resources" },
+        { title: "Clean & Jerk Blueprint", category: "Program", type: "Blueprint", image: "/Resources/Clean-and-Jerk-Blueprint.jpeg", url: "https://start.theliftingzone.com/clean-and-jerk-plan?utm_source=resources" },
+        { title: "Efficiency Calculator", category: "Analysis", type: "Tool", image: "/Resources/Efficiency-Calculator.jpeg", url: "https://join.theliftingzone.com/efficiency-calculator?utm_source=resources" },
+        { title: "Nutrition", category: "Health", type: "Nutrition", image: "/Resources/Nutrition.jpeg", url: "#" },
+        { title: "1:1 Coaching", category: "Professional", type: "Coach", image: "/Resources/1-1 Coaching.jpeg", url: "?page=vip&utm_source=resources" },
     ];
 
     return (
