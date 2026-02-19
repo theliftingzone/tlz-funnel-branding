@@ -533,6 +533,9 @@ const App = () => {
       setStep('resources');
     } else if (page === 'technique-analysis') {
       setStep('technique-analysis');
+    } else if (page === 'vip') {
+      setStep('result');
+      setResultPage('vip');
     }
   }, []);
 
@@ -1432,7 +1435,7 @@ const App = () => {
                             period: isAnnual ? 'annual' : 'monthly'
                           });
                           window.open(url + '?utm_source=quiz_funnel', '_blank');
-                        }} className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Apply for Solo</button>
+                        }} className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Start Solo</button>
 
                       </div>
 
@@ -1551,7 +1554,7 @@ const App = () => {
                             period: isAnnual ? 'annual' : 'monthly'
                           });
                           window.open(url + '?utm_source=quiz_funnel', '_blank');
-                        }} className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Apply for Inner Circle</button>
+                        }} className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Join the Inner Circle</button>
                       </div>
                     </div>
 
@@ -1559,6 +1562,38 @@ const App = () => {
                   </div>
                 </div>
 
+              </FadeInSection>
+
+              {/* Call CTA */}
+              {/* Call CTA */}
+              <FadeInSection className="mt-12 mb-16 px-4">
+                <div className="max-w-3xl mx-auto bg-white rounded-[24px] p-8 border border-slate-200 shadow-xl shadow-blue-900/5 relative overflow-hidden group hover:border-blue-200 transition-all duration-300">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full -mr-16 -mt-16 group-hover:bg-blue-100 transition-colors"></div>
+
+                  <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+                    <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20 rotate-3 group-hover:rotate-0 transition-transform duration-300">
+                      <Calendar className="w-8 h-8 text-white" />
+                    </div>
+
+                    <div className="flex-grow">
+                      <h4 className="text-xl md:text-2xl font-heading font-black text-slate-900 uppercase italic mb-2">
+                        Still Have Questions?
+                      </h4>
+                      <p className="text-slate-500 font-medium leading-relaxed">
+                        Not sure which path is right for you? Hop on a quick call with Sonny to discuss your goals.
+                      </p>
+                    </div>
+
+                    <a
+                      href="https://calendly.com/sonnywebsterappointments/coaching-discovery"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 bg-slate-900 text-white px-8 py-4 rounded-xl font-heading font-bold uppercase tracking-widest text-xs hover:bg-blue-600 hover:-translate-y-1 transition-all shadow-lg flex items-center gap-2"
+                    >
+                      Book A Time <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
               </FadeInSection>
 
               {/* Downsell / Sales Page Link */}
@@ -1602,7 +1637,7 @@ const App = () => {
       {step === 'result' && <ResultView onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
 
       {/* DEV TOOLS - REMOVE FOR PRODUCTION */}
-      <DevTools step={step} setStep={setStep} setResultPage={setResultPage} />
+      {/* <DevTools step={step} setStep={setStep} setResultPage={setResultPage} /> */}
 
 
 
