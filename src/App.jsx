@@ -759,7 +759,7 @@ const App = () => {
       <div className="relative z-10 max-w-5xl mx-auto px-6 pt-12 pb-8 text-center">
         <FadeInSection>
           <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-slate-900 border border-slate-800 text-white text-xs font-bold uppercase tracking-[0.2em] mb-10 shadow-xl shadow-slate-900/20 hover:scale-105 transition-transform duration-300 animate-fade-in-down">
-            <Award className="w-4 h-4 text-blue-500 animate-pulse" /> By The Lifting Zone Sonny Webster
+            <Award className="w-4 h-4 text-blue-500 animate-pulse" /> The Lifting Zone By Sonny Webster
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black mb-10 tracking-tight leading-[0.95] text-slate-900 animate-fade-in-up">
