@@ -1155,8 +1155,8 @@ const App = () => {
                 </div>
               </FadeInSection>
 
-              <FadeInSection>
-                <div className="max-w-6xl mx-auto px-6">
+              <div className="max-w-6xl mx-auto px-6">
+                <FadeInSection>
                   {/* "Two Options" Comparison Section - Clean & Connected */}
                   <div className="mb-32 relative">
                     <div className="text-center mb-20 space-y-6">
@@ -1244,13 +1244,17 @@ const App = () => {
                       </p>
                     </div>
                   </div>
+                </FadeInSection>
 
-                  {/* The Process Timeline */}
-                  {/* The Process Timeline - Redesigned Vertical Connection */}
-                  {/* The Process Timeline */}
+                {/* The Process Timeline */}
+                {/* The Process Timeline - Redesigned Vertical Connection */}
+                {/* The Process Timeline */}
+                <FadeInSection>
                   <ProcessTimeline />
+                </FadeInSection>
 
-                  {/* Assessment to Action - Clean/Transparent Section */}
+                {/* Assessment to Action - Clean/Transparent Section */}
+                <FadeInSection>
                   <div className="w-full py-16 relative text-center mb-12">
                     <div className="max-w-4xl mx-auto px-6 relative z-10">
                       <h4 className="text-blue-600 font-bold uppercase tracking-widest text-xs mb-4">Elite Coaching Personalised From Day One</h4>
@@ -1290,9 +1294,11 @@ const App = () => {
                       </div>
                     </div>
                   </div>
+                </FadeInSection>
 
-                  {/* Real Results / Testimonials */}
-                  {/* Real Results / Testimonials - Redesigned Masonry Mix */}
+                {/* Real Results / Testimonials */}
+                {/* Real Results / Testimonials - Redesigned Masonry Mix */}
+                <FadeInSection>
                   <div className="mb-20">
                     <div className="text-center mb-12">
                       <div className="flex justify-center mb-4">
@@ -1367,9 +1373,13 @@ const App = () => {
                       </div>
                     </div>
                   </div>
-                  {/* Final CTA Area */}
+                </FadeInSection>
+                {/* Final CTA Area */}
+                <FadeInSection>
                   <GuaranteeCTA />
-                  {/* Pricing Section */}
+                </FadeInSection>
+                {/* Pricing Section */}
+                <FadeInSection>
                   <div id="pricing" className="mb-24 scroll-mt-24">
                     <h3 className="text-3xl md:text-5xl font-heading font-black mb-8 text-center text-slate-900 leading-tight">Choose Your <span className="text-blue-600">Protocol</span></h3>
 
@@ -1560,9 +1570,8 @@ const App = () => {
 
 
                   </div>
-                </div>
-
-              </FadeInSection>
+                </FadeInSection>
+              </div>
 
               {/* Call CTA */}
               {/* Call CTA */}
