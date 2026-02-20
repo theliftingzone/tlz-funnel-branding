@@ -1413,7 +1413,7 @@ const App = () => {
                         </div>
 
                         <div className="mb-8 h-32 flex flex-col justify-center items-center">
-                          <div key={isAnnual ? 'solo-yr' : 'solo-mo'} className="animate-pop-in">
+                          <div key={isAnnual ? 'solo-yr' : 'solo-mo'} className="animate-pop-in flex flex-col items-center text-center">
                             {isAnnual ? (
                               <>
                                 <div><span className="text-5xl font-heading font-black text-slate-900">£169.50</span><span className="text-slate-500 font-medium">/mo</span></div>
@@ -1459,7 +1459,7 @@ const App = () => {
                         </div>
 
                         <div className="mb-8 h-32 flex flex-col justify-center items-center">
-                          <div key={isAnnual ? 'elite-yr' : 'elite-mo'} className="animate-pop-in">
+                          <div key={isAnnual ? 'elite-yr' : 'elite-mo'} className="animate-pop-in flex flex-col items-center text-center">
                             {isAnnual ? (
                               <>
                                 <div><span className="text-6xl font-heading font-black text-slate-900">£296.50</span><span className="text-slate-500 font-medium">/mo</span></div>
@@ -1531,7 +1531,7 @@ const App = () => {
                         </div>
 
                         <div className="mb-8 h-32 flex flex-col justify-center items-center">
-                          <div key={isAnnual ? 'inner-yr' : 'inner-mo'} className="animate-pop-in">
+                          <div key={isAnnual ? 'inner-yr' : 'inner-mo'} className="animate-pop-in flex flex-col items-center text-center">
                             {isAnnual ? (
                               <>
                                 <div><span className="text-5xl font-heading font-black text-slate-900">£425</span><span className="text-slate-500 font-medium">/mo</span></div>
