@@ -1385,19 +1385,19 @@ const App = () => {
 
                     {/* Pricing Toggle with Sliding Animation */}
                     <div className="flex justify-center mb-16 px-4">
-                      <div className="bg-slate-100 p-1.5 rounded-full flex relative cursor-pointer w-full max-w-[340px]" onClick={() => setIsAnnual(!isAnnual)}>
+                      <div className="bg-slate-100 p-1.5 rounded-full grid grid-cols-2 relative cursor-pointer w-full max-w-[340px]" onClick={() => setIsAnnual(!isAnnual)}>
                         {/* Sliding Background Pill */}
-                        <div className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-white rounded-full shadow-md transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1) ${isAnnual ? 'left-[calc(50%+3px)]' : 'left-1.5'}`}></div>
+                        <div className={`absolute top-1.5 bottom-1.5 left-1.5 w-[calc(50%-6px)] bg-white rounded-full shadow-md transition-transform duration-500 z-0 ${isAnnual ? 'translate-x-full' : 'translate-x-0'}`} style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}></div>
 
                         <button
                           onClick={(e) => { e.stopPropagation(); setIsAnnual(false); }}
-                          className={`relative z-10 w-1/2 py-3 rounded-full text-xs font-heading font-black uppercase tracking-widest transition-colors duration-300 ${!isAnnual ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'}`}
+                          className={`relative z-10 w-full py-3 rounded-full text-xs font-heading font-black uppercase tracking-widest transition-colors duration-300 flex items-center justify-center ${!isAnnual ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'}`}
                         >
                           Monthly
                         </button>
                         <button
                           onClick={(e) => { e.stopPropagation(); setIsAnnual(true); }}
-                          className={`relative z-10 w-1/2 py-2 sm:py-3 rounded-full text-[10px] sm:text-xs font-heading font-black uppercase tracking-widest transition-colors duration-300 flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 ${isAnnual ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'}`}
+                          className={`relative z-10 w-full py-2 sm:py-3 rounded-full text-[10px] sm:text-xs font-heading font-black uppercase tracking-widest transition-colors duration-300 flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2 ${isAnnual ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'}`}
                         >
                           <span>Annual</span>
                           <span className="bg-green-100 text-green-600 px-1.5 py-0.5 rounded text-[8px] whitespace-nowrap leading-none transform sm:translate-y-0.5 mt-0.5 sm:mt-0">SAVE 15%</span>
@@ -1413,16 +1413,16 @@ const App = () => {
                           <h4 className="text-3xl font-heading font-black text-slate-900 mt-2 uppercase">Solo <br />Protocol</h4>
                         </div>
 
-                        <div className="mb-8 h-32 flex flex-col justify-center items-center">
-                          <div key={isAnnual ? 'solo-yr' : 'solo-mo'} className="animate-pop-in flex flex-col items-center text-center">
+                        <div className="mb-8 h-32 w-full flex flex-col justify-center items-center">
+                          <div key={isAnnual ? 'solo-yr' : 'solo-mo'} className="animate-pop-in w-full flex flex-col items-center justify-center text-center">
                             {isAnnual ? (
                               <>
-                                <div><span className="text-5xl font-heading font-black text-slate-900">£169.50</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="flex items-baseline justify-center whitespace-nowrap"><span className="text-4xl md:text-5xl font-heading font-black text-slate-900 tracking-tight">£169.50</span><span className="text-slate-500 font-medium text-sm md:text-base ml-1">/mo</span></div>
                                 <div className="mt-2 inline-block mx-auto bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded">£2,029 Billed Annually</div>
                               </>
                             ) : (
                               <>
-                                <div><span className="text-5xl font-heading font-black text-slate-900">£199</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="flex items-baseline justify-center whitespace-nowrap"><span className="text-4xl md:text-5xl font-heading font-black text-slate-900 tracking-tight">£199</span><span className="text-slate-500 font-medium text-sm md:text-base ml-1">/mo</span></div>
                                 <div className="mt-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Billed Monthly</div>
                               </>
                             )}
@@ -1459,16 +1459,16 @@ const App = () => {
                           <h4 className="text-4xl font-heading font-black text-slate-900 mt-2 uppercase">Elite <br />Protocol</h4>
                         </div>
 
-                        <div className="mb-8 h-32 flex flex-col justify-center items-center">
-                          <div key={isAnnual ? 'elite-yr' : 'elite-mo'} className="animate-pop-in flex flex-col items-center text-center">
+                        <div className="mb-8 h-32 w-full flex flex-col justify-center items-center">
+                          <div key={isAnnual ? 'elite-yr' : 'elite-mo'} className="animate-pop-in w-full flex flex-col items-center justify-center text-center">
                             {isAnnual ? (
                               <>
-                                <div><span className="text-6xl font-heading font-black text-slate-900">£296.50</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="flex items-baseline justify-center whitespace-nowrap"><span className="text-5xl lg:text-6xl font-heading font-black text-slate-900 tracking-tight">£296.50</span><span className="text-slate-500 font-medium text-base ml-1">/mo</span></div>
                                 <div className="mt-2 inline-block mx-auto bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded">£3,559 Billed Annually</div>
                               </>
                             ) : (
                               <>
-                                <div><span className="text-6xl font-heading font-black text-slate-900">£349</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="flex items-baseline justify-center whitespace-nowrap"><span className="text-5xl lg:text-6xl font-heading font-black text-slate-900 tracking-tight">£349</span><span className="text-slate-500 font-medium text-base ml-1">/mo</span></div>
                                 <div className="mt-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Billed Monthly</div>
                               </>
                             )}
@@ -1531,16 +1531,16 @@ const App = () => {
                           <h4 className="text-3xl font-heading font-black text-slate-900 mt-2 uppercase">Inner <br />Circle</h4>
                         </div>
 
-                        <div className="mb-8 h-32 flex flex-col justify-center items-center">
-                          <div key={isAnnual ? 'inner-yr' : 'inner-mo'} className="animate-pop-in flex flex-col items-center text-center">
+                        <div className="mb-8 h-32 w-full flex flex-col justify-center items-center">
+                          <div key={isAnnual ? 'inner-yr' : 'inner-mo'} className="animate-pop-in w-full flex flex-col items-center justify-center text-center">
                             {isAnnual ? (
                               <>
-                                <div><span className="text-5xl font-heading font-black text-slate-900">£425</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="flex items-baseline justify-center whitespace-nowrap"><span className="text-4xl md:text-5xl font-heading font-black text-slate-900 tracking-tight">£425</span><span className="text-slate-500 font-medium text-sm md:text-base ml-1">/mo</span></div>
                                 <div className="mt-2 inline-block mx-auto bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded">£5,100 Billed Annually</div>
                               </>
                             ) : (
                               <>
-                                <div><span className="text-5xl font-heading font-black text-slate-900">£500</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="flex items-baseline justify-center whitespace-nowrap"><span className="text-4xl md:text-5xl font-heading font-black text-slate-900 tracking-tight">£500</span><span className="text-slate-500 font-medium text-sm md:text-base ml-1">/mo</span></div>
                                 <div className="mt-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Billed Monthly</div>
                               </>
                             )}
