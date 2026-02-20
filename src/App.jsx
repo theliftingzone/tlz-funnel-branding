@@ -1406,8 +1406,8 @@ const App = () => {
                           <div key={isAnnual ? 'solo-yr' : 'solo-mo'} className="animate-pop-in">
                             {isAnnual ? (
                               <>
-                                <div><span className="text-5xl font-heading font-black text-slate-900">£2,029</span><span className="text-slate-500 font-medium">/yr</span></div>
-                                <div className="mt-2 inline-flex bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded w-max">Just £169.50/mo</div>
+                                <div><span className="text-5xl font-heading font-black text-slate-900">£169.50</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="mt-2 inline-flex bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded w-max">£2,029 Billed Annually</div>
                               </>
                             ) : (
                               <>
@@ -1452,8 +1452,8 @@ const App = () => {
                           <div key={isAnnual ? 'elite-yr' : 'elite-mo'} className="animate-pop-in">
                             {isAnnual ? (
                               <>
-                                <div><span className="text-6xl font-heading font-black text-slate-900">£3,559</span><span className="text-slate-500 font-medium">/yr</span></div>
-                                <div className="mt-2 inline-flex bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded w-max">Just £296/mo</div>
+                                <div><span className="text-6xl font-heading font-black text-slate-900">£296.50</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="mt-2 inline-flex bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded w-max">£3,559 Billed Annually</div>
                               </>
                             ) : (
                               <>
@@ -1524,8 +1524,8 @@ const App = () => {
                           <div key={isAnnual ? 'inner-yr' : 'inner-mo'} className="animate-pop-in">
                             {isAnnual ? (
                               <>
-                                <div><span className="text-5xl font-heading font-black text-slate-900">£5,100</span><span className="text-slate-500 font-medium">/yr</span></div>
-                                <div className="mt-2 inline-flex bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded w-max">Just £425/mo</div>
+                                <div><span className="text-5xl font-heading font-black text-slate-900">£425</span><span className="text-slate-500 font-medium">/mo</span></div>
+                                <div className="mt-2 inline-flex bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded w-max">£5,100 Billed Annually</div>
                               </>
                             ) : (
                               <>
