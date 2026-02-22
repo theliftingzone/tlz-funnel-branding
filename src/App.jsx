@@ -115,8 +115,12 @@ const VideoPlaceholder = ({ src, alt, className = "" }) => (
 
 
 const LogoPlaceholder = ({ className = "" }) => (
-  <div className={`${className}`}>
-    <img src="/the-lifting-zone-logo.svg" alt="The Lifting Zone" className="h-10 w-auto" />
+  <div className={`${className} flex items-center justify-center`}>
+    <img
+      src="/the-lifting-zone-logo.svg"
+      alt="The Lifting Zone"
+      className="h-10 md:h-12 w-auto invert hue-rotate-180 drop-shadow-sm"
+    />
   </div>
 );
 
@@ -501,8 +505,14 @@ const App = () => {
 
   useEffect(() => {
     if (step === 'landing') {
-      const timer = setTimeout(() => setShowWebinar(true), 15000);
-      return () => clearTimeout(timer);
+      const deadline = new Date('2026-02-23T17:00:00Z'); // 23rd Feb, 9pm Dubai
+      const lastClosed = localStorage.getItem('webinarClosedAt');
+      const isRecentlyClosed = lastClosed && (new Date() - new Date(lastClosed) < 24 * 60 * 60 * 1000); // 24 hours
+
+      if (new Date() < deadline && !isRecentlyClosed) {
+        const timer = setTimeout(() => setShowWebinar(true), 15000);
+        return () => clearTimeout(timer);
+      }
     } else {
       setShowWebinar(false);
     }
@@ -743,7 +753,10 @@ const App = () => {
         description="Master the art of weightlifting with Olympian Sonny Webster. Get personalized coaching enabling you to hit new PRs."
       />
       <AnimatedBackground />
-      <WebinarPopup isOpen={showWebinar} onClose={() => setShowWebinar(false)} />
+      <WebinarPopup isOpen={showWebinar} onClose={() => {
+        setShowWebinar(false);
+        localStorage.setItem('webinarClosedAt', new Date().toISOString());
+      }} />
 
       <nav className="relative z-50 p-6 grid grid-cols-3 items-center bg-transparent max-w-7xl mx-auto">
         <div></div>
