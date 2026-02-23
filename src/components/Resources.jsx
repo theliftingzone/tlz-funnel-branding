@@ -142,7 +142,7 @@ const Resources = ({ onBack }) => {
         { title: "Squat Protocol", category: "Strength", type: "Blueprint", image: "/Resources/Squat Protocol.jpeg", url: "https://start.theliftingzone.com/squat-strength-plan?utm_source=resources" },
         { title: "Clean & Jerk Blueprint", category: "Program", type: "Blueprint", image: "/Resources/Clean-and-Jerk-Blueprint.jpeg", url: "https://start.theliftingzone.com/clean-and-jerk-plan?utm_source=resources" },
         { title: "Efficiency Calculator", category: "Analysis", type: "Tool", image: "/Resources/Efficiency-Calculator.jpeg", url: "https://join.theliftingzone.com/efficiency-calculator?utm_source=resources" },
-        { title: "Nutrition", category: "Health", type: "Nutrition", image: "/Resources/Nutrition.jpeg", url: "#" },
+        { title: "Nutrition", category: "Health", type: "Nutrition", image: "/Resources/Nutrition.jpeg", url: "?page=nutrition&utm_source=resources" },
         { title: "1:1 Coaching", category: "Professional", type: "Coach", image: "/Resources/1-1 Coaching.jpeg", url: "?page=vip&utm_source=resources" },
     ];
 

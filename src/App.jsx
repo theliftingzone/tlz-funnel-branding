@@ -9,6 +9,7 @@ import MeetTheTeam from './components/MeetTheTeam';
 import Education from './components/Education';
 import Resources from './components/Resources';
 import TechniqueAnalysis from './components/TechniqueAnalysis';
+import Nutrition from './components/Nutrition';
 import SEO from './components/SEO';
 import TrackingScripts, { trackPixelEvent } from './components/TrackingScripts';
 import CookieConsent from './components/CookieConsent';
@@ -546,6 +547,8 @@ const App = () => {
     } else if (page === 'vip') {
       setStep('result');
       setResultPage('vip');
+    } else if (page === 'nutrition') {
+      setStep('nutrition');
     }
   }, []);
 
@@ -775,9 +778,9 @@ const App = () => {
             <Award className="w-4 h-4 text-blue-500 animate-pulse" /> The Lifting Zone By Sonny Webster
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black mb-10 tracking-tight leading-[0.95] text-slate-900 animate-fade-in-up">
+          <h1 className="text-[11vw] sm:text-5xl md:text-7xl lg:text-8xl font-heading font-black mb-10 tracking-tight leading-[0.95] text-slate-900 animate-fade-in-up px-2">
             MASTER THE ART OF <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 drop-shadow-sm animate-text-glow">WEIGHTLIFTING.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 pb-2 pr-2 animate-text-glow">WEIGHTLIFTING.</span>
           </h1>
 
           <p className="text-slate-600 font-medium text-base md:text-lg mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-100">
@@ -898,7 +901,7 @@ const App = () => {
     const progress = ((currentQuestion + 1) / questions.length) * 100;
 
     return (
-      <div className="bg-[#f8fafc] h-screen text-slate-900 font-body overflow-hidden relative selection:bg-[#2563eb] selection:text-white">
+      <div className="bg-[#f8fafc] min-h-screen text-slate-900 font-body overflow-x-hidden relative selection:bg-[#2563eb] selection:text-white flex flex-col">
         <SEO
           title="Free Assessment | The Lifting Zone"
           description="Identify your lifting weaknesses in 60 seconds with our free assessment tool."
@@ -906,7 +909,7 @@ const App = () => {
         <AnimatedBackground />
 
         {/* Top Navigation - Centered */}
-        <div className="absolute top-0 left-0 right-0 z-30 flex justify-center p-8 pointer-events-none">
+        <div className="relative z-30 flex justify-center p-6 md:p-8 pointer-events-none shrink-0">
           {/* Centered container with pointer-events-auto for the button */}
           <div className="pointer-events-auto">
             <button
@@ -920,8 +923,8 @@ const App = () => {
         </div>
 
         {/* Main Content - Centered in Viewport */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center p-6">
-          <div className="w-full max-w-2xl relative">
+        <div className="relative z-20 flex-1 flex items-center justify-center p-6 pb-24">
+          <div className="w-full max-w-2xl relative mt-auto mb-auto">
             <FadeInSection className="w-full">
               {/* Progress Header */}
               <div className="flex flex-col mb-10">
@@ -1657,6 +1660,7 @@ const App = () => {
       {step === 'education' && <Education onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
       {step === 'resources' && <Resources onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
       {step === 'technique-analysis' && <TechniqueAnalysis onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
+      {step === 'nutrition' && <Nutrition onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
       {step === 'result' && <ResultView onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
 
       {/* DEV TOOLS - REMOVE FOR PRODUCTION */}
