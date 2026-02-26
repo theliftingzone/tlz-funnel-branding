@@ -86,13 +86,11 @@ const Nutrition = ({ onBack }) => {
                         </div>
 
                         <a
-                            href="https://buy.stripe.com/6oU8wPb338XG3HO96lbV62w"
+                            href="https://calendly.com/mikenicho/nutrition-discovery-call"
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={() => trackPixelEvent('InitiateCheckout', {
-                                content_name: 'Nutrition Coaching Lead',
-                                value: 169.50, // Assuming a value if it goes to Stripe, else leave as is or 0
-                                currency: 'USD'
+                            onClick={() => trackPixelEvent('Lead', {
+                                content_name: 'Nutrition Coaching Lead'
                             })}
                             className="inline-block bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black py-5 px-10 rounded-2xl text-lg uppercase tracking-widest shadow-2xl shadow-blue-600/20 transition-all hover:scale-105"
                         >
@@ -334,9 +332,12 @@ const Nutrition = ({ onBack }) => {
                             </p>
 
                             <a
-                                href="https://buy.stripe.com/6oU8wPb338XG3HO96lbV62w"
+                                href="https://calendly.com/mikenicho/nutrition-discovery-call"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={() => trackPixelEvent('Lead', {
+                                    content_name: 'Nutrition Coaching Lead'
+                                })}
                                 className="inline-block w-full md:w-auto bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black py-5 px-12 rounded-xl text-lg uppercase tracking-widest shadow-xl shadow-blue-600/20 transition-all hover:-translate-y-1"
                             >
                                 Apply Now

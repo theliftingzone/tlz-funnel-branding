@@ -495,6 +495,30 @@ const DevTools = ({ step, setStep, setResultPage }) => {
   );
 };
 
+const ThemeToggle = () => {
+  const [isTlz, setIsTlz] = useState(false);
+  useEffect(() => {
+    if (isTlz) {
+      document.body.classList.add('theme-tlz');
+    } else {
+      document.body.classList.remove('theme-tlz');
+    }
+  }, [isTlz]);
+
+  return (
+    <button
+      onClick={() => setIsTlz(!isTlz)}
+      className="fixed bottom-4 right-4 z-[9999] bg-white text-slate-900 border border-slate-200 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-2xl hover:scale-105 transition-transform flex items-center gap-2"
+    >
+      <div
+        className={`w-3 h-3 rounded-full ${!isTlz ? 'bg-blue-600' : ''}`}
+        style={isTlz ? { backgroundImage: 'linear-gradient(135deg, #E8F684, #8DE9D3, #56C1E3, #7A66AD)' } : {}}
+      ></div>
+      {isTlz ? 'TLZ Brand' : 'Default Brand'}
+    </button>
+  );
+};
+
 const App = () => {
   const [step, setStep] = useState('landing');
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -956,7 +980,7 @@ const App = () => {
                   <button
                     key={idx}
                     onClick={() => handleAnswer(opt.value)}
-                    className="w-full text-left p-6 md:p-7 bg-white border border-slate-200 hover:border-blue-600 hover:bg-blue-50 transition-all duration-300 rounded-2xl group flex justify-between items-center relative overflow-hidden active:scale-[0.98] shadow-sm hover:shadow-md ring-1 ring-transparent hover:ring-blue-100"
+                    className="w-full text-left p-6 md:p-7 bg-white border border-slate-200 hover:border-blue-600 hover:bg-slate-50 transition-all duration-300 rounded-2xl group flex justify-between items-center relative overflow-hidden active:scale-[0.98] shadow-sm hover:shadow-md ring-1 ring-transparent hover:ring-slate-100"
                   >
                     <span className="text-base md:text-lg font-medium text-slate-700 group-hover:text-blue-700 transition-colors relative z-10 pl-2">{opt.label}</span>
                     <div className="w-8 h-8 rounded-full border border-slate-200 group-hover:border-blue-600 group-hover:bg-blue-600 flex items-center justify-center transition-all duration-300 relative z-10 flex-shrink-0 ml-4 shadow-inner">
@@ -1665,6 +1689,8 @@ const App = () => {
 
       {/* DEV TOOLS - REMOVE FOR PRODUCTION */}
       {/* <DevTools step={step} setStep={setStep} setResultPage={setResultPage} /> */}
+
+      <ThemeToggle />
 
 
 

@@ -522,7 +522,7 @@ const Education = ({ onBack }) => {
                             </div>
 
                             <a href="https://learn.theliftingzone.com/offers/Rp5sqNWw?utm_source=quiz_funnel" className="block w-full text-center bg-slate-900 border-b-[6px] border-slate-700 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black py-6 rounded-2xl text-2xl uppercase tracking-widest shadow-xl transition-all btn-pop">
-                                Save £500 Off
+                                Save £250 Off
                             </a>
                         </div>
                     </FadeInSection>

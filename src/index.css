@@ -19,6 +19,55 @@
   --color-bg-offwhite: #f8fafc;
 }
 
+/* TLZ Brand Toggle Styles */
+.theme-tlz {
+  /* Map Standard Tailwind Blue variables to new TLZ Brand Colors */
+  --color-blue-50: #e7f7fb;   /* Light Cyan instead of Yellow */
+  --color-blue-100: #d5f2f9;
+  --color-blue-200: #b3e7f4;
+  /* Neon Lemon */
+  --color-blue-300: #E8F684;
+  --color-blue-400: #E8F684;
+  /* Electric Mint */
+  --color-blue-500: #8DE9D3;
+  /* Cyan Spark */
+  --color-blue-600: #56C1E3;
+  /* Hyper Blue */
+  --color-blue-700: #3B87C8;
+  /* Deep Lavender */
+  --color-blue-800: #7A66AD;
+  --color-blue-900: #62528a;
+  --color-blue-950: #4a3e68;
+
+  /* Map Custom Brand variables */
+  --color-brand-primary: var(--color-blue-600);
+  --color-brand-light-blue: var(--color-blue-50);
+  --color-brand-gold: var(--color-blue-500);
+  --color-brand-gold-deep: var(--color-blue-600);
+  --color-brand-orange: var(--color-blue-700);
+  --color-brand-urgent: var(--color-blue-600);
+}
+
+/* TLZ Gradient Overrides */
+.theme-tlz .from-blue-600,
+.theme-tlz .from-blue-400 {
+  background-image: linear-gradient(135deg, #E8F684, #8DE9D3, #56C1E3, #7A66AD) !important;
+}
+
+.theme-tlz .text-transparent.from-blue-600,
+.theme-tlz .text-transparent.from-blue-400 {
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Remove Violet from the 3D Button Shadows / Bottom Borders */
+.theme-tlz .border-blue-800 {
+  border-color: #3B87C8 !important;
+  /* Uses Hyper Blue instead of Violet */
+}
+
+
 /* Custom Keyframe Animations */
 @keyframes fade-in-up {
   from {
