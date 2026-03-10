@@ -12,13 +12,13 @@ html.dark iframe {
   filter: invert(1) hue-rotate(180deg) !important;
 }
 
-/* Hide background blobs in dark mode per user request */
-html.dark .animate-pulse-glow,
-html.dark .animate-float,
-html.dark [class*="w-[600px]"],
-html.dark [class*="bg-blue-400/10"],
-html.dark div[class*="blur-"][class*="rounded-full"][class*="absolute"] {
-  display: none !important;
+/* Make background blobs blend correctly in dark mode */
+html.dark.theme-tlz .animate-pulse-glow,
+html.dark.theme-tlz .animate-float,
+html.dark.theme-tlz [class*="w-[600px]"],
+html.dark.theme-tlz [class*="bg-blue-400/10"],
+html.dark.theme-tlz div[class*="blur-"][class*="rounded-full"][class*="absolute"] {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 @theme {
