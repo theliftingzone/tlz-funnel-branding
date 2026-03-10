@@ -79,7 +79,7 @@ const AnimatedBackground = () => {
     <div ref={bgRef} className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#f8fafc] transform-gpu">
       {/* Dynamic Mouse Blob */}
       <div
-        className="hidden md:block absolute w-[600px] h-[600px] bg-blue-400/10 rounded-full blur-[100px] will-change-transform mix-blend-multiply opacity-100 transition-transform duration-100 ease-out"
+        className="hidden md:block absolute w-[600px] h-[600px] bg-blue-400/10 rounded-full blur-[100px] will-change-transform mix-blend-multiply opacity-100 transition-transform duration-100 ease-out dark:hidden"
         style={{
           left: 'var(--mouse-x, -1000px)',
           top: 'var(--mouse-y, -1000px)',
@@ -88,11 +88,11 @@ const AnimatedBackground = () => {
       />
 
       {/* Static Ambient Blobs with Float Animation */}
-      <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-blue-200/20 rounded-full blur-[120px] animate-pulse-glow animate-float"></div>
-      <div className="absolute bottom-[10%] left-[-10%] w-[30%] h-[30%] bg-indigo-200/20 rounded-full blur-[100px] animate-float delay-700"></div>
-      <div className="absolute top-[40%] left-[20%] w-[20%] h-[20%] bg-sky-200/10 rounded-full blur-[80px] animate-float delay-500"></div>
+      <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-blue-200/20 rounded-full blur-[120px] animate-pulse-glow animate-float dark:hidden"></div>
+      <div className="absolute bottom-[10%] left-[-10%] w-[30%] h-[30%] bg-indigo-200/20 rounded-full blur-[100px] animate-float delay-700 dark:hidden"></div>
+      <div className="absolute top-[40%] left-[20%] w-[20%] h-[20%] bg-sky-200/10 rounded-full blur-[80px] animate-float delay-500 dark:hidden"></div>
 
-      {/* Premium Grid Pattern */}
+      {/* Premium Grid Pattern (keep this, it looks good!) */}
       <div className="absolute inset-0 bg-grid opacity-[0.4]"></div>
     </div>
   );
