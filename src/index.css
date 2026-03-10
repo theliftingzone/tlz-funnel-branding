@@ -82,6 +82,13 @@ html.dark div[class*="blur-"][class*="rounded-full"][class*="absolute"] {
   color: transparent !important;
 }
 
+html.dark.theme-tlz .from-blue-600,
+html.dark.theme-tlz .from-blue-400,
+html.dark.theme-tlz .text-transparent.from-blue-600,
+html.dark.theme-tlz .text-transparent.from-blue-400 {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
 /* Remove Violet from the 3D Button Shadows / Bottom Borders */
 .theme-tlz .border-blue-800 {
   border-color: #3B87C8 !important;

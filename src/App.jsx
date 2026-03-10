@@ -495,12 +495,21 @@ const DevTools = ({ step, setStep, setResultPage }) => {
   );
 };
 
-const ThemeToggle = () => {
+const ThemeToggles = () => {
   const [isDark, setIsDark] = useState(false);
+  const [isBrand, setIsBrand] = useState(true);
 
   useEffect(() => {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setIsDark(true);
+    }
+    // Check if the theme-tlz class is already on the html element (default typically)
+    if (document.documentElement.classList.contains('theme-tlz')) {
+      setIsBrand(true);
+    } else {
+      // If we want it to default to brand, we should add it
+      document.documentElement.classList.add('theme-tlz');
+      setIsBrand(true);
     }
   }, []);
 
@@ -512,14 +521,31 @@ const ThemeToggle = () => {
     }
   }, [isDark]);
 
+  useEffect(() => {
+    if (isBrand) {
+      document.documentElement.classList.add('theme-tlz');
+    } else {
+      document.documentElement.classList.remove('theme-tlz');
+    }
+  }, [isBrand]);
+
   return (
-    <button
-      onClick={() => setIsDark(!isDark)}
-      className="fixed bottom-4 right-4 z-[9999] bg-white text-slate-900 border border-slate-200 px-4 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-2xl hover:scale-105 transition-transform flex items-center gap-2"
-    >
-      <div className="w-3 h-3 rounded-full bg-slate-900"></div>
-      {isDark ? 'Light Mode' : 'Dark Mode'}
-    </button>
+    <div className="fixed bottom-4 right-4 z-[9999] flex flex-col gap-2">
+      <button
+        onClick={() => setIsBrand(!isBrand)}
+        className="bg-white text-slate-900 border border-slate-200 px-4 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-2xl hover:scale-105 transition-transform flex items-center gap-2"
+      >
+        <div className={`w-3 h-3 rounded-full ${isBrand ? 'bg-blue-500' : 'bg-blue-600'}`}></div>
+        {isBrand ? 'Original Colors' : 'TLZ Branding'}
+      </button>
+      <button
+        onClick={() => setIsDark(!isDark)}
+        className="bg-white text-slate-900 border border-slate-200 px-4 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-2xl hover:scale-105 transition-transform flex items-center gap-2"
+      >
+        <div className="w-3 h-3 rounded-full bg-slate-900"></div>
+        {isDark ? 'Light Mode' : 'Dark Mode'}
+      </button>
+    </div>
   );
 };
 
@@ -1692,9 +1718,7 @@ const App = () => {
       {step === 'result' && <ResultView onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
 
       {/* DEV TOOLS - REMOVE FOR PRODUCTION */}
-      {/* <DevTools step={step} setStep={setStep} setResultPage={setResultPage} /> */}
-
-      <ThemeToggle />
+      <ThemeToggles />
 
 
 
