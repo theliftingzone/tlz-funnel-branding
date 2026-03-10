@@ -496,25 +496,29 @@ const DevTools = ({ step, setStep, setResultPage }) => {
 };
 
 const ThemeToggle = () => {
-  const [isTlz, setIsTlz] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
   useEffect(() => {
-    if (isTlz) {
-      document.body.classList.add('theme-tlz');
-    } else {
-      document.body.classList.remove('theme-tlz');
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setIsDark(true);
     }
-  }, [isTlz]);
+  }, []);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   return (
     <button
-      onClick={() => setIsTlz(!isTlz)}
-      className="fixed bottom-4 right-4 z-[9999] bg-white text-slate-900 border border-slate-200 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-2xl hover:scale-105 transition-transform flex items-center gap-2"
+      onClick={() => setIsDark(!isDark)}
+      className="fixed bottom-4 right-4 z-[9999] bg-white text-slate-900 border border-slate-200 px-4 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-2xl hover:scale-105 transition-transform flex items-center gap-2"
     >
-      <div
-        className={`w-3 h-3 rounded-full ${!isTlz ? 'bg-blue-600' : ''}`}
-        style={isTlz ? { backgroundImage: 'linear-gradient(135deg, #E8F684, #8DE9D3, #56C1E3, #7A66AD)' } : {}}
-      ></div>
-      {isTlz ? 'TLZ Brand' : 'Default Brand'}
+      <div className="w-3 h-3 rounded-full bg-slate-900"></div>
+      {isDark ? 'Light Mode' : 'Dark Mode'}
     </button>
   );
 };

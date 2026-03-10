@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+/* Global Dark Mode */
+html.dark {
+  filter: invert(1) hue-rotate(180deg);
+  background-color: #ffffff;
+}
+
+html.dark img,
+html.dark video,
+html.dark iframe {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+/* Hide background blobs in dark mode per user request */
+html.dark .animate-pulse-glow,
+html.dark .animate-float,
+html.dark [class*="w-[600px]"],
+html.dark [class*="bg-blue-400/10"],
+html.dark div[class*="blur-"][class*="rounded-full"][class*="absolute"] {
+  display: none !important;
+}
+
 @theme {
   /* Primary Colors */
   --color-brand-primary: #2563eb;
