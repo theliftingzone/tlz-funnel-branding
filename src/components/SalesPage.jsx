@@ -63,7 +63,16 @@ const FadeInSection = ({ children, className = "", delay = 0 }) => {
     );
 };
 
-const SalesPage = ({ onBack }) => {
+const SalesPage = ({ onBack, trackingParams = {} }) => {
+    // Helper: append UTM params to any URL
+    const buildTrackedUrl = (baseUrl) => {
+        const url = new URL(baseUrl);
+        const params = { utm_source: 'quiz_funnel', ...trackingParams };
+        Object.entries(params).forEach(([key, value]) => {
+            if (value) url.searchParams.set(key, value);
+        });
+        return url.toString();
+    };
     return (
         <div className="min-h-screen font-sans text-slate-900 selection:bg-blue-600 selection:text-white overflow-x-hidden">
             <SEO
@@ -117,7 +126,7 @@ const SalesPage = ({ onBack }) => {
                                         value: 99.00,
                                         currency: 'GBP'
                                     });
-                                    window.location.href = 'https://learn.theliftingzone.com/offers/jZMpuB9E/?utm_source=quiz_funnel';
+                                    window.location.href = buildTrackedUrl('https://learn.theliftingzone.com/offers/jZMpuB9E/');
                                 }}
                                 className="cursor-pointer group relative bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] text-white font-heading font-black text-xl md:text-2xl uppercase tracking-[0.15em] px-14 py-6 rounded-2xl shadow-2xl shadow-blue-600/30 hover:brightness-110 transition-all duration-300 transform btn-shine-effect"
                             >
@@ -496,7 +505,7 @@ const SalesPage = ({ onBack }) => {
                                         value: 99.00,
                                         currency: 'GBP'
                                     });
-                                    window.location.href = 'https://learn.theliftingzone.com/offers/jZMpuB9E/?utm_source=quiz_funnel';
+                                    window.location.href = buildTrackedUrl('https://learn.theliftingzone.com/offers/jZMpuB9E/');
                                 }}
                                 className="cursor-pointer relative bg-gradient-to-r from-blue-600 to-blue-700 border-b-[10px] border-blue-800 active:border-b-0 active:translate-y-[10px] text-white font-heading font-black text-2xl md:text-4xl uppercase tracking-[0.2em] px-20 py-10 rounded-[40px] shadow-[0_25px_60px_-15px_rgba(37,99,235,0.4)] hover:brightness-110 transition-all duration-300 transform-gpu btn-shine-effect hover:scale-105"
                             >

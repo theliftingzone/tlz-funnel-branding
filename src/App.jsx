@@ -288,8 +288,19 @@ const AnalyzingScreen = () => (
   </div>
 );
 
-const BridgePage = ({ resource, onUpsellClick, onBack }) => {
+const BridgePage = ({ resource, onUpsellClick, onBack, trackingParams = {} }) => {
   const [timeLeft, setTimeLeft] = useState(15);
+
+  // Build redirect URL with full UTM passthrough
+  const redirectUrl = (() => {
+    const url = new URL(resource.url);
+    // Pass through all original UTMs from ads, fallback to quiz_funnel source
+    const utms = { utm_source: 'quiz_funnel', ...trackingParams };
+    Object.entries(utms).forEach(([key, value]) => {
+      if (value) url.searchParams.set(key, value);
+    });
+    return url.toString();
+  })();
 
   // Auto-redirect logic
   useEffect(() => {
@@ -297,14 +308,14 @@ const BridgePage = ({ resource, onUpsellClick, onBack }) => {
       setTimeLeft(prev => {
         if (prev <= 1) {
           clearInterval(timer);
-          window.location.href = resource.url;
+          window.location.href = redirectUrl;
           return 0;
         }
         return prev - 1;
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [resource.url]);
+  }, [redirectUrl]);
 
   return (
     <div className="bg-[#f8fafc] min-h-screen relative font-body overflow-x-hidden selection:bg-[#2563eb] selection:text-white">
@@ -340,7 +351,7 @@ const BridgePage = ({ resource, onUpsellClick, onBack }) => {
             <div className="h-1 bg-slate-200 w-full rounded-full overflow-hidden">
               <div className="h-full bg-green-500 transition-all duration-1000 ease-linear" style={{ width: `${(timeLeft / 15) * 100}%` }}></div>
             </div>
-            <a href={resource.url} target="_blank" rel="noopener noreferrer" className="block mt-3 text-[10px] font-bold text-[#2563eb] hover:text-blue-700 transition-colors uppercase tracking-widest text-center flex items-center justify-center gap-1">
+            <a href={redirectUrl} target="_blank" rel="noopener noreferrer" className="block mt-3 text-[10px] font-bold text-[#2563eb] hover:text-blue-700 transition-colors uppercase tracking-widest text-center flex items-center justify-center gap-1">
               Click here if you are not redirected <ExternalLink className="w-3 h-3" />
             </a>
           </div>
@@ -736,6 +747,16 @@ const App = () => {
     } else {
       return { title: "Strength Error", name: "Free Squat Strength Plan", url: "https://start.theliftingzone.com/squat-strength-plan" };
     }
+  };
+
+  // Helper: append UTM params to any URL (for Stripe, GHL, etc.)
+  const buildTrackedUrl = (baseUrl, extraParams = {}) => {
+    const url = new URL(baseUrl);
+    const params = { utm_source: 'quiz_funnel', ...trackingParams, ...extraParams };
+    Object.entries(params).forEach(([key, value]) => {
+      if (value) url.searchParams.set(key, value);
+    });
+    return url.toString();
   };
 
   const handleLeadSubmit = (e) => {
@@ -1515,7 +1536,7 @@ const App = () => {
                             currency: 'GBP',
                             period: isAnnual ? 'annual' : 'monthly'
                           });
-                          window.open(url + '?utm_source=quiz_funnel', '_blank');
+                          window.open(buildTrackedUrl(url), '_blank');
                         }} className="cursor-pointer w-full py-4 border-2 border-slate-200 text-slate-900 font-heading font-bold rounded-xl hover:border-slate-900 transition-colors uppercase text-xs tracking-widest">Start Solo</button>
 
                       </div>
@@ -1586,7 +1607,7 @@ const App = () => {
                             currency: 'GBP',
                             period: isAnnual ? 'annual' : 'monthly'
                           });
-                          window.open(url + '?utm_source=quiz_funnel', '_blank');
+                          window.open(buildTrackedUrl(url), '_blank');
                         }} className="cursor-pointer w-full py-5 bg-gradient-to-r from-blue-600 to-blue-700 border-b-[6px] border-blue-800 active:border-b-0 active:translate-y-[6px] hover:brightness-110 text-white font-heading font-black rounded-xl shadow-xl shadow-blue-600/20 uppercase text-sm tracking-widest mb-4 hover:scale-105 transition-all">Start Now</button>
 
                         <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-slate-500 bg-slate-50 py-3 rounded-lg border border-slate-100">
@@ -1634,7 +1655,7 @@ const App = () => {
                             currency: 'GBP',
                             period: isAnnual ? 'annual' : 'monthly'
                           });
-                          window.open(url + '?utm_source=quiz_funnel', '_blank');
+                          window.open(buildTrackedUrl(url), '_blank');
                         }} className="cursor-pointer w-full py-4 border-2 border-orange-400 text-orange-500 font-heading font-bold rounded-xl hover:bg-orange-50 transition-colors uppercase text-xs tracking-widest">Join the Inner Circle</button>
                       </div>
                     </div>
@@ -1684,7 +1705,7 @@ const App = () => {
             </>
           )}
           {resultPage === 'sales' && (
-            <SalesPage onBack={() => setResultPage('vip')} />
+            <SalesPage onBack={() => setResultPage('vip')} trackingParams={trackingParams} />
           )}
           {/* NOTE: 'free' result page logic is now handled by the BridgePage component. 
               The 'calculateResult' function sets resultPage='sales' or 'vip', but 'handleLeadSubmit' intercepts 'free' path to show BridgePage first.
@@ -1709,7 +1730,7 @@ const App = () => {
       {step === 'quiz' && <QuizStep />}
       {step === 'lead-form' && <LeadCaptureForm data={leadData} setData={setLeadData} onSubmit={handleLeadSubmit} onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
       {step === 'analyzing' && <AnalyzingScreen />}
-      {step === 'bridge' && <BridgePage resource={getFreeResource()} onUpsellClick={() => { setStep('result'); setResultPage('sales'); }} onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
+      {step === 'bridge' && <BridgePage resource={getFreeResource()} trackingParams={trackingParams} onUpsellClick={() => { setStep('result'); setResultPage('sales'); }} onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
       {step === 'meet-the-team' && <MeetTheTeam onBack={() => window.location.href = window.location.origin + window.location.pathname} onStartQuiz={() => setStep('quiz')} />}
       {step === 'education' && <Education onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
       {step === 'resources' && <Resources onBack={() => window.location.href = window.location.origin + window.location.pathname} />}
